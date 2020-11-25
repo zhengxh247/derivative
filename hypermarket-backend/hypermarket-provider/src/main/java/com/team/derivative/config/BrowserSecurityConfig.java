@@ -12,11 +12,11 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.security.SpringSocialConfigurer;
-import properties.authentication.AbstractChannelSecurityConfig;
-import properties.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
-import properties.properties.SecurityConstants;
-import properties.properties.SecurityProperties;
-import properties.validate.code.ValidateCodeSecurityConfig;
+import com.team.derivative.properties.authentication.AbstractChannelSecurityConfig;
+import com.team.derivative.properties.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.team.derivative.properties.properties.SecurityConstants;
+import com.team.derivative.properties.properties.SecurityProperties;
+import com.team.derivative.properties.validate.code.ValidateCodeSecurityConfig;
 
 import javax.sql.DataSource;
 

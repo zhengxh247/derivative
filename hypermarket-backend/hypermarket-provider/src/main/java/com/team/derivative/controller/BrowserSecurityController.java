@@ -3,6 +3,8 @@
  */
 package com.team.derivative.controller;
 
+import com.team.derivative.properties.properties.SecurityConstants;
+import com.team.derivative.properties.properties.SecurityProperties;
 import com.team.derivative.support.SimpleResponse;
 import com.team.derivative.support.SocialUserInfo;
 import org.apache.commons.lang.StringUtils;
@@ -22,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
-import properties.properties.SecurityConstants;
-import properties.properties.SecurityProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

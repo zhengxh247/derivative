@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
-import properties.properties.SecurityProperties;
+import com.team.derivative.properties.properties.SecurityProperties;
 
 
 /**
