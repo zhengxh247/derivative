@@ -1,8 +1,5 @@
 <template>
-  <div class="hello">
-    <div>{{ msg }}</div>
-    <el-button type="primary">测试按钮</el-button>
-  </div>
+  <div class="hello"></div>
 </template>
 
 <script>
