@@ -1,6 +1,7 @@
 import Vue from "vue";
-import { Button, Tabs, TabPane } from "element-ui";
+import { Button, Form, FormItem, Input } from "element-ui";
 
 Vue.use(Button);
-Vue.use(Tabs);
-Vue.use(TabPane);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Input);
