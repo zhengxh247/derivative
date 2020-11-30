@@ -19,6 +19,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "LoginFooter"
+};
+</script>
+
 <style lang="scss" scoped>
 .login-footer {
   background: #fff;
@@ -42,7 +48,6 @@
     a:visited,
     a:hover,
     a:active {
-      text-decoration: none;
       color: #f56600;
     }
   }

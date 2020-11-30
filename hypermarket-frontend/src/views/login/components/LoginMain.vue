@@ -97,6 +97,7 @@
 
 <script>
 export default {
+  name: "LoginMain",
   data() {
     return {
       activeName: "first",

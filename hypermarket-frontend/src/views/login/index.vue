@@ -11,6 +11,7 @@ import LoginHeader from "./components/LoginHeader.vue";
 import LoginMain from "./components/LoginMain.vue";
 import LoginFooter from "./components/LoginFooter.vue";
 export default {
+  name: "Login",
   components: {
     LoginHeader,
     LoginMain,
