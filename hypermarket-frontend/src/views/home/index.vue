@@ -33,6 +33,45 @@
             <span class="sep">|</span>
             <a href="javasctipt:;">Select Location</a>
           </div>
+          <div class="topbar-cart">
+            <i class="iconfont icon-gouwuche"></i>
+            <span>购物车(0)</span>
+          </div>
+          <div class="topbar-info">
+            <router-link to="/login" class="link">登录</router-link>
+            <span class="sep">|</span>
+            <span class="link">注册</span>
+            <span class="sep">|</span>
+            <span class="message">消息通知</span>
+          </div>
+        </div>
+      </div>
+      <div class="site-header">
+        <div class="container">
+          <div class="header-logo">
+            <a href="javascript:;" class="logo"></a>
+          </div>
+          <div class="doodle">
+            <a href="javascript:;" class="link-block"></a>
+          </div>
+          <div class="header-nav">
+            <div class="list">
+              <span>小米手机</span>
+              <span>Redmi 红米</span>
+              <span>电视</span>
+              <span>笔记本</span>
+              <span>家电</span>
+              <span>路由器</span>
+              <span>智能硬件</span>
+              <span>服务</span>
+              <span>社区</span>
+            </div>
+          </div>
+          <div class="header-search">
+            <el-input v-model="search" placeholder="Redmi K30 Pro 变焦版">
+              <el-button slot="append" icon="el-icon-search"></el-button>
+            </el-input>
+          </div>
         </div>
       </div>
     </div>
@@ -41,7 +80,12 @@
 
 <script>
 export default {
-  name: "Home"
+  name: "Home",
+  data() {
+    return {
+      search: ""
+    };
+  }
 };
 </script>
 
@@ -71,10 +115,102 @@ export default {
   .container {
     width: 1226px;
     margin: 0 auto;
-    .sep {
-      margin: 0.3em;
-      color: #424242;
+    .topbar-nav {
+      float: left;
+      a:hover {
+        color: #fff;
+      }
+      .sep {
+        margin: 0.3em;
+        color: #424242;
+      }
     }
+    .topbar-info {
+      float: right;
+      .link {
+        padding: 0 5px;
+        cursor: pointer;
+      }
+      .message {
+        padding: 0 10px;
+        cursor: pointer;
+      }
+      .link:hover,
+      .message:hover {
+        color: #fff;
+      }
+      .sep {
+        color: #424242;
+      }
+    }
+    .topbar-cart {
+      float: right;
+      width: 120px;
+      margin-left: 15px;
+    }
+  }
+}
+.site-header {
+  height: 100px;
+  .container {
+    position: relative;
+    width: 1226px;
+    margin: 0 auto;
+    .header-logo {
+      float: left;
+      width: 62px;
+      margin-top: 22px;
+      .logo {
+        display: block;
+        width: 55px;
+        height: 55px;
+        overflow: hidden;
+        background-color: #ff6700;
+      }
+    }
+    .link-block {
+      position: absolute;
+      left: 69px;
+      top: 0;
+      width: 165px;
+      height: 100px;
+      background-repeat: no-repeat;
+      background-position: 50%;
+      text-indent: -9999em;
+      background-image: url(https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1e455ea5dca7763e88f7a4bfface056d.jpg?w=165&h=55);
+    }
+    .header-nav {
+      float: left;
+      width: 678px;
+      margin-left: 172px;
+      .list {
+        padding-top: 5px;
+        span {
+          height: 88px;
+          line-height: 88px;
+          font-size: 16px;
+          cursor: pointer;
+          padding: 26px 10px 38px;
+        }
+        span:hover {
+          color: #ff6700;
+        }
+      }
+    }
+    .header-search {
+      float: right;
+      width: 296px;
+      margin-top: 25px;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.header-search {
+  .el-input__inner {
+    height: 48px;
+    line-height: 48px;
   }
 }
 </style>
