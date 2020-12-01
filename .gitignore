@@ -1,6 +1,7 @@
 .DS_Store
 hypermarket-frontend/node_modules
 hypermarket-frontend/dist
+hypermarket-frontend/package-lock.json
 
 
 # local env files
