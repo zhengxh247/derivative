@@ -1,0 +1,18 @@
+version: '3'
+services:
+
+  maxbase-weekly-report:
+    container_name: hypermarket-frontend
+    image: hypermarket-frontend:theversion
+    privileged: true
+    restart: always
+    ports:
+      - 83:80
+    environment:
+      - TZ=Asia/Shanghai
+
+networks:
+  default:
+    external:
+      name: maxcloud
+

@@ -1,0 +1,33 @@
+version: '3'
+services:
+
+  maxbase-weekly-report:
+    container_name: hypermarket-backend
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: hypermarket-backend:theversion
+    privileged: true
+    restart: always
+    ports:
+      - 10010:10010
+    volumes:
+      - /opt/logs/hypermarket-backend:/opt/logs/hypermarket-backend
+    environment:
+      - SQL_ENV_NAME=dev
+      - IP_ADDRESS=theip
+      - REDIS_HOST=49.232.11.36
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=redispwd
+      - MASTER_MYSQL_HOST=bj-cdb-q25dy9vm.sql.tencentcdb.com
+      - MASTER_MYSQL_PORT=61152
+      - MASTER_MYSQL_USERNAME=root
+      - MASTER_MYSQL_PASSWORD=thedbpwd
+      - LOG_PATH=/opt/logs/hypermarket-backend
+      - LOG_FILE=maxbase-storage
+      - LOG_MAX_FILE_SIZE=100MB
+      - LOG_MAX_HISTORY_DAYS=30
+      - LOG_ROOT_LEVEL=info
+      - DB_AUTO_INIT=false
+      - TZ=Asia/Shanghai
+
