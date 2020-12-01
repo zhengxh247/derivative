@@ -3,8 +3,6 @@
  */
 package com.team.derivative.admin.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.segments.MergeSegments;
 import com.team.derivative.admin.dao.UserMapper;
 import com.team.derivative.admin.entity.GeneralUser;
 import org.slf4j.Logger;
@@ -19,8 +17,6 @@ import org.springframework.social.security.SocialUser;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author zhengxh
@@ -49,13 +45,13 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
         return buildUser(userId);
     }
 
-    private SocialUserDetails buildUser(String userId) {
+    private SocialUserDetails buildUser(String username) {
         // 根据用户名查找用户信息
         //根据查找到的用户信息判断用户是否被冻结
-        GeneralUser user = userMapper.selectById(userId);
-        String password = passwordEncoder.encode(user.getPassword());
+        GeneralUser user = userMapper.getUserByUsername(username);
+        String password = passwordEncoder.encode("2");
         logger.info("数据库密码是:" + password);
-        return new SocialUser(userId, password,
+        return new SocialUser(username, user.getPassword(),
                 true, true, true, true,
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }

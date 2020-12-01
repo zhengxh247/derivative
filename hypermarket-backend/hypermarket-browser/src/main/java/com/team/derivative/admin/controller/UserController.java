@@ -1,13 +1,11 @@
 package com.team.derivative.admin.controller;
 
+import com.team.derivative.admin.entity.User;
+import com.team.derivative.admin.service.MyUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zhengxh
@@ -18,10 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserDetailsService service;
+    private MyUserDetailsService service;
 
-    @GetMapping("/login")
-    public void login(@Validated @PathVariable String username) {
-        service.loadUserByUsername(username);
+    @PostMapping("/user")
+    public void login(@Validated @RequestBody User user) {
+        System.out.println(user.getUsername());
+        service.loadUserByUsername(user.getUsername());
     }
 }
