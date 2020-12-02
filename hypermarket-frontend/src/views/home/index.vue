@@ -34,8 +34,13 @@
             <a href="javasctipt:;">Select Location</a>
           </div>
           <div class="topbar-cart">
-            <i class="iconfont icon-gouwuche"></i>
-            <span>购物车(0)</span>
+            <div class="cart-mini">
+              <!-- <i class="iconfont icon-gouwuche"></i> -->
+              <span>购物车(0)</span>
+            </div>
+            <div class="cart-menu">
+              some value
+            </div>
           </div>
           <div class="topbar-info">
             <router-link to="/login" class="link">登录</router-link>
@@ -115,6 +120,7 @@ export default {
   .container {
     width: 1226px;
     margin: 0 auto;
+    height: 40px;
     .topbar-nav {
       float: left;
       a:hover {
@@ -144,9 +150,33 @@ export default {
       }
     }
     .topbar-cart {
+      position: relative;
       float: right;
       width: 120px;
       margin-left: 15px;
+      .cart-mini {
+        background: #424242;
+      }
+      .cart-menu {
+        display: none;
+        position: absolute;
+        width: 316px;
+        height: 100px;
+        text-align: center;
+        right: 0;
+        top: 40px;
+        z-index: 1;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      }
+      .cart-mini:hover {
+        color: #ff6700;
+        cursor: pointer;
+        background: #fff;
+      }
+    }
+    .topbar-cart:hover .cart-menu {
+      display: block;
     }
   }
 }
@@ -156,6 +186,7 @@ export default {
     position: relative;
     width: 1226px;
     margin: 0 auto;
+    height: 100px;
     .header-logo {
       float: left;
       width: 62px;
