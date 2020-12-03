@@ -18,11 +18,11 @@ public interface SecurityConstants {
 	 * 
 	 * @see SecurityController
 	 */
-	public static final String DEFAULT_UNAUTHENTICATION_URL = "/authentication/require";
+	public static final String DEFAULT_UNAUTHENTICATION_URL = "http://49.232.11.36:83/";
 	/**
 	 * 默认的用户名密码登录请求处理url
 	 */
-	public static final String DEFAULT_LOGIN_PROCESSING_URL_FORM = "/authentication/login";
+	public static final String DEFAULT_LOGIN_PROCESSING_URL_FORM = "/login";
 	/**
 	 * 默认的手机验证码登录请求处理url
 	 */
