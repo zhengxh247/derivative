@@ -11,8 +11,3 @@ services:
     environment:
       - TZ=Asia/Shanghai
 
-networks:
-  default:
-    external:
-      name: maxcloud
-
