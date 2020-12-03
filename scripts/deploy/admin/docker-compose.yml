@@ -16,15 +16,15 @@ services:
     environment:
       - SQL_ENV_NAME=dev
       - IP_ADDRESS=theip
-      - REDIS_HOST=49.232.11.36
+      - REDIS_HOST=theip
       - REDIS_PORT=6379
       - REDIS_PASSWORD=redispwd
-      - MASTER_MYSQL_HOST=bj-cdb-q25dy9vm.sql.tencentcdb.com
-      - MASTER_MYSQL_PORT=61152
+      - MASTER_MYSQL_HOST=mysqlhost
+      - MASTER_MYSQL_PORT=mysqlport
       - MASTER_MYSQL_USERNAME=theuser
       - MASTER_MYSQL_PASSWORD=thedbpwd
       - LOG_PATH=/opt/logs/hypermarket-backend
-      - LOG_FILE=maxbase-storage
+      - LOG_FILE=hypermarket-backend
       - LOG_MAX_FILE_SIZE=100MB
       - LOG_MAX_HISTORY_DAYS=30
       - LOG_ROOT_LEVEL=info
