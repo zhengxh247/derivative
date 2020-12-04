@@ -34,7 +34,9 @@
                 </el-input>
               </el-form-item>
               <el-form-item>
-                <el-button class="login-button">登录</el-button>
+                <el-button class="login-button" @click="handleLogin">
+                  登录
+                </el-button>
               </el-form-item>
             </el-form>
             <span
@@ -65,7 +67,9 @@
                 </el-input>
               </el-form-item>
               <el-form-item>
-                <el-button class="login-button">立即登录/注册</el-button>
+                <el-button class="login-button" @click="handleLoginRegister">
+                  立即登录/注册
+                </el-button>
               </el-form-item>
             </el-form>
             <span
@@ -96,6 +100,7 @@
 </template>
 
 <script>
+import { LoginApi } from "@/api";
 export default {
   name: "LoginMain",
   data() {
@@ -132,6 +137,24 @@ export default {
      */
     changeLoginOrRegStatus(type) {
       type === "login" ? (this.isLogin = true) : (this.isLogin = false);
+    },
+    /**
+     * 登录
+     * @author Jack
+     * @param 无
+     */
+    handleLogin() {
+      LoginApi.login(this.loginForm).then(res => {
+        console.log(res);
+      });
+    },
+    /**
+     * 注册和登录
+     * @author Jack
+     * @param 无
+     */
+    handleLoginRegister() {
+      console.log("注册和登录");
     }
   }
 };
