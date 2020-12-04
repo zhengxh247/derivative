@@ -76,7 +76,8 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL);
+                .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
+                .and().cors();
 //                .loginProcessingUrl(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)
         http.apply(validateCodeSecurityConfig)
                 .and()
