@@ -76,22 +76,8 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
-                .loginProcessingUrl(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)
-                .and()
-                .logout().logoutUrl("/logout")
-                .logoutSuccessHandler((request, response, authentication) -> {
-                    response.setContentType("application/json;charset=utf-8");
-                    PrintWriter out = response.getWriter();
-                    out.write(objectMapper.writeValueAsString(logoutObj()));
-                    out.flush();
-                    out.close();
-                })
-                .and()
-                .csrf().disable();
-
-//        applyPasswordAuthenticationConfig(http);
-
+                .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL);
+//                .loginProcessingUrl(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)
         http.apply(validateCodeSecurityConfig)
                 .and()
                 .apply(smsCodeAuthenticationSecurityConfig)
@@ -125,6 +111,7 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 .authenticated()
                 .and()
                 .csrf().disable();
+
         http.addFilterAt(usernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
@@ -150,6 +137,7 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 }
             }
         };
+        filter.setFilterProcessesUrl("/authentication/login");
         filter.setAuthenticationSuccessHandler((request, response, authentication) -> {
             response.setContentType("application/json;charset=utf-8");
             PrintWriter out = response.getWriter();
