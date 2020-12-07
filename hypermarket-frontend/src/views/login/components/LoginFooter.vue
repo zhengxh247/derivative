@@ -10,7 +10,7 @@
       </ul>
     </div>
     <p class="nf-intro">
-      此网站只作为技术练习，如需购买小米商品，请到
+      作者声明：此网站只作为技术练习，如需购买小米商品，请到
       <a href="https://www.mi.com/index.html" target="_blank">
         小米官网
       </a>
@@ -40,6 +40,10 @@ export default {
   }
   & ul > li > span {
     padding: 0 10px;
+    cursor: pointer;
+  }
+  & ul > li > span:hover {
+    color: $textHover;
   }
   .nf-intro {
     padding: 10px;
@@ -48,7 +52,7 @@ export default {
     a:visited,
     a:hover,
     a:active {
-      color: #f56600;
+      color: $colorPrimary;
     }
   }
 }

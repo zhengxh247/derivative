@@ -43,7 +43,6 @@ class HttpService {
     } else {
       options = { method, url, data, params };
     }
-    console.log(url);
     return axios(options)
       .then(response => {
         return response;
