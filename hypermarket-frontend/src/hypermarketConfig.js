@@ -1,6 +1,6 @@
 module.exports = {
   setting: {
-      title: "仿小米网",
+      title: "Chophands",
       api: "",
       port: 8089
   }

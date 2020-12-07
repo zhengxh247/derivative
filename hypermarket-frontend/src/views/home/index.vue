@@ -170,7 +170,7 @@ export default {
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
       }
       .cart-mini:hover {
-        color: #ff6700;
+        color: $colorHover;
         cursor: pointer;
         background: #fff;
       }
@@ -196,7 +196,7 @@ export default {
         width: 55px;
         height: 55px;
         overflow: hidden;
-        background-color: #ff6700;
+        background-color: $colorPrimary;
       }
     }
     .link-block {
@@ -224,7 +224,7 @@ export default {
           padding: 26px 10px 38px;
         }
         span:hover {
-          color: #ff6700;
+          color: $textHover;
         }
       }
     }

@@ -256,7 +256,7 @@ export default {
       cursor: pointer;
     }
     span:hover {
-      color: #ff6700;
+      color: $textHover;
     }
     .interval {
       padding: 0 5px;
@@ -299,7 +299,7 @@ export default {
     border-color: #e0e0e0;
   }
   & .el-button:active {
-    border-color: #ff6700;
+    border-color: $colorHover;
   }
   & .el-input-group__append,
   .el-input-group__prepend {
