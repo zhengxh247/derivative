@@ -3,16 +3,15 @@
  */
 package com.team.derivative.properties.validate.code;
 
+import com.team.derivative.properties.properties.SecurityConstants;
+import com.team.derivative.properties.properties.SecurityProperties;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.team.derivative.properties.properties.SecurityConstants;
-import com.team.derivative.properties.properties.SecurityProperties;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -62,8 +61,8 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
 
-        urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, ValidateCodeType.IMAGE);
-        addUrlToMap(securityProperties.getCode().getImage().getUrl(), ValidateCodeType.IMAGE);
+//        urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, ValidateCodeType.IMAGE);
+//        addUrlToMap(securityProperties.getCode().getImage().getUrl(), ValidateCodeType.IMAGE);
 
         urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, ValidateCodeType.SMS);
         addUrlToMap(securityProperties.getCode().getSms().getUrl(), ValidateCodeType.SMS);
@@ -96,18 +95,16 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
-        if (request.getRequestURI().contains("admin")) {
-            ValidateCodeType type = getValidateCodeType(request);
-            if (type != null) {
-                logger.info("校验请求(" + request.getRequestURI() + ")中的验证码,验证码类型" + type);
-                try {
-                    validateCodeProcessorHolder.findValidateCodeProcessor(type)
-                            .validate(new ServletWebRequest(request, response));
-                    logger.info("验证码校验通过");
-                } catch (ValidateCodeException exception) {
-                    authenticationFailureHandler.onAuthenticationFailure(request, response, exception);
-                    return;
-                }
+        ValidateCodeType type = getValidateCodeType(request);
+        if (type != null) {
+            logger.info("校验请求(" + request.getRequestURI() + ")中的验证码,验证码类型" + type);
+            try {
+                validateCodeProcessorHolder.findValidateCodeProcessor(type)
+                        .validate(request, response);
+                logger.info("验证码校验通过");
+            } catch (ValidateCodeException exception) {
+                authenticationFailureHandler.onAuthenticationFailure(request, response, exception);
+                return;
             }
         }
 

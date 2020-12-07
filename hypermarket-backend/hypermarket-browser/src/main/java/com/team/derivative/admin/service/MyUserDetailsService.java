@@ -5,6 +5,7 @@ package com.team.derivative.admin.service;
 
 import com.team.derivative.admin.dao.UserMapper;
 import com.team.derivative.admin.entity.GeneralUser;
+import com.team.derivative.admin.exceptioin.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +49,22 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
     private SocialUserDetails buildUser(String username) {
         // 根据用户名查找用户信息
         //根据查找到的用户信息判断用户是否被冻结
+        System.out.println(username);
         GeneralUser user = userMapper.getUserByUsername(username);
         String password = passwordEncoder.encode("2");
         logger.info("数据库密码是:" + password);
         return new SocialUser(username, user.getPassword(),
                 true, true, true, true,
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+    }
+
+    public Boolean loginByMobile(String mobile){
+
+        GeneralUser user = userMapper.getUserByMobile(mobile);
+        if (user == null){
+            throw ServiceException.notExistMobile(mobile);
+        }
+        return true;
     }
 
 }
