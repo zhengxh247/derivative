@@ -46,7 +46,7 @@
               手机短信登录/注册
             </span>
             <div class="reverse">
-              <span>立即注册</span>
+              <router-link to="/register" class="btn">立即注册</router-link>
               <span class="interval">|</span>
               <span>忘记密码?</span>
             </div>
@@ -145,7 +145,9 @@ export default {
      */
     handleLogin() {
       LoginApi.login(this.loginForm).then(res => {
-        console.log(res);
+        if (res.data.code === 200) {
+          this.$router.push("/");
+        }
       });
     },
     /**
@@ -252,9 +254,11 @@ export default {
     display: block;
     text-align: center;
     font-size: 14px;
+    .btn,
     span {
       cursor: pointer;
     }
+    .btn:hover,
     span:hover {
       color: $textHover;
     }
