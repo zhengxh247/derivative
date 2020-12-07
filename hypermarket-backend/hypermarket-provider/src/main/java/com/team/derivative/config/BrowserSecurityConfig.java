@@ -72,6 +72,12 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
+                .antMatchers(
+                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
+                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
+                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
+                        "/user/regist")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -81,8 +87,8 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 //                .loginProcessingUrl(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)
         http.apply(validateCodeSecurityConfig)
                 .and()
-                .apply(smsCodeAuthenticationSecurityConfig)
-                .and()
+//                .apply(smsCodeAuthenticationSecurityConfig)
+//                .and()
                 .apply(imoocSocialSecurityConfig)
                 .and()
                 .rememberMe()
@@ -96,20 +102,6 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                 .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())
                 .expiredSessionStrategy(sessionInformationExpiredStrategy)
                 .and()
-                .and()
-                .authorizeRequests()
-                .antMatchers(
-                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
-                        securityProperties.getBrowser().getLoginPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
-                        securityProperties.getBrowser().getSignUpUrl(),
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".json",
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".html",
-                        "/user/regist")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
                 .and()
                 .csrf().disable();
 

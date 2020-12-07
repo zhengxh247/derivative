@@ -28,7 +28,7 @@ public class DefaultSmsCodeSender implements SmsCodeSender {
 		headers.put("Authorization", "APPCODE " + appcode);
 		Map<String, String> querys = new HashMap<String, String>();
 		querys.put("mobile", mobile);
-		querys.put("content", "幸福商城：您的注册码：" + code + "，如非本人操作，请忽略本短信！");
+		querys.put("content", "您的手机号：" + mobile + "，验证码：" + code + "，请及时完成验证，如不是本人操作请忽略。【阿里云市场】");
 
 		try {
 			HttpResponse response = HttpUtil.doGet(host, path, method, headers, querys);

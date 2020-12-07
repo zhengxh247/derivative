@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
  * @author zhengxh
  */
 @RestController
-@RequestMapping("/authentication")
+@RequestMapping("/user")
 @Slf4j
 public class UserController {
 
     @Autowired
     private MyUserDetailsService service;
 
-    @PostMapping("/user")
+    @PostMapping("/getAll")
     public void login(@Validated @RequestBody User user) {
         System.out.println(user.getUsername());
         service.loadUserByUsername(user.getUsername());

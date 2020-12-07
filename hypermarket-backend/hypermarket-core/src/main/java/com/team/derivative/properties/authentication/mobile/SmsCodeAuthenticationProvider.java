@@ -25,7 +25,7 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
 		SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
-		
+
 		UserDetails user = userDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());
 
 		if (user == null) {
