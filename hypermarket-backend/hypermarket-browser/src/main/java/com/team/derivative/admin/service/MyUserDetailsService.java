@@ -58,10 +58,11 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 
-    public Boolean loginByMobile(String mobile){
+    public Boolean loginByMobile(String mobile) {
 
-        GeneralUser user = userMapper.getUserByMobile(mobile);
-        if (user == null){
+        try {
+            userMapper.getUserByMobile(mobile);
+        } catch (Exception e) {
             throw ServiceException.notExistMobile(mobile);
         }
         return true;
