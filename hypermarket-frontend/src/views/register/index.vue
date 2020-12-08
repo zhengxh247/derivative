@@ -10,17 +10,24 @@
             注册剁手账号
           </div>
           <div class="regbox">
-            <el-form :model="registerForm" ref="loginform">
-              <el-form-item label="手机号码">
+            <el-form
+              :model="registerForm"
+              :rules="rules"
+              ref="loginform"
+              hide-required-asterisk
+            >
+              <el-form-item label="手机号码" prop="phone">
                 <el-input v-model="registerForm.phone">
                   <template slot="prepend">+86</template>
                 </el-input>
               </el-form-item>
-              <el-form-item label="密码">
-                <el-input v-model="registerForm.password"></el-input>
+              <el-form-item label="密码" prop="password">
+                <el-input v-model="registerForm.password" show-password>
+                </el-input>
               </el-form-item>
-              <el-form-item label="确认密码">
-                <el-input v-model="registerForm.repassword"></el-input>
+              <el-form-item label="确认密码" prop="repassword">
+                <el-input v-model="registerForm.repassword" show-password>
+                </el-input>
               </el-form-item>
               <el-form-item>
                 <el-button class="res-button">立即注册</el-button>
@@ -42,6 +49,29 @@ export default {
         phone: "",
         password: "",
         repassword: ""
+      },
+      rules: {
+        phone: [
+          {
+            required: true,
+            message: "请输入手机号码",
+            trigger: "blur"
+          }
+        ],
+        password: [
+          {
+            required: true,
+            message: "请输入密码",
+            trigger: "blur"
+          }
+        ],
+        repassword: [
+          {
+            required: true,
+            message: "请输入确认密码",
+            trigger: "blur"
+          }
+        ]
       }
     };
   }
@@ -101,6 +131,12 @@ export default {
 .regbox {
   .el-form-item {
     margin-bottom: 0;
+  }
+  .el-form-item__error {
+    top: auto;
+    bottom: 55%;
+    left: auto;
+    right: 0;
   }
 }
 </style>
