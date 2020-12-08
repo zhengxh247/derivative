@@ -5,6 +5,7 @@ package com.team.derivative.admin.service;
 
 import com.team.derivative.admin.dao.UserMapper;
 import com.team.derivative.admin.entity.GeneralUser;
+import com.team.derivative.admin.entity.User;
 import com.team.derivative.admin.exceptioin.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,6 +66,21 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
         } catch (Exception e) {
             throw ServiceException.notExistMobile(mobile);
         }
+        return true;
+    }
+
+    public Boolean register(User user) {
+
+        try {
+            userMapper.getUserByMobile(user.getMobilePhone());
+        } catch (Exception e) {
+            throw ServiceException.IsExistMobile(user.getMobilePhone());
+        }
+        String password = passwordEncoder.encode(user.getPassword());
+        GeneralUser generalUser = new GeneralUser();
+        generalUser.setMobilePhone(user.getMobilePhone());
+        generalUser.setPassword(password);
+        userMapper.insert(generalUser);
         return true;
     }
 

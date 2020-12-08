@@ -2,7 +2,6 @@ package com.team.derivative.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.team.derivative.admin.entity.GeneralUser;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 
@@ -30,9 +29,9 @@ public interface UserMapper extends BaseMapper<GeneralUser>{
 
     /**
      * 根据手机号码插入用户信息
-     * @param mobile
+     * @param User
      * @return GeneralUser
      */
-    @Insert("INSERT INTO admin_user (mobile_phone) VALUES (#{mobile})")
-    GeneralUser addUserByMobile(String mobile);
+    @Override
+    int insert(GeneralUser entity);
 }

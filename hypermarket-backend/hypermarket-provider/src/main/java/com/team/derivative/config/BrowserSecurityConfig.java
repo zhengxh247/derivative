@@ -76,7 +76,7 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                         SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
                         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
-                        "/user/regist")
+                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_REGISTER)
                 .permitAll()
                 .anyRequest()
                 .authenticated()

@@ -23,4 +23,9 @@ public class UserController {
         System.out.println(user.getUsername());
         service.loadUserByUsername(user.getUsername());
     }
+
+    @PostMapping("/register")
+    public Boolean register(@Validated @RequestBody User user) {
+        return service.register(user);
+    }
 }

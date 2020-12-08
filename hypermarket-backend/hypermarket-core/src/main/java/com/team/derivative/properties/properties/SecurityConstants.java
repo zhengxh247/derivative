@@ -28,6 +28,10 @@ public interface SecurityConstants {
 	 */
 	public static final String DEFAULT_LOGIN_PROCESSING_URL_MOBILE = "/authentication/mobile";
 	/**
+	 * 默认的手注册请求处理url
+	 */
+	public static final String DEFAULT_LOGIN_PROCESSING_URL_REGISTER= "/user/register";
+	/**
 	 * 默认登录页面
 	 *
 	 * @see SecurityController

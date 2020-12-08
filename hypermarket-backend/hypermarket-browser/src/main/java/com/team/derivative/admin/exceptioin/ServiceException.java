@@ -12,8 +12,10 @@ public class ServiceException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     private static final String ID_ERROR = "用户需要注册:";
+    private static final String ID_EXIST = "手机用户已注册:";
 
     private static final String CODE_ERROR = "1000404";
+    private static final String CODE_EXIST= "1000400";
     private String errCode;
     private String errMessage;
 
@@ -24,9 +26,14 @@ public class ServiceException extends RuntimeException {
         this.errMessage = errMessage;
     }
 
-    public static ServiceException notExistMobile(String token) {
-        return new ServiceException(CODE_ERROR, ID_ERROR + token);
+    public static ServiceException notExistMobile(String mobile) {
+        return new ServiceException(CODE_ERROR, ID_ERROR + mobile);
     }
+
+    public static ServiceException IsExistMobile(String mobile) {
+        return new ServiceException(ID_EXIST, CODE_EXIST + mobile);
+    }
+
 
     public String getErrCode() {
         return errCode;
