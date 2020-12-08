@@ -1,2 +1,3 @@
 import { LoginApi } from "./login.api";
-export { LoginApi };
+import { RegisterApi } from "./register.api";
+export { LoginApi, RegisterApi };
