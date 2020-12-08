@@ -71,16 +71,17 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
 
     public Boolean register(User user) {
 
-        try {
-            userMapper.getUserByMobile(user.getMobilePhone());
-        } catch (Exception e) {
+        if (userMapper.getUserByMobile(user.getMobilePhone()) != null){
             throw ServiceException.IsExistMobile(user.getMobilePhone());
+        }else {
+            String password = passwordEncoder.encode(user.getPassword());
+            GeneralUser generalUser = new GeneralUser();
+            generalUser.setMobilePhone(user.getMobilePhone());
+            generalUser.setPassword(password);
+            generalUser.setUsername(user.getUsername());
+            generalUser.setEmail(user.getEmail());
+            userMapper.insert(generalUser);
         }
-        String password = passwordEncoder.encode(user.getPassword());
-        GeneralUser generalUser = new GeneralUser();
-        generalUser.setMobilePhone(user.getMobilePhone());
-        generalUser.setPassword(password);
-        userMapper.insert(generalUser);
         return true;
     }
 
