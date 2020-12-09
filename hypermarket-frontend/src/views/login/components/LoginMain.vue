@@ -21,16 +21,25 @@
         </div>
         <div class="tabs-content" v-show="isCurrent">
           <div class="login" v-show="isLogin">
-            <el-form :model="loginForm" ref="loginform">
-              <el-form-item>
+            <el-form
+              :model="loginForm"
+              :rules="rules"
+              ref="loginForm"
+              hide-required-asterisk
+            >
+              <el-form-item prop="phone">
                 <el-input
-                  v-model="loginForm.username"
+                  v-model="loginForm.phone"
                   placeholder="邮箱/手机号码/小米ID"
                 >
                 </el-input>
               </el-form-item>
-              <el-form-item>
-                <el-input v-model="loginForm.password" placeholder="密码">
+              <el-form-item prop="password">
+                <el-input
+                  type="password"
+                  v-model="loginForm.password"
+                  placeholder="密码"
+                >
                 </el-input>
               </el-form-item>
               <el-form-item>
@@ -52,18 +61,27 @@
             </div>
           </div>
           <div class="register" v-show="!isLogin">
-            <el-form :model="registerForm" ref="loginform">
-              <el-form-item>
+            <el-form :model="registerForm" :rules="rules" ref="registerForm">
+              <el-form-item prop="phone">
                 <el-input v-model="registerForm.phone" placeholder="手机号码">
                   <template slot="prepend">+86</template>
                 </el-input>
               </el-form-item>
-              <el-form-item>
+              <el-form-item prop="authCode">
                 <el-input
-                  v-model="registerForm.password"
+                  v-model="registerForm.authCode"
                   placeholder="短信验证码"
+                  maxlength="6"
                 >
-                  <template slot="append">获取验证码</template>
+                  <el-button
+                    slot="append"
+                    :disabled="btnDisabled"
+                    class="clear-active"
+                    :class="{ clearColor: btnDisabled }"
+                    @click="getAuthCode"
+                  >
+                    {{ authCodeText }}
+                  </el-button>
                 </el-input>
               </el-form-item>
               <el-form-item>
@@ -101,6 +119,8 @@
 
 <script>
 import { LoginApi } from "@/api";
+import { phoneValidation } from "@/common/utils";
+import Message from "@/common/tool";
 export default {
   name: "LoginMain",
   data() {
@@ -108,13 +128,43 @@ export default {
       activeName: "first",
       isCurrent: true,
       isLogin: true,
+      btnDisabled: false,
+      authCodeText: "获取验证码",
+      time: 60,
       loginForm: {
-        username: "",
+        phone: "",
         password: ""
       },
       registerForm: {
-        password: "",
-        phone: ""
+        phone: "",
+        authCode: ""
+      },
+      rules: {
+        phone: [
+          {
+            required: true,
+            message: "请输入手机号码",
+            trigger: "blur"
+          },
+          {
+            validator: phoneValidation,
+            trigger: "blur"
+          }
+        ],
+        password: [
+          {
+            required: true,
+            message: "请输入密码",
+            trigger: "blur"
+          }
+        ],
+        authCode: [
+          {
+            required: true,
+            message: "请输入验证码",
+            trigger: "blur"
+          }
+        ]
       }
     };
   },
@@ -141,11 +191,54 @@ export default {
      * @param 无
      */
     handleLogin() {
-      LoginApi.login(this.loginForm).then(res => {
-        if (res.data.code === 200) {
-          this.$router.push("/");
+      this.$refs["loginForm"].validate(valid => {
+        if (valid) {
+          const data = {
+            username: this.loginForm.phone,
+            password: this.loginForm.password
+          };
+          LoginApi.login(data).then(res => {
+            if (res.data.code === 200) {
+              Message(res.data.message, "success");
+              this.$refs["loginForm"].resetFields();
+              this.$router.push("/");
+            } else {
+              Message(res.data.message, "error");
+            }
+          });
+        } else {
+          return false;
         }
       });
+    },
+    /**
+     * 获取验证码
+     * @author Jack
+     * @param 无
+     */
+    getAuthCode() {
+      let onOff = true;
+      const param = {
+        mobile: this.registerForm.phone
+      };
+      const timer = setInterval(_ => {
+        if (this.time === 60 && onOff) {
+          LoginApi.getAuthCode(param).then(res => {
+            if (!res.status === 200) {
+              Message("验证码发送失败", "error");
+            }
+          });
+          onOff = false;
+        } else if (!this.time) {
+          this.authCodeText = "获取验证码";
+          this.time = 60;
+          this.btnDisabled = false;
+          clearInterval(timer);
+        } else {
+          this.btnDisabled = true;
+          this.authCodeText = `${--this.time}s重新发送`;
+        }
+      }, 1000);
     },
     /**
      * 注册和登录
@@ -153,7 +246,25 @@ export default {
      * @param 无
      */
     handleLoginRegister() {
-      console.log("注册和登录");
+      this.$refs["registerForm"].validate(valid => {
+        if (valid) {
+          const data = {
+            mobilePhone: this.registerForm.phone,
+            smsCode: this.registerForm.authCode
+          };
+          LoginApi.authCodeLogin(data).then(res => {
+            if (res.data.code === 200) {
+              Message(res.data.message, "success");
+              this.$refs["registerForm"].resetFields();
+              this.$router.push("/");
+            } else {
+              Message(res.data.message, "error");
+            }
+          });
+        } else {
+          return false;
+        }
+      });
     }
   }
 };
@@ -225,6 +336,14 @@ export default {
       }
       .icon-logo-wechat {
         color: #00d20d;
+      }
+    }
+    .register {
+      .clear-active:active {
+        border-color: transparent;
+      }
+      .clearColor {
+        color: #999;
       }
     }
   }
@@ -310,8 +429,13 @@ export default {
     color: #333333;
   }
   & .el-input-group__append {
-    cursor: pointer;
     color: #003ab5;
+  }
+  & .el-form-item__error {
+    top: -18px;
+    bottom: auto;
+    left: auto;
+    right: 0;
   }
 }
 </style>

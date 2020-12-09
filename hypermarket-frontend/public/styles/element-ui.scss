@@ -1,1 +1,9 @@
 // cover some element-ui styles
+.hm-form {
+  .el-form-item__error {
+    top: auto;
+    bottom: 55%;
+    left: auto;
+    right: 0;
+  }
+}
