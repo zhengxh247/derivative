@@ -45,7 +45,7 @@
           <div class="topbar-info">
             <router-link to="/login" class="link">登录</router-link>
             <span class="sep">|</span>
-            <span class="link">注册</span>
+            <router-link to="/register" class="link">注册</router-link>
             <span class="sep">|</span>
             <span class="message">消息通知</span>
           </div>

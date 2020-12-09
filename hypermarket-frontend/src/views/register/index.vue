@@ -10,20 +10,29 @@
             注册剁手账号
           </div>
           <div class="regbox">
-            <el-form :model="registerForm" ref="loginform">
-              <el-form-item label="手机号码">
-                <el-input v-model="registerForm.phone">
+            <el-form
+              :model="registerForm"
+              :rules="rules"
+              ref="registerForm"
+              hide-required-asterisk
+            >
+              <el-form-item label="手机号码" prop="mobilePhone">
+                <el-input v-model="registerForm.mobilePhone">
                   <template slot="prepend">+86</template>
                 </el-input>
               </el-form-item>
-              <el-form-item label="密码">
-                <el-input v-model="registerForm.password"></el-input>
+              <el-form-item label="密码" prop="password">
+                <el-input v-model="registerForm.password" show-password>
+                </el-input>
               </el-form-item>
-              <el-form-item label="确认密码">
-                <el-input v-model="registerForm.repassword"></el-input>
+              <el-form-item label="确认密码" prop="repassword">
+                <el-input v-model="registerForm.repassword" show-password>
+                </el-input>
               </el-form-item>
               <el-form-item>
-                <el-button class="res-button">立即注册</el-button>
+                <el-button class="res-button" @click="handleRegister">
+                  立即注册
+                </el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -34,16 +43,81 @@
 </template>
 
 <script>
+import { phoneValidation, pwdValidationIntensity } from "@/common/utils";
+import { RegisterApi } from "@/api";
 export default {
   name: "Register",
   data() {
-    return {
-      registerForm: {
-        phone: "",
-        password: "",
-        repassword: ""
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.registerForm.password) {
+        callback(new Error("两次输入密码不一致"));
+      } else {
+        callback();
       }
     };
+    return {
+      registerForm: {
+        mobilePhone: "",
+        password: "",
+        repassword: ""
+      },
+      rules: {
+        mobilePhone: [
+          {
+            required: true,
+            message: "请输入手机号码",
+            trigger: "blur"
+          },
+          {
+            validator: phoneValidation,
+            trigger: "blur"
+          }
+        ],
+        password: [
+          {
+            required: true,
+            message: "请输入密码",
+            trigger: "blur"
+          },
+          {
+            validator: pwdValidationIntensity,
+            trigger: "blur"
+          }
+        ],
+        repassword: [
+          {
+            required: true,
+            message: "请输入确认密码",
+            trigger: "blur"
+          },
+          {
+            validator: validatePass,
+            trigger: "blur"
+          }
+        ]
+      }
+    };
+  },
+  methods: {
+    handleRegister() {
+      const data = {
+        mobilePhone: this.registerForm.mobilePhone,
+        password: this.registerForm.password
+      };
+      this.$refs["registerForm"].validate(valid => {
+        if (valid) {
+          RegisterApi.register(data).then(res => {
+            if (res.status === 200) {
+              alert("注册成功");
+            }
+          });
+        } else {
+          return false;
+        }
+      });
+    }
   }
 };
 </script>
@@ -101,6 +175,12 @@ export default {
 .regbox {
   .el-form-item {
     margin-bottom: 0;
+  }
+  .el-form-item__error {
+    top: auto;
+    bottom: 55%;
+    left: auto;
+    right: 0;
   }
 }
 </style>

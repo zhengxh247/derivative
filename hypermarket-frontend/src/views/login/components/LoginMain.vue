@@ -113,11 +113,8 @@ export default {
         password: ""
       },
       registerForm: {
-        username: "",
         password: "",
-        rePassword: "",
-        phone: "",
-        email: ""
+        phone: ""
       }
     };
   },
