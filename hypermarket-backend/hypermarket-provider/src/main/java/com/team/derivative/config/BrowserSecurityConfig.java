@@ -1,8 +1,6 @@
 package com.team.derivative.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.team.derivative.properties.authentication.AbstractChannelSecurityConfig;
-import com.team.derivative.properties.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.team.derivative.properties.properties.SecurityConstants;
 import com.team.derivative.properties.properties.SecurityProperties;
 import com.team.derivative.properties.validate.code.ValidateCodeSecurityConfig;
@@ -12,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -38,7 +37,7 @@ import java.util.Map;
  */
 
 @Configuration
-public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
+public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SecurityProperties securityProperties;
@@ -48,9 +47,6 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 
     @Autowired
     private UserDetailsService userDetailsService;
-
-    @Autowired
-    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
