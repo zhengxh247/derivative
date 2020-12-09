@@ -217,6 +217,10 @@ export default {
      * @param 无
      */
     getAuthCode() {
+      if (!this.registerForm.phone) {
+        Message("请先输入输入手机号", "error");
+        return false;
+      }
       let onOff = true;
       const param = {
         mobile: this.registerForm.phone
