@@ -16,7 +16,7 @@ public interface UserMapper extends BaseMapper<GeneralUser>{
      * @param username
      * @return GeneralUser
      */
-    @Select("select * from admin_user where username = #{username}")
+    @Select("select * from admin_user where (username = #{username} or mobile_phone  = #{username})")
     GeneralUser getUserByUsername(String username);
 
     /**
