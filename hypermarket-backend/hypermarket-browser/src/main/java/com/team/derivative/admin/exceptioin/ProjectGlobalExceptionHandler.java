@@ -26,7 +26,7 @@ public class ProjectGlobalExceptionHandler {
      */
     @ExceptionHandler(value = ServiceException.class)
     @ResponseBody
-    public ResultBody pipeExceptionHandler(HttpServletRequest req, ServiceException e) {
+    public ResultBody browserExceptionHandler(HttpServletRequest req, ServiceException e) {
         logger.error("发生业务异常！原因是：{}", e.getErrMessage());
         return ResultBody.error(e.getErrCode(), e.getErrMessage());
     }

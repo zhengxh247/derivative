@@ -8,18 +8,18 @@ package com.team.derivative.support;
  */
 public class SimpleResponse {
 	
-	public SimpleResponse(Object content){
-		this.content = content;
+	public SimpleResponse(Object message){
+		this.message = message;
 	}
 	
-	private Object content;
+	private Object message;
 
-	public Object getContent() {
-		return content;
+	public Object getMessage() {
+		return message;
 	}
 
-	public void setContent(Object content) {
-		this.content = content;
+	public void setMessage(Object message) {
+		this.message = message;
 	}
-	
+
 }

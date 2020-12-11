@@ -84,7 +84,6 @@ public class ResultBody {
         ResultBody rb = new ResultBody();
         rb.setCode(errorInfo.getResultCode());
         rb.setMessage(errorInfo.getResultMsg());
-        rb.setResult(null);
         return rb;
     }
 
@@ -95,7 +94,6 @@ public class ResultBody {
         ResultBody rb = new ResultBody();
         rb.setCode(code);
         rb.setMessage(message);
-        rb.setResult(null);
         return rb;
     }
 
@@ -106,7 +104,6 @@ public class ResultBody {
         ResultBody rb = new ResultBody();
         rb.setCode("-1");
         rb.setMessage(message);
-        rb.setResult(null);
         return rb;
     }
 
