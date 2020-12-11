@@ -45,6 +45,7 @@
 <script>
 import { phoneValidation, pwdValidationIntensity } from "@/common/utils";
 import { RegisterApi } from "@/api";
+import Message from "@/common/tool";
 export default {
   name: "Register",
   data() {
@@ -110,7 +111,9 @@ export default {
         if (valid) {
           RegisterApi.register(data).then(res => {
             if (res.status === 200) {
-              alert("注册成功");
+              Message("注册成功", "success");
+              this.$refs["registerForm"].resetFields();
+              this.$router.push("/login");
             }
           });
         } else {

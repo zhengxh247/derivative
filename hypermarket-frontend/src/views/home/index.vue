@@ -80,6 +80,11 @@
         </div>
       </div>
     </div>
+    <div class="item-body">
+      <div class="item-children">
+        123
+      </div>
+    </div>
   </div>
 </template>
 
@@ -233,6 +238,17 @@ export default {
       width: 296px;
       margin-top: 25px;
     }
+  }
+}
+.item-body {
+  display: none;
+  border-top: 1px solid #e0e0e0;
+  box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  .item-children {
+    width: 1226px;
+    height: 200px;
+    margin: 0 auto;
   }
 }
 </style>
