@@ -60,14 +60,35 @@
             <a href="javascript:;" class="link-block"></a>
           </div>
           <div class="header-nav">
-            <div class="list">
-              <span>小米手机</span>
-              <span>Redmi 红米</span>
-              <span>电视</span>
-              <span>笔记本</span>
-              <span>家电</span>
-              <span>路由器</span>
-              <span>智能硬件</span>
+            <div class="nav-item">
+              <span class="title">小米手机</span>
+              <div class="item-children">
+                <div class="item-container">小米手机</div>
+              </div>
+              <span class="title">Redmi 红米</span>
+              <div class="item-children">
+                <div class="item-container"></div>
+              </div>
+              <span class="title">电视</span>
+              <div class="item-children">
+                <div class="item-container">电视</div>
+              </div>
+              <span class="title">笔记本</span>
+              <div class="item-children">
+                <div class="item-container"></div>
+              </div>
+              <span class="title">家电</span>
+              <div class="item-children">
+                <div class="item-container"></div>
+              </div>
+              <span class="title">路由器</span>
+              <div class="item-children">
+                <div class="item-container"></div>
+              </div>
+              <span class="title">智能硬件</span>
+              <div class="item-children">
+                <div class="item-container"></div>
+              </div>
               <span>服务</span>
               <span>社区</span>
             </div>
@@ -78,11 +99,6 @@
             </el-input>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="item-body">
-      <div class="item-children">
-        123
       </div>
     </div>
   </div>
@@ -187,8 +203,8 @@ export default {
 }
 .site-header {
   height: 100px;
+  position: relative;
   .container {
-    position: relative;
     width: 1226px;
     margin: 0 auto;
     height: 100px;
@@ -206,7 +222,7 @@ export default {
     }
     .link-block {
       position: absolute;
-      left: 69px;
+      left: auto;
       top: 0;
       width: 165px;
       height: 100px;
@@ -219,7 +235,7 @@ export default {
       float: left;
       width: 678px;
       margin-left: 172px;
-      .list {
+      .nav-item {
         padding-top: 5px;
         span {
           height: 88px;
@@ -231,6 +247,26 @@ export default {
         span:hover {
           color: $textHover;
         }
+        .title:hover + .item-children {
+          display: block;
+        }
+        .item-children {
+          display: none;
+          position: absolute;
+          left: 0;
+          width: 100%;
+          border-top: 1px solid #e0e0e0;
+          box-shadow: 0px 5px 8px -5px rgba(128, 128, 128, 0.5);
+          box-sizing: border-box;
+          .item-container {
+            width: 1226px;
+            height: 200px;
+            margin: 0 auto;
+          }
+        }
+        .item-children:hover {
+          display: block;
+        }
       }
     }
     .header-search {
@@ -238,17 +274,6 @@ export default {
       width: 296px;
       margin-top: 25px;
     }
-  }
-}
-.item-body {
-  display: none;
-  border-top: 1px solid #e0e0e0;
-  box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.5);
-  box-sizing: border-box;
-  .item-children {
-    width: 1226px;
-    height: 200px;
-    margin: 0 auto;
   }
 }
 </style>
