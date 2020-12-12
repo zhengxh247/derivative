@@ -5,7 +5,7 @@ package com.team.derivative.admin.service;
 
 import com.team.derivative.admin.dao.UserMapper;
 import com.team.derivative.admin.entity.GeneralUser;
-import com.team.derivative.admin.entity.User;
+import com.team.derivative.admin.Vo.User;
 import com.team.derivative.admin.exceptioin.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

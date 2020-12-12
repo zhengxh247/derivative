@@ -1,4 +1,4 @@
-package com.team.derivative.admin.entity;
+package com.team.derivative.admin.Vo;
 
 import lombok.Data;
 

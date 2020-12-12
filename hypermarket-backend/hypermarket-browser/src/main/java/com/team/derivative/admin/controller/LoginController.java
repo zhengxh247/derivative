@@ -1,6 +1,6 @@
 package com.team.derivative.admin.controller;
 
-import com.team.derivative.admin.entity.User;
+import com.team.derivative.admin.Vo.User;
 import com.team.derivative.admin.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

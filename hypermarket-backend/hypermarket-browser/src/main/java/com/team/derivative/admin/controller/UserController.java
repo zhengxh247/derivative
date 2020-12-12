@@ -1,6 +1,6 @@
 package com.team.derivative.admin.controller;
 
-import com.team.derivative.admin.entity.User;
+import com.team.derivative.admin.Vo.User;
 import com.team.derivative.admin.service.MyUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
