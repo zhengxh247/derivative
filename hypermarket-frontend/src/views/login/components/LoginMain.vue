@@ -218,7 +218,7 @@ export default {
      */
     getAuthCode() {
       if (!this.registerForm.phone) {
-        Message("请先输入输入手机号", "error");
+        Message("请先输入手机号", "error");
         return false;
       }
       let onOff = true;
