@@ -1,22 +1,22 @@
-package com.team.derivative;
+package com.team.derivative.admin;
 
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author zhengxh
  */
-@SpringBootApplication(scanBasePackages = "com.team.derivative")
+@EnableSwagger2Doc
+@SpringBootApplication(scanBasePackages = "com.team")
 @MapperScan("com.team.derivative.admin.dao")
 @RestController
-@EnableSwagger2
-public class DemoApplication {
+public class HypermarketApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class,args);
+        SpringApplication.run(HypermarketApplication.class,args);
     }
 
 }

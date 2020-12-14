@@ -21,7 +21,6 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
-import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,9 +51,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 
     @Autowired
-    private SpringSocialConfigurer imoocSocialSecurityConfig;
-
-    @Autowired
     private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
 
     @Autowired
@@ -73,7 +69,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
                         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_REGISTER,
-                        SecurityConstants.DEFAULT_goods_display
+                        SecurityConstants.DEFAULT_GOODS_DISPLAY,
+                        SecurityConstants.SWAGGER_INDEX_HTML,
+                        SecurityConstants.SWAGGER_V2,
+                        SecurityConstants.SWAGGER_RESOURCE
                         )
                 .permitAll()
                 .anyRequest()
@@ -87,8 +86,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 //                .apply(smsCodeAuthenticationSecurityConfig)
 //                .and()
-                .apply(imoocSocialSecurityConfig)
-                .and()
+//                .apply(imoocSocialSecurityConfig)
+//                .and()
                 .rememberMe()
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
