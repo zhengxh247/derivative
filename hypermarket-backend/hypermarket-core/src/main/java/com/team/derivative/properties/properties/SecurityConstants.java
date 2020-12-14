@@ -16,7 +16,7 @@ public interface SecurityConstants {
 	/**
 	 * 当请求需要身份认证时，默认跳转的url
 	 * 
-	 * @see SecurityController
+	 * @see
 	 */
 	public static final String DEFAULT_UNAUTHENTICATION_URL = "http://49.232.11.36:83/";
 	/**
@@ -34,13 +34,14 @@ public interface SecurityConstants {
 	/**
 	 * 商品展示的url
 	 */
-	public static final String DEFAULT_goods_display= "/goods/*";
+	public static final String DEFAULT_GOODS_DISPLAY= "/goods/*";
 	/**
-	 * 默认登录页面
-	 *
-	 * @see SecurityController
+	 * swagger的url
 	 */
-	public static final String DEFAULT_LOGIN_PAGE_URL = "/imooc-signIn.html";
+	public static final String SWAGGER_INDEX_HTML= "/swagger-ui.html";
+	public static final String SWAGGER_V2= "/v2/**";
+	public static final String SWAGGER_RESOURCE= "/swagger-resources/**";
+
 	/**
 	 * 验证图片验证码时，http请求中默认的携带图片验证码信息的参数的名称
 	 */

@@ -3,6 +3,7 @@
  */
 package com.team.derivative.properties.social;
 
+import com.team.derivative.properties.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +15,6 @@ import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInUtils;
-import org.springframework.social.security.SpringSocialConfigurer;
-import com.team.derivative.properties.properties.SecurityProperties;
 
 import javax.sql.DataSource;
 
@@ -46,14 +45,6 @@ public class SocialConfig extends SocialConfigurerAdapter {
 			repository.setConnectionSignUp(connectionSignUp);
 		}
 		return repository;
-	}
-
-	@Bean
-	public SpringSocialConfigurer imoocSocialSecurityConfig() {
-		String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();
-		ImoocSpringSocialConfigurer configurer = new ImoocSpringSocialConfigurer(filterProcessesUrl);
-		configurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
-		return configurer;
 	}
 
 	@Bean
