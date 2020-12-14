@@ -72,7 +72,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
                         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
-                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_REGISTER)
+                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_REGISTER,
+                        SecurityConstants.DEFAULT_goods_display
+                        )
                 .permitAll()
                 .anyRequest()
                 .authenticated()

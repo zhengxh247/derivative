@@ -8,7 +8,7 @@ import lombok.Data;
  */
 @Data
 @TableName(value = "admin_user")
-public class GeneralUser {
+public class GeneralUserEntity {
 
     private String username;
     private String password;

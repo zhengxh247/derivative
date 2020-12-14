@@ -1,7 +1,7 @@
 package com.team.derivative.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.team.derivative.admin.entity.GeneralUser;
+import com.team.derivative.admin.entity.GeneralUserEntity;
 import org.apache.ibatis.annotations.Select;
 
 
@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
  * @author zhengxh
  */
 
-public interface UserMapper extends BaseMapper<GeneralUser>{
+public interface UserMapper extends BaseMapper<GeneralUserEntity>{
 
     /**
      * 根据账号获取用户信息
@@ -17,7 +17,7 @@ public interface UserMapper extends BaseMapper<GeneralUser>{
      * @return GeneralUser
      */
     @Select("select * from admin_user where (username = #{username} or mobile_phone  = #{username})")
-    GeneralUser getUserByUsername(String username);
+    GeneralUserEntity getUserByUsername(String username);
 
     /**
      * 根据手机号码获取用户信息
@@ -25,7 +25,7 @@ public interface UserMapper extends BaseMapper<GeneralUser>{
      * @return GeneralUser
      */
     @Select("select * from admin_user where mobile_phone = #{mobile}")
-    GeneralUser getUserByMobile(String mobile);
+    GeneralUserEntity getUserByMobile(String mobile);
 
     /**
      * 根据手机号码插入用户信息
@@ -33,5 +33,5 @@ public interface UserMapper extends BaseMapper<GeneralUser>{
      * @return GeneralUser
      */
     @Override
-    int insert(GeneralUser entity);
+    int insert(GeneralUserEntity entity);
 }

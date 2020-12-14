@@ -4,7 +4,7 @@
 package com.team.derivative.admin.service;
 
 import com.team.derivative.admin.dao.UserMapper;
-import com.team.derivative.admin.entity.GeneralUser;
+import com.team.derivative.admin.entity.GeneralUserEntity;
 import com.team.derivative.admin.Vo.User;
 import com.team.derivative.admin.exceptioin.ServiceException;
 import org.slf4j.Logger;
@@ -51,7 +51,7 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
         // 根据用户名查找用户信息
         //根据查找到的用户信息判断用户是否被冻结
         System.out.println(username);
-        GeneralUser user = userMapper.getUserByUsername(username);
+        GeneralUserEntity user = userMapper.getUserByUsername(username);
         String password = passwordEncoder.encode("2");
         logger.info("数据库密码是:" + password);
         return new SocialUser(username, user.getPassword(),
@@ -75,7 +75,7 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
             throw ServiceException.IsExistMobile(user.getMobilePhone());
         }else {
             String password = passwordEncoder.encode(user.getPassword());
-            GeneralUser generalUser = new GeneralUser();
+            GeneralUserEntity generalUser = new GeneralUserEntity();
             generalUser.setMobilePhone(user.getMobilePhone());
             generalUser.setPassword(password);
             generalUser.setUsername(user.getUsername());

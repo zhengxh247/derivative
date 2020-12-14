@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Data
 @TableName(value = "goods_details")
-public class GoodsDetails {
+public class GoodsDetailsEntity {
 
     @Id
     @ApiModelProperty(value = "主键id", example = "1")

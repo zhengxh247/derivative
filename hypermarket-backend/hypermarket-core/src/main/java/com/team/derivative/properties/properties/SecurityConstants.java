@@ -32,6 +32,10 @@ public interface SecurityConstants {
 	 */
 	public static final String DEFAULT_LOGIN_PROCESSING_URL_REGISTER= "/user/register";
 	/**
+	 * 商品展示的url
+	 */
+	public static final String DEFAULT_goods_display= "/goods/*";
+	/**
 	 * 默认登录页面
 	 *
 	 * @see SecurityController

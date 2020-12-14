@@ -9,14 +9,14 @@ import org.springframework.data.annotation.Id;
  * @author zhengxh
  */
 @Data
-@TableName(value = "goods_category")
-public class GoodsCategory {
+@TableName(value = "view_img")
+public class ViewImgEntity {
 
     @Id
     @ApiModelProperty(value = "主键id", example = "1")
     private Integer id;
 
-    private String name;
-    private String keyword;
-    private String correlation;
+    private String type;
+    private String targetId;
+    private String imgUrl;
 }
