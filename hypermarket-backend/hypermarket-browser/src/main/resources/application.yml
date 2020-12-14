@@ -2,6 +2,12 @@ spring:
   application:
     name: hypermarket-browser
 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10M  #单个文件的最大上限
+      max-request-size: 30M #单个请求的文件总大小上限
+
   mvc:
     static-path-pattern: /**
 

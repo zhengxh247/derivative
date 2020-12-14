@@ -8,6 +8,7 @@ import com.team.derivative.admin.entity.GoodsDetailsEntity;
 import com.team.derivative.admin.entity.ViewImgEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ public class GoodManagerService {
      * 获取商品列表
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     public Map<String, List<GoodsDetailsEntity>> getGoodsList(){
 
         List<GoodsCategoryEntity> list = categoryMapper.selectList(null);
@@ -47,6 +49,7 @@ public class GoodManagerService {
     /**
      * 轮播图接口
      */
+    @Transactional(rollbackFor = Exception.class)
     public List<ViewImgEntity> getView(){
         return viewImgMapper.selectList(null);
     }

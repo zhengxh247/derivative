@@ -3,9 +3,9 @@
  */
 package com.team.derivative.admin.service;
 
+import com.team.derivative.admin.Vo.User;
 import com.team.derivative.admin.dao.UserMapper;
 import com.team.derivative.admin.entity.GeneralUserEntity;
-import com.team.derivative.admin.Vo.User;
 import com.team.derivative.admin.exceptioin.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +19,7 @@ import org.springframework.social.security.SocialUser;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author zhengxh
@@ -47,6 +48,7 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
         return buildUser(userId);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     private SocialUserDetails buildUser(String username) {
         // 根据用户名查找用户信息
         //根据查找到的用户信息判断用户是否被冻结
@@ -59,6 +61,7 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public Boolean loginByMobile(String mobile) {
 
         try {
@@ -69,10 +72,11 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
         return true;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public Boolean register(User user) {
 
         if (userMapper.getUserByMobile(user.getMobilePhone()) != null){
-            throw ServiceException.IsExistMobile(user.getMobilePhone());
+            throw ServiceException.isExistMobile(user.getMobilePhone());
         }else {
             String password = passwordEncoder.encode(user.getPassword());
             GeneralUserEntity generalUser = new GeneralUserEntity();
