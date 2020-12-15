@@ -13,6 +13,7 @@ services:
       - 10010:10010
     volumes:
       - /opt/logs/hypermarket-backend:/opt/logs/hypermarket-backend
+      - /data/resources:/resources
     environment:
       - SQL_ENV_NAME=dev
       - IP_ADDRESS=theip
