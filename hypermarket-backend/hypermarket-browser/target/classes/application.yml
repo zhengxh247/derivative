@@ -1,6 +1,12 @@
 spring:
   application:
-    name: security-demo
+    name: hypermarket-browser
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10M  #单个文件的最大上限
+      max-request-size: 30M #单个请求的文件总大小上限
 
   mvc:
     static-path-pattern: /**
@@ -96,3 +102,22 @@ mybatis-plus:
     call-setters-on-nulls: true
     # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+---
+# swagger 配置
+swagger:
+  enabled: true
+  base-package: com.team
+  title: ${spring.application.name}
+  version: 1.0.0
+  contact:
+    name: admin
+  global-operation-parameters:
+    - name: Authorization
+      parameter-type: header
+      model-ref: string
+      description: "Bearer + ' ' + accessToken"
+    - name: locale
+      parameter-type: header
+      model-ref: string
+      description: "国际化 目前支持zh_CN, zh_TW, en_US 不写默认zh_CN"
