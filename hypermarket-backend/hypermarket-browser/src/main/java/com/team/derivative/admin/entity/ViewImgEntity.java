@@ -19,4 +19,6 @@ public class ViewImgEntity {
     private String type;
     private String targetId;
     private String imgUrl;
+    private String sort;
+    private String creatime;
 }
