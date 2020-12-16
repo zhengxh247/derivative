@@ -39,7 +39,7 @@
               <span>购物车(0)</span>
             </div>
             <div class="cart-menu">
-              some value
+              购物车中还没有商品，赶紧选购吧！
             </div>
           </div>
           <div class="topbar-info">
@@ -93,7 +93,30 @@
               <span class="title">Redmi 红米</span>
               <div class="item-children">
                 <ul class="item-container">
-                  <li>Redmi 红米</li>
+                  <li>
+                    <div>
+                      <div class="figure clear">
+                        <img
+                          src="http://49.232.11.36/images/goods/phone/redmi9a.jpg"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">小米10至尊纪念版</div>
+                      <div class="price">5299元起</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="figure">
+                        <img
+                          src="http://49.232.11.36/images/goods/phone/redmi10x.png"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">小米10</div>
+                      <div class="price">3799元起</div>
+                    </div>
+                  </li>
                 </ul>
               </div>
               <span class="title">电视</span>
@@ -253,6 +276,69 @@
         </div>
       </div>
     </div>
+    <div class="home-hero-container">
+      <div class="home-hero">
+        <div class="swiper-container">
+          <div class="site-category">
+            <ul class="site-category-list">
+              <li class="category-item">
+                <span>手机 电话卡</span>
+                <i class="el-icon-arrow-right"></i>
+              </li>
+              <li class="category-item">
+                <span>电视 盒子</span>
+                <i class="el-icon-arrow-right"></i>
+              </li>
+              <li class="category-item">
+                <span>笔记本 显示器</span>
+                <i class="el-icon-arrow-right"></i>
+              </li>
+              <li class="category-item">
+                <span>家电 插线板</span>
+                <i class="el-icon-arrow-right"></i>
+              </li>
+              <li class="category-item">
+                <span>出行 穿戴</span>
+                <i class="el-icon-arrow-right"></i>
+              </li>
+              <li class="category-item">
+                <span>智能 路由器</span>
+                <i class="el-icon-arrow-right"></i>
+              </li>
+              <li class="category-item">
+                <span>电源 配件</span>
+                <i class="el-icon-arrow-right"></i>
+              </li>
+              <li class="category-item">
+                <span>健康 儿童</span>
+                <i class="el-icon-arrow-right"></i>
+              </li>
+              <li class="category-item">
+                <span>耳机 音箱</span>
+                <i class="el-icon-arrow-right"></i>
+              </li>
+              <li class="category-item">
+                <span>生活 箱包</span>
+                <i class="el-icon-arrow-right"></i>
+              </li>
+            </ul>
+          </div>
+          <el-carousel
+            :interval="4500"
+            arrow="always"
+            class="hm-carousel swiper-view"
+          >
+            <el-carousel-item v-for="item in swipers" :key="item.id">
+              <img
+                class="slide-item"
+                :src="`http://49.232.11.36${item.imgUrl}`"
+              />
+            </el-carousel-item>
+          </el-carousel>
+        </div>
+        <div class="home-hero-sub"></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -262,16 +348,23 @@ export default {
   name: "Home",
   data() {
     return {
-      search: ""
+      search: "",
+      swipers: []
     };
   },
   created() {
     this.getHeaderMenuList();
+    this.getSwiperList();
   },
   methods: {
     getHeaderMenuList() {
       GoodsApi.getHeaderMenuList().then(res => {
         console.log(res);
+      });
+    },
+    getSwiperList() {
+      GoodsApi.getSwiperList().then(res => {
+        this.swipers = res.data;
       });
     }
   }
@@ -351,7 +444,8 @@ export default {
         top: 40px;
         z-index: 1;
         background: #fff;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        box-shadow: -5px 5px 10px -4px rgba(0, 0, 0, 0.15),
+          5px 5px 10px -4px rgba(0, 0, 0, 0.15);
       }
       .cart-mini:hover {
         color: $colorHover;
@@ -361,6 +455,10 @@ export default {
     }
     .topbar-cart:hover .cart-menu {
       display: block;
+    }
+    .topbar-cart:hover .cart-mini {
+      color: $colorHover;
+      background: #fff;
     }
   }
 }
@@ -416,7 +514,9 @@ export default {
         .item-children {
           display: none;
           position: absolute;
+          background: #fff;
           left: 0;
+          z-index: 101;
           width: 100%;
           border-top: 1px solid #e0e0e0;
           box-shadow: 0px 5px 8px -5px rgba(128, 128, 128, 0.5);
@@ -460,6 +560,46 @@ export default {
     }
   }
 }
+.home-hero-container {
+  width: 1226px;
+  margin: 0 auto;
+  position: relative;
+  .swiper-container {
+    position: relative;
+    .site-category {
+      position: absolute;
+      z-index: 100;
+      width: 234px;
+      height: 460px;
+      .site-category-list {
+        height: 420px;
+        border: 0;
+        color: #fff;
+        padding: 20px 0;
+        background: rgba(105, 101, 101, 0.6);
+        .category-item {
+          position: relative;
+          height: 42px;
+          line-height: 42px;
+          padding-left: 30px;
+          i {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+          }
+        }
+        .category-item:hover {
+          cursor: pointer;
+          background: $colorPrimary;
+        }
+      }
+    }
+    .slide-item {
+      width: 1226px;
+      height: 460px;
+    }
+  }
+}
 </style>
 
 <style lang="scss">
@@ -467,6 +607,11 @@ export default {
   .el-input__inner {
     height: 48px;
     line-height: 48px;
+  }
+}
+.swiper-view {
+  .el-carousel__container {
+    height: 460px;
   }
 }
 </style>

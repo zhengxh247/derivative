@@ -5,7 +5,7 @@ export const GoodsApi = {
   getHeaderMenuList() {
     return $http.request("get", {}, `${config.api}/${base}/getAll`);
   },
-  getViewList() {
+  getSwiperList() {
     return $http.request("get", {}, `${config.api}/${base}/getView`);
   }
 };
