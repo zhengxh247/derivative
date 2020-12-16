@@ -63,31 +63,183 @@
             <div class="nav-item">
               <span class="title">小米手机</span>
               <div class="item-children">
-                <div class="item-container">小米手机</div>
+                <ul class="item-container">
+                  <li>
+                    <div>
+                      <div class="figure clear">
+                        <img
+                          src="http://49.232.11.36/images/goods/phone/redmi9a.jpg"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">小米10至尊纪念版</div>
+                      <div class="price">5299元起</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="figure">
+                        <img
+                          src="http://49.232.11.36/images/goods/phone/redmi10x.png"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">小米10</div>
+                      <div class="price">3799元起</div>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <span class="title">Redmi 红米</span>
               <div class="item-children">
-                <div class="item-container"></div>
+                <ul class="item-container">
+                  <li>Redmi 红米</li>
+                </ul>
               </div>
               <span class="title">电视</span>
               <div class="item-children">
-                <div class="item-container">电视</div>
+                <ul class="item-container">
+                  <li>
+                    <div>
+                      <div class="figure clear">
+                        <img
+                          src="http://49.232.11.36/images/goods/tv/redmitv-max.jpg"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">Redmi 智能电视 MAX 98</div>
+                      <div class="price">19999元</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="figure">
+                        <img
+                          src="http://49.232.11.36/images/goods/tv/tv65in.png"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">小米电视 大师 65英寸OLED</div>
+                      <div class="price">12999元</div>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <span class="title">笔记本</span>
               <div class="item-children">
-                <div class="item-container"></div>
+                <ul class="item-container">
+                  <li>
+                    <div>
+                      <div class="figure clear">
+                        <img
+                          src="http://49.232.11.36/images/goods/laptop/redmiBook13.png"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">RedmiBook Air 13</div>
+                      <div class="price">4499元起</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="figure">
+                        <img
+                          src="http://49.232.11.36/images/goods/laptop/displayer.png"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">显示器</div>
+                      <div class="price">2499元</div>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <span class="title">家电</span>
               <div class="item-children">
-                <div class="item-container"></div>
+                <ul class="item-container">
+                  <li>
+                    <div>
+                      <div class="figure clear">
+                        <img
+                          src="http://49.232.11.36/images/goods/electrical_equipment/air-c1.png"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">米家互联网空调C1（一级能效）</div>
+                      <div class="price">2099元</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="figure">
+                        <img
+                          src="http://49.232.11.36/images/goods/electrical_equipment/mihone.png"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">米家互联网洗烘一体机10kg</div>
+                      <div class="price">1999元</div>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <span class="title">路由器</span>
               <div class="item-children">
-                <div class="item-container"></div>
+                <ul class="item-container">
+                  <li>
+                    <div>
+                      <div class="figure clear">
+                        <img
+                          src="http://49.232.11.36/images/goods/router/routerac2100.png"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">小米路由器AC2100</div>
+                      <div class="price">199元</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="figure">
+                        <img
+                          src="http://49.232.11.36/images/goods/router/redmi-routerac2100.png"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">Redmi路由器AC2100</div>
+                      <div class="price">159元</div>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <span class="title">智能硬件</span>
               <div class="item-children">
-                <div class="item-container"></div>
+                <ul class="item-container">
+                  <li>
+                    <div>
+                      <div class="figure clear">
+                        <img
+                          src="http://49.232.11.36/images/goods/Intelligent_hardware/camera.jpg"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">小米智能摄像机 云台版2K 白色</div>
+                      <div class="price">199元</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="figure">
+                        <img
+                          src="http://49.232.11.36/images/goods/Intelligent_hardware/door.png"
+                          alt="小米"
+                        />
+                      </div>
+                      <div class="title">小米全自动智能门锁</div>
+                      <div class="price">1799元</div>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <span>服务</span>
               <span>社区</span>
@@ -105,12 +257,23 @@
 </template>
 
 <script>
+import { GoodsApi } from "@/api";
 export default {
   name: "Home",
   data() {
     return {
       search: ""
     };
+  },
+  created() {
+    this.getHeaderMenuList();
+  },
+  methods: {
+    getHeaderMenuList() {
+      GoodsApi.getHeaderMenuList().then(res => {
+        console.log(res);
+      });
+    }
   }
 };
 </script>
@@ -262,6 +425,27 @@ export default {
             width: 1226px;
             height: 200px;
             margin: 0 auto;
+            li {
+              width: auto;
+              height: auto;
+              font-size: 12px;
+              float: left;
+              text-align: center;
+              padding-top: 32px;
+              .figure {
+                width: 205px;
+                border-left: 1px solid #e0e0e0;
+              }
+              .clear {
+                border: 0;
+              }
+              .title {
+                color: #757575;
+              }
+              .price {
+                color: $colorPrimary;
+              }
+            }
           }
         }
         .item-children:hover {

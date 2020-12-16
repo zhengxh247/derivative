@@ -1,3 +1,4 @@
 import { LoginApi } from "./login.api";
 import { RegisterApi } from "./register.api";
-export { LoginApi, RegisterApi };
+import { GoodsApi } from "./goods.api";
+export { LoginApi, RegisterApi, GoodsApi };

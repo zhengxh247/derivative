@@ -26,7 +26,7 @@ class HttpService {
       return response;
     });
   }
-  request(method, data, url, params, other) {
+  request(method, data, url, params = {}, other) {
     let options = {};
     // 判断method类型
     if (method === "get" || method === "delete") {
@@ -35,9 +35,10 @@ class HttpService {
       if (method === "delete") {
         options = { method, url, data: params, params: other };
       } else {
-        Object.keys(params).forEach(key => {
-          if (!params[key]) delete params[key];
-        });
+        params &&
+          Object.keys(params).forEach(key => {
+            if (!params[key]) delete params[key];
+          });
         options = { method, url, data: {}, params };
       }
     } else {
