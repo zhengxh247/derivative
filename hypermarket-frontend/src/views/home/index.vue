@@ -280,48 +280,160 @@
       <div class="home-hero">
         <div class="swiper-container">
           <div class="site-category">
-            <ul class="site-category-list">
-              <li class="category-item">
+            <div class="site-category-list">
+              <div class="category-item">
                 <span>手机 电话卡</span>
                 <i class="el-icon-arrow-right"></i>
-              </li>
-              <li class="category-item">
+              </div>
+              <div class="category-item-children">
+                <div class="container">
+                  <ul class="children-list">
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                  </ul>
+                  <ul class="children-list">
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                  </ul>
+                  <ul class="children-list">
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="category-item">
                 <span>电视 盒子</span>
                 <i class="el-icon-arrow-right"></i>
-              </li>
-              <li class="category-item">
+              </div>
+              <div class="category-item-children">
+                <div class="container">
+                  <ul class="children-list">
+                    <li class="link">电视</li>
+                    <li class="link">电视</li>
+                    <li class="link">电视</li>
+                    <li class="link">电视</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="category-item">
                 <span>笔记本 显示器</span>
                 <i class="el-icon-arrow-right"></i>
-              </li>
-              <li class="category-item">
+              </div>
+              <div class="category-item-children">
+                <div class="container">
+                  <ul class="children-list">
+                    <li class="link">笔记本</li>
+                    <li class="link">笔记本</li>
+                    <li class="link">笔记本</li>
+                    <li class="link">笔记本</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="category-item">
                 <span>家电 插线板</span>
                 <i class="el-icon-arrow-right"></i>
-              </li>
-              <li class="category-item">
+              </div>
+              <div class="category-item-children">
+                <div class="container">
+                  <ul class="children-list">
+                    <li class="link">家电</li>
+                    <li class="link">家电</li>
+                    <li class="link">家电</li>
+                    <li class="link">家电</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="category-item">
                 <span>出行 穿戴</span>
                 <i class="el-icon-arrow-right"></i>
-              </li>
-              <li class="category-item">
+              </div>
+              <div class="category-item-children">
+                <div class="container">
+                  <ul class="children-list">
+                    <li class="link">出行</li>
+                    <li class="link">出行</li>
+                    <li class="link">出行</li>
+                    <li class="link">出行</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="category-item">
                 <span>智能 路由器</span>
                 <i class="el-icon-arrow-right"></i>
-              </li>
-              <li class="category-item">
+              </div>
+              <div class="category-item-children">
+                <div class="container">
+                  <ul class="children-list">
+                    <li class="link">智能</li>
+                    <li class="link">智能</li>
+                    <li class="link">智能</li>
+                    <li class="link">智能</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="category-item">
                 <span>电源 配件</span>
                 <i class="el-icon-arrow-right"></i>
-              </li>
-              <li class="category-item">
+              </div>
+              <div class="category-item-children">
+                <div class="container">
+                  <ul class="children-list">
+                    <li class="link">电源</li>
+                    <li class="link">电源</li>
+                    <li class="link">电源</li>
+                    <li class="link">电源</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="category-item">
                 <span>健康 儿童</span>
                 <i class="el-icon-arrow-right"></i>
-              </li>
-              <li class="category-item">
+              </div>
+              <div class="category-item-children">
+                <div class="container">
+                  <ul class="children-list">
+                    <li class="link">健康</li>
+                    <li class="link">健康</li>
+                    <li class="link">健康</li>
+                    <li class="link">健康</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="category-item">
                 <span>耳机 音箱</span>
                 <i class="el-icon-arrow-right"></i>
-              </li>
-              <li class="category-item">
+              </div>
+              <div class="category-item-children">
+                <div class="container">
+                  <ul class="children-list">
+                    <li class="link">耳机</li>
+                    <li class="link">耳机</li>
+                    <li class="link">耳机</li>
+                    <li class="link">耳机</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="category-item">
                 <span>生活 箱包</span>
                 <i class="el-icon-arrow-right"></i>
-              </li>
-            </ul>
+              </div>
+              <div class="category-item-children">
+                <div class="container">
+                  <ul class="children-list">
+                    <li class="link">生活</li>
+                    <li class="link">生活</li>
+                    <li class="link">生活</li>
+                    <li class="link">生活</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
           <el-carousel
             :interval="4500"
@@ -591,6 +703,35 @@ export default {
         .category-item:hover {
           cursor: pointer;
           background: $colorPrimary;
+        }
+        .category-item-children {
+          position: absolute;
+          display: none;
+          left: 234px;
+          top: 0;
+          background: #fff;
+          color: #000;
+          width: auto;
+          height: 458px;
+          border: 1px solid #e0e0e0;
+          border-left: 0;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+          .container {
+            display: flex;
+            .link {
+              width: 265px;
+              height: 76px;
+            }
+          }
+          // .children-list {
+          //   float: left;
+          // }
+        }
+        .category-item:hover + .category-item-children {
+          display: block;
+        }
+        .category-item-children:hover {
+          display: block;
         }
       }
     }
