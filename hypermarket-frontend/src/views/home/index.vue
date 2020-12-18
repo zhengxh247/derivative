@@ -454,8 +454,70 @@
             </el-carousel-item>
           </el-carousel>
         </div>
-        <div class="home-hero-sub"></div>
       </div>
+      <div class="home-hero-sub">
+        <div class="span4">
+          <ul class="home-channel-list">
+            <li>小米秒杀</li>
+            <li>企业团购</li>
+            <li>F码通道</li>
+            <li>米粉卡</li>
+            <li>以旧换新</li>
+            <li>话费充值</li>
+          </ul>
+        </div>
+        <div class="span16">
+          <ul class="home-promo-list">
+            <li>
+              <a href="javascript:;">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e5f20a62c3d5b3d6806bd51ab6c5dd12.jpg?w=632&h=340"
+                />
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8a43378b96501d7e227a9018fe2668c5.jpg?w=632&h=340"
+                />
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/793913688bfaee26b755a0b0cc8575fd.jpg?w=632&h=340"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="home-tool-bar">
+      <a href="javascript:;" class="item">
+        <div>icon</div>
+        <span>手机APP</span>
+      </a>
+      <a href="javascript:;" class="item">
+        <div>icon</div>
+        <span>个人中心</span>
+      </a>
+      <a href="javascript:;" class="item">
+        <div>icon</div>
+        <span>售后服务</span>
+      </a>
+      <a href="javascript:;" class="item">
+        <div>icon</div>
+        <span>人工服务</span>
+      </a>
+      <a href="javascript:;" class="item">
+        <div>icon</div>
+        <span>购物车</span>
+      </a>
+      <a href="javascript:;" class="item backtop">
+        <div>icon</div>
+        <span>返回顶部</span>
+      </a>
     </div>
   </div>
 </template>
@@ -478,7 +540,7 @@ export default {
   methods: {
     getHeaderMenuList() {
       GoodsApi.getHeaderMenuList().then(res => {
-        console.log(res);
+        // console.log(res);
       });
     },
     getSwiperList() {
@@ -734,9 +796,6 @@ export default {
               height: 76px;
             }
           }
-          // .children-list {
-          //   float: left;
-          // }
         }
         .category-item:hover + .category-item-children {
           display: block;
@@ -756,6 +815,69 @@ export default {
       width: 1226px;
       height: 460px;
     }
+  }
+  .home-hero-sub {
+    display: flex;
+    margin-top: 14px;
+    .span4 {
+      width: 234px;
+      .home-channel-list {
+        margin: 0;
+        padding: 3px;
+        list-style-type: none;
+        font-size: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        background: #5f5750;
+        li {
+          width: 70px;
+          height: 82px;
+          color: #fff;
+          opacity: 0.7;
+          padding: 0 3px;
+        }
+      }
+    }
+    .span16 {
+      width: 978px;
+      margin-left: 14px;
+      .home-promo-list {
+        display: flex;
+        li:first-child {
+          margin-left: 0;
+        }
+        li {
+          margin-left: 15px;
+        }
+        img {
+          width: 316px;
+          height: 170px;
+        }
+      }
+    }
+  }
+}
+.home-tool-bar {
+  position: fixed;
+  bottom: 70px;
+  right: 0;
+  .item {
+    position: relative;
+    display: block;
+    width: 82px;
+    height: 90px;
+    margin-top: -1px;
+    background-color: #fff;
+    border: 1px solid #f5f5f5;
+    text-align: center;
+  }
+  .item:hover {
+    color: $textHover;
+  }
+  .backtop {
+    visibility: hidden;
+    margin-top: 14px;
   }
 }
 </style>
