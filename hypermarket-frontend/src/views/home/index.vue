@@ -35,8 +35,8 @@
           </div>
           <div class="topbar-cart">
             <div class="cart-mini">
-              <!-- <i class="iconfont icon-gouwuche"></i> -->
-              <span>购物车(0)</span>
+              <i class="iconfont icon-gouwuche"></i>
+              <span>购物车（0）</span>
             </div>
             <div class="cart-menu">
               购物车中还没有商品，赶紧选购吧！
@@ -285,8 +285,14 @@
                 <span>手机 电话卡</span>
                 <i class="el-icon-arrow-right"></i>
               </div>
-              <div class="category-item-children">
+              <div class="category-item-children" :class="[calcColumnClass]">
                 <div class="container">
+                  <ul class="children-list">
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                    <li class="link">手机</li>
+                  </ul>
                   <ul class="children-list">
                     <li class="link">手机</li>
                     <li class="link">手机</li>
@@ -461,7 +467,8 @@ export default {
   data() {
     return {
       search: "",
-      swipers: []
+      swipers: [],
+      calcColumnClass: "children-col-4"
     };
   },
   created() {
@@ -545,6 +552,10 @@ export default {
       margin-left: 15px;
       .cart-mini {
         background: #424242;
+        text-align: center;
+        i {
+          font-size: 15px;
+        }
       }
       .cart-menu {
         display: none;
@@ -732,6 +743,12 @@ export default {
         }
         .category-item-children:hover {
           display: block;
+        }
+        .children-col-4 {
+          width: 992px;
+          .link {
+            width: 248px !important;
+          }
         }
       }
     }
