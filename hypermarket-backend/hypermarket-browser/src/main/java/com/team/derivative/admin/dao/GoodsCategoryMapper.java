@@ -7,4 +7,5 @@ import com.team.derivative.admin.entity.GoodsCategoryEntity;
  * @author zhengxh
  */
 public interface GoodsCategoryMapper extends BaseMapper<GoodsCategoryEntity> {
+
 }

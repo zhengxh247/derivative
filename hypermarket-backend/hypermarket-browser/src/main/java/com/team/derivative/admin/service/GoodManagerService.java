@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author zhengxh
@@ -31,7 +32,7 @@ public class GoodManagerService {
     private ViewImgMapper viewImgMapper;
 
     /**
-     * 获取商品列表
+     * 获取二级分类商品列表
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
@@ -39,9 +40,33 @@ public class GoodManagerService {
 
         List<GoodsCategoryEntity> list = categoryMapper.selectList(null);
         Map<String, List<GoodsDetailsEntity>> map = new HashMap<>();
+        //一级目录
+        Integer parent = 0;
         list.forEach(r->{
-            List<GoodsDetailsEntity> goodsList = detailsMapper.findGoodsByCategoryId(r.getId());
-            map.put(r.getName(),goodsList);
+            if (!parent.equals(r.getCorrelation())) {
+                List<GoodsDetailsEntity> goodsList = detailsMapper.findGoodsByCategoryId(r.getId());
+                map.put(r.getName(), goodsList);
+            }
+        });
+        return map;
+    }
+
+    /**
+     * 获取一级分类商品列表
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public Map<String, List<GoodsDetailsEntity>> getGroupGoodsList()
+    {
+
+        List<GoodsCategoryEntity> list = categoryMapper.selectList(null);
+        Map<String, List<GoodsDetailsEntity>> map = new HashMap<>();
+        //一级目录
+        Integer parent = 0;
+        List<GoodsCategoryEntity> array = list.stream().filter(r->parent.equals(r.getCorrelation())).collect(Collectors.toList());
+        array.forEach(r->{
+            List<GoodsDetailsEntity> goodsList = detailsMapper.findGoodsByCroupId(r.getId());
+            map.put(r.getName(), goodsList);
         });
         return map;
     }

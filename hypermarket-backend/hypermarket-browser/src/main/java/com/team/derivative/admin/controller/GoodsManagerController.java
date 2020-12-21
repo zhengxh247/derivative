@@ -30,6 +30,12 @@ public class GoodsManagerController {
         return service.getGoodsList();
     }
 
+    @ApiOperation(value = "查询一级分类菜单详情")
+    @GetMapping("/getGroupAll")
+    public Map<String, List<GoodsDetailsEntity>> getGroupAll(){
+        return service.getGroupGoodsList();
+    }
+
     @ApiOperation(value = "查询首页轮播图详情")
     @GetMapping("/getView")
     public List<ViewImgEntity> getView(){
