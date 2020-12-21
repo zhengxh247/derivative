@@ -7,3 +7,18 @@
     right: 0;
   }
 }
+.hm-carousel {
+  .el-carousel__indicators--horizontal {
+    left: auto;
+    right: 30px;
+    transform: none;
+  }
+  .el-carousel__arrow--left {
+    left: 251px;
+  }
+  .el-carousel__button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+}
