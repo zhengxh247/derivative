@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 /**
  * @author zhengxh
- *
  */
 @Service
 public class GoodManagerService {
@@ -33,16 +32,17 @@ public class GoodManagerService {
 
     /**
      * 获取二级分类商品列表
+     *
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public Map<String, List<GoodsDetailsEntity>> getGoodsList(){
+    public Map<String, List<GoodsDetailsEntity>> getGoodsList() {
 
         List<GoodsCategoryEntity> list = categoryMapper.selectList(null);
         Map<String, List<GoodsDetailsEntity>> map = new HashMap<>();
         //一级目录
         Integer parent = 0;
-        list.forEach(r->{
+        list.forEach(r -> {
             if (!parent.equals(r.getCorrelation())) {
                 List<GoodsDetailsEntity> goodsList = detailsMapper.findGoodsByCategoryId(r.getId());
                 map.put(r.getName(), goodsList);
@@ -53,18 +53,18 @@ public class GoodManagerService {
 
     /**
      * 获取一级分类商品列表
+     *
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public Map<String, List<GoodsDetailsEntity>> getGroupGoodsList()
-    {
+    public Map<String, List<GoodsDetailsEntity>> getGroupGoodsList() {
 
         List<GoodsCategoryEntity> list = categoryMapper.selectList(null);
         Map<String, List<GoodsDetailsEntity>> map = new HashMap<>();
         //一级目录
         Integer parent = 0;
-        List<GoodsCategoryEntity> array = list.stream().filter(r->parent.equals(r.getCorrelation())).collect(Collectors.toList());
-        array.forEach(r->{
+        List<GoodsCategoryEntity> array = list.stream().filter(r -> parent.equals(r.getCorrelation())).collect(Collectors.toList());
+        array.forEach(r -> {
             List<GoodsDetailsEntity> goodsList = detailsMapper.findGoodsByCroupId(r.getId());
             map.put(r.getName(), goodsList);
         });
@@ -72,10 +72,19 @@ public class GoodManagerService {
     }
 
     /**
+     * 商品二级分类模糊查询
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public List<GoodsDetailsEntity> selectByKey(String keyWord) {
+        Integer id = categoryMapper.selectByKey(keyWord);
+        return detailsMapper.findGoodsByCategoryId(id);
+    }
+
+    /**
      * 轮播图接口
      */
     @Transactional(rollbackFor = Exception.class)
-    public List<ViewImgEntity> getView(){
+    public List<ViewImgEntity> getView() {
         return viewImgMapper.selectList(null);
     }
 }

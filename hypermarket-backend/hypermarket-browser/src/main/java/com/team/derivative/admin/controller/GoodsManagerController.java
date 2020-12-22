@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -34,6 +35,12 @@ public class GoodsManagerController {
     @GetMapping("/getGroupAll")
     public Map<String, List<GoodsDetailsEntity>> getGroupAll(){
         return service.getGroupGoodsList();
+    }
+
+    @ApiOperation(value = "商品类别模糊查询")
+    @GetMapping("/select")
+    public List<GoodsDetailsEntity> selectByKey(@RequestParam String keyWord){
+        return service.selectByKey(keyWord);
     }
 
     @ApiOperation(value = "查询首页轮播图详情")
