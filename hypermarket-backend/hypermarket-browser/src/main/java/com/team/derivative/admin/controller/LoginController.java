@@ -1,6 +1,7 @@
 package com.team.derivative.admin.controller;
 
 import com.team.derivative.admin.Vo.User;
+import com.team.derivative.admin.exceptioin.ResultBody;
 import com.team.derivative.admin.service.MyUserDetailsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +25,7 @@ public class LoginController {
 
     @ApiOperation(value = "手机验证码登录")
     @PostMapping("/mobile")
-    public Boolean login(@Validated @RequestBody User user) {
-        return service.loginByMobile(user.getMobilePhone());
+    public ResultBody login(@Validated @RequestBody User user) {
+        return ResultBody.success(service.loginByMobile(user.getMobilePhone()));
     }
 }

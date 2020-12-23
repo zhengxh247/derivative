@@ -1,5 +1,6 @@
 package com.team.derivative.admin.controller;
 
+import com.team.derivative.admin.exceptioin.ResultBody;
 import com.team.derivative.admin.service.FileMangerService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class UploadController {
 
     @PostMapping("/multiUpload")
     @ResponseBody
-    public Boolean multiUpload(@RequestParam("upFile") MultipartFile[] files , @RequestParam("filePath") String filePath) {
+    public ResultBody multiUpload(@RequestParam("upFile") MultipartFile[] files , @RequestParam("filePath") String filePath) {
 
-        return service.multiUploadFile(files,filePath);
+        return ResultBody.success(service.multiUploadFile(files,filePath));
     }
 }

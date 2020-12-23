@@ -1,6 +1,7 @@
 package com.team.derivative.admin.controller;
 
 import com.team.derivative.admin.Vo.User;
+import com.team.derivative.admin.exceptioin.ResultBody;
 import com.team.derivative.admin.service.MyUserDetailsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +27,7 @@ public class UserController {
 
     @ApiOperation(value = "用户注册")
     @PostMapping("/register")
-    public Boolean register(@Validated @RequestBody User user) {
-        return service.register(user);
+    public ResultBody register(@Validated @RequestBody User user) {
+        return ResultBody.success(service.register(user));
     }
 }
