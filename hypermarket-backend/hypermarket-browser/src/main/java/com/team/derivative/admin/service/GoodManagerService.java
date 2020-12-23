@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,19 +37,21 @@ public class GoodManagerService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public Map<String, List<GoodsDetailsEntity>> getGoodsList() {
-
+    public List getGoodsList() {
         List<GoodsCategoryEntity> list = categoryMapper.selectList(null);
-        Map<String, List<GoodsDetailsEntity>> map = new HashMap<>();
+        List result = new ArrayList();
         //一级目录
         Integer parent = 0;
         list.forEach(r -> {
             if (!parent.equals(r.getCorrelation())) {
+                Map map = new HashMap<>();
                 List<GoodsDetailsEntity> goodsList = detailsMapper.findGoodsByCategoryId(r.getId());
-                map.put(r.getName(), goodsList);
+                map.put("title", r.getName());
+                map.put("data", goodsList);
+                result.add(map);
             }
         });
-        return map;
+        return result;
     }
 
     /**
@@ -57,18 +60,21 @@ public class GoodManagerService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public Map<String, List<GoodsDetailsEntity>> getGroupGoodsList() {
+    public List getGroupGoodsList() {
 
         List<GoodsCategoryEntity> list = categoryMapper.selectList(null);
-        Map<String, List<GoodsDetailsEntity>> map = new HashMap<>();
         //一级目录
         Integer parent = 0;
         List<GoodsCategoryEntity> array = list.stream().filter(r -> parent.equals(r.getCorrelation())).collect(Collectors.toList());
+        List result = new ArrayList();
         array.forEach(r -> {
             List<GoodsDetailsEntity> goodsList = detailsMapper.findGoodsByCroupId(r.getId());
-            map.put(r.getName(), goodsList);
+            Map map = new HashMap<>();
+            map.put("title", r.getName());
+            map.put("data", goodsList);
+            result.add(map);
         });
-        return map;
+        return result;
     }
 
     /**

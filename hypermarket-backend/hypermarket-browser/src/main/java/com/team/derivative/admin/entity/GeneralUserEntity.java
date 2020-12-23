@@ -19,4 +19,5 @@ public class GeneralUserEntity {
     private String address;
     private String roleId;
     private String enabled;
+
 }
