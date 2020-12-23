@@ -7,5 +7,8 @@ export const GoodsApi = {
   },
   getSwiperList() {
     return $http.request("get", {}, `${config.api}/${base}/getView`);
+  },
+  getGroupMenuList() {
+    return $http.request("get", {}, `${config.api}/${base}/getGroupAll`);
   }
 };

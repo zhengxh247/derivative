@@ -5,7 +5,7 @@
         <div class="site-category">
           <div class="site-category-list">
             <div class="category-item">
-              <span>手机 电话卡</span>
+              <span>电子 电器</span>
               <i class="el-icon-arrow-right"></i>
             </div>
             <div class="category-item-children" :class="[calcColumnClass]">
@@ -37,7 +37,7 @@
               </div>
             </div>
             <div class="category-item">
-              <span>电视 盒子</span>
+              <span>旅游 出行</span>
               <i class="el-icon-arrow-right"></i>
             </div>
             <div class="category-item-children">
@@ -51,7 +51,7 @@
               </div>
             </div>
             <div class="category-item">
-              <span>笔记本 显示器</span>
+              <span>外设 硬件</span>
               <i class="el-icon-arrow-right"></i>
             </div>
             <div class="category-item-children">
@@ -65,7 +65,7 @@
               </div>
             </div>
             <div class="category-item">
-              <span>家电 插线板</span>
+              <span>日常 生活</span>
               <i class="el-icon-arrow-right"></i>
             </div>
             <div class="category-item-children">
@@ -79,7 +79,7 @@
               </div>
             </div>
             <div class="category-item">
-              <span>出行 穿戴</span>
+              <span>儿童 玩具</span>
               <i class="el-icon-arrow-right"></i>
             </div>
             <div class="category-item-children">
@@ -225,16 +225,23 @@ export default {
   data() {
     return {
       swipers: [],
+      groupMenus: {},
       calcColumnClass: "children-col-4"
     };
   },
   created() {
     this.getSwiperList();
+    this.getGroupMenuList();
   },
   methods: {
     getSwiperList() {
       GoodsApi.getSwiperList().then(res => {
         this.swipers = res.data;
+      });
+    },
+    getGroupMenuList() {
+      GoodsApi.getGroupMenuList().then(res => {
+        this.groupMenus = res.data;
       });
     }
   }
