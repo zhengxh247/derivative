@@ -236,7 +236,7 @@ export default {
   methods: {
     getSwiperList() {
       GoodsApi.getSwiperList().then(res => {
-        this.swipers = res.data;
+        this.swipers = res.data.result;
       });
     },
     getGroupMenuList() {

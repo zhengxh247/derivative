@@ -60,7 +60,26 @@
         </div>
         <div class="header-nav">
           <div class="nav-item">
-            <span class="title">小米手机</span>
+            <template v-for="(menu, i) in menus">
+              <span class="title" :key="'title' + i">手机</span>
+              <div class="item-children" :key="'item' + i">
+                <ul class="item-container">
+                  <li v-for="(item, index) in menu.data" :key="item.id">
+                    <div>
+                      <div class="figure" :class="{ clear: index === 0 }">
+                        <img
+                          :src="`http://49.232.11.36${item.imgSrc}`"
+                          :alt="item.goodsName"
+                        />
+                      </div>
+                      <div class="title">{{ item.goodsName }}</div>
+                      <div class="price">{{ item.price }}元</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </template>
+            <!-- <span class="title">小米手机</span>
             <div class="item-children">
               <ul class="item-container">
                 <li v-for="(item, index) in headerMenus.mobile" :key="item.id">
@@ -184,7 +203,7 @@
                   </div>
                 </li>
               </ul>
-            </div>
+            </div> -->
             <span>服务</span>
             <span>社区</span>
           </div>
@@ -206,7 +225,7 @@ export default {
   data() {
     return {
       search: "",
-      headerMenus: {}
+      menus: []
     };
   },
   created() {
@@ -215,7 +234,7 @@ export default {
   methods: {
     getHeaderMenuList() {
       GoodsApi.getHeaderMenuList().then(res => {
-        this.headerMenus = res.data;
+        this.menus = res.data.result;
       });
     }
   }
