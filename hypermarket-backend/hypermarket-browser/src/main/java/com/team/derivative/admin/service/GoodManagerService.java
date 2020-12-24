@@ -46,7 +46,7 @@ public class GoodManagerService {
             if (!parent.equals(r.getCorrelation())) {
                 Map map = new HashMap<>();
                 List<GoodsDetailsEntity> goodsList = detailsMapper.findGoodsByCategoryId(r.getId());
-                map.put("title", r.getName());
+                map.put("title", r.getKeyword());
                 map.put("data", goodsList);
                 result.add(map);
             }
@@ -56,7 +56,6 @@ public class GoodManagerService {
 
     /**
      * 获取一级分类商品列表
-     *
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
@@ -70,7 +69,7 @@ public class GoodManagerService {
         array.forEach(r -> {
             List<GoodsDetailsEntity> goodsList = detailsMapper.findGoodsByCroupId(r.getId());
             Map map = new HashMap<>();
-            map.put("title", r.getName());
+            map.put("title", r.getKeyword());
             map.put("data", goodsList);
             result.add(map);
         });
