@@ -19,4 +19,5 @@ public class GoodsCategoryEntity {
     private String name;
     private String keyword;
     private Integer correlation;
+    private Integer sort;
 }

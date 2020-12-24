@@ -38,7 +38,7 @@ public class GoodManagerService {
      */
     @Transactional(rollbackFor = Exception.class)
     public List getGoodsList() {
-        List<GoodsCategoryEntity> list = categoryMapper.selectList(null);
+        List<GoodsCategoryEntity> list = categoryMapper.findAll();
         List result = new ArrayList();
         //一级目录
         Integer parent = 0;
