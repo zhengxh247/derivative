@@ -5,11 +5,13 @@ import store from "./store";
 import "./plugins/element.js";
 import "../public/styles/index.scss";
 import "@/assets/iconfont/iconfont.css";
+import i18n from "@/lang";
 
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount("#app");

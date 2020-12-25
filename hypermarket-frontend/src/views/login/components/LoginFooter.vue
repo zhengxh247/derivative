@@ -1,10 +1,34 @@
 <template>
   <div class="login-footer">
-    <div class="nf-link-area ">
+    <div class="nf-link-area">
       <ul>
-        <li><span>简体</span>|</li>
-        <li><span>繁体</span>|</li>
-        <li><span>English</span>|</li>
+        <li>
+          <span
+            @click="changeLocaleType('zh-CN')"
+            :class="{ select: $i18n.locale == 'zh-CN' }"
+          >
+            简体
+          </span>
+          |
+        </li>
+        <li>
+          <span
+            @click="changeLocaleType('zh-TW')"
+            :class="{ select: $i18n.locale == 'zh-TW' }"
+          >
+            繁体
+          </span>
+          |
+        </li>
+        <li>
+          <span
+            @click="changeLocaleType('en')"
+            :class="{ select: $i18n.locale == 'en' }"
+          >
+            English
+          </span>
+          |
+        </li>
         <li><span>常见问题</span>|</li>
         <li><span>隐私政策</span></li>
       </ul>
@@ -21,7 +45,13 @@
 
 <script>
 export default {
-  name: "LoginFooter"
+  name: "LoginFooter",
+  methods: {
+    changeLocaleType(type) {
+      this.$i18n.locale = type;
+      localStorage.setItem("localeType", type);
+    }
+  }
 };
 </script>
 
@@ -43,6 +73,9 @@ export default {
     cursor: pointer;
   }
   & ul > li > span:hover {
+    color: $textHover;
+  }
+  .select {
     color: $textHover;
   }
   .nf-intro {

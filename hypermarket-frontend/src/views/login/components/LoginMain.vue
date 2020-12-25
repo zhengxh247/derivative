@@ -8,7 +8,7 @@
             :class="{ active: isCurrent }"
             @click="chooseLoginType('account')"
           >
-            帐号登录
+            {{ $t("route.signIn") }}
           </span>
           <span class="line"></span>
           <span
@@ -16,7 +16,7 @@
             :class="{ active: !isCurrent }"
             @click="chooseLoginType('code')"
           >
-            扫码登录
+            {{ $t("route.scanQrCode") }}
           </span>
         </div>
         <div class="tabs-content" v-show="isCurrent">
@@ -30,7 +30,7 @@
               <el-form-item prop="phone">
                 <el-input
                   v-model="loginForm.phone"
-                  placeholder="邮箱/手机号码/小米ID"
+                  :placeholder="$t('route.email_Phone_ID')"
                 >
                 </el-input>
               </el-form-item>
@@ -38,13 +38,13 @@
                 <el-input
                   type="password"
                   v-model="loginForm.password"
-                  placeholder="密码"
+                  :placeholder="$t('route.loginPwd')"
                 >
                 </el-input>
               </el-form-item>
               <el-form-item>
                 <el-button class="login-button" @click="handleLogin">
-                  登录
+                  {{ $t("route.loginBtn") }}
                 </el-button>
               </el-form-item>
             </el-form>
@@ -52,12 +52,14 @@
               class="login-type-link"
               @click="changeLoginOrRegStatus('register')"
             >
-              手机短信登录/注册
+              {{ $t("route.loginMode") }}
             </span>
             <div class="reverse">
-              <router-link to="/register" class="btn">立即注册</router-link>
+              <router-link to="/register" class="btn">
+                {{ $t("route.registering") }}
+              </router-link>
               <span class="interval">|</span>
-              <span>忘记密码?</span>
+              <span>{{ $t("route.forgotPassword") }}?</span>
             </div>
           </div>
           <div class="register" v-show="!isLogin">
@@ -75,6 +77,7 @@
                 >
                   <el-button
                     slot="append"
+                    :loading="loading"
                     :disabled="btnDisabled"
                     class="clear-active"
                     :class="{ clearColor: btnDisabled }"
@@ -124,10 +127,18 @@ import Message from "@/common/tool";
 export default {
   name: "LoginMain",
   data() {
+    const phoneRequired = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("route.phoneRequired")));
+      } else {
+        callback();
+      }
+    };
     return {
       activeName: "first",
       isCurrent: true,
       isLogin: true,
+      loading: false,
       btnDisabled: false,
       authCodeText: "获取验证码",
       time: 60,
@@ -143,7 +154,7 @@ export default {
         phone: [
           {
             required: true,
-            message: "请输入手机号码",
+            validator: phoneRequired,
             trigger: "blur"
           },
           {
@@ -154,7 +165,7 @@ export default {
         password: [
           {
             required: true,
-            message: "请输入密码",
+            message: this.$t("route.pwdRequired"),
             trigger: "blur"
           }
         ],
@@ -167,6 +178,15 @@ export default {
         ]
       }
     };
+  },
+  watch: {
+    "$i18n.locale": function() {
+      this.$refs["loginForm"].fields.forEach(item => {
+        if (item.validateState === "error") {
+          this.$refs["loginForm"].validateField(item.labelFor);
+        }
+      });
+    }
   },
   methods: {
     /**
@@ -221,6 +241,7 @@ export default {
         Message("请先输入手机号", "error");
         return false;
       }
+      this.loading = true;
       let onOff = true;
       const param = {
         mobile: this.registerForm.phone
@@ -239,6 +260,7 @@ export default {
           this.btnDisabled = false;
           clearInterval(timer);
         } else {
+          this.loading = false;
           this.btnDisabled = true;
           this.authCodeText = `${--this.time}s重新发送`;
         }
