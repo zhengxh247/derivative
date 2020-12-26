@@ -22,14 +22,14 @@
         <div class="tabs-content" v-show="isCurrent">
           <div class="login" v-show="isLogin">
             <el-form
-              :model="loginForm"
-              :rules="rules"
-              ref="loginForm"
+              :model="pwdLogin"
+              :rules="loginRules"
+              ref="pwdLogin"
               hide-required-asterisk
             >
               <el-form-item prop="phone">
                 <el-input
-                  v-model="loginForm.phone"
+                  v-model="pwdLogin.phone"
                   :placeholder="$t('route.email_Phone_ID')"
                 >
                 </el-input>
@@ -37,7 +37,7 @@
               <el-form-item prop="password">
                 <el-input
                   type="password"
-                  v-model="loginForm.password"
+                  v-model="pwdLogin.password"
                   :placeholder="$t('route.loginPwd')"
                 >
                 </el-input>
@@ -52,7 +52,7 @@
               class="login-type-link"
               @click="changeLoginOrRegStatus('register')"
             >
-              {{ $t("route.loginMode") }}
+              {{ $t("route.loginModeSMS") }}
             </span>
             <div class="reverse">
               <router-link to="/register" class="btn">
@@ -63,16 +63,23 @@
             </div>
           </div>
           <div class="register" v-show="!isLogin">
-            <el-form :model="registerForm" :rules="rules" ref="registerForm">
+            <el-form
+              :model="authCodeLogin"
+              :rules="authCoderules"
+              ref="authCodeLogin"
+            >
               <el-form-item prop="phone">
-                <el-input v-model="registerForm.phone" placeholder="手机号码">
+                <el-input
+                  v-model="authCodeLogin.phone"
+                  :placeholder="$t('route.phoneNumber')"
+                >
                   <template slot="prepend">+86</template>
                 </el-input>
               </el-form-item>
               <el-form-item prop="authCode">
                 <el-input
-                  v-model="registerForm.authCode"
-                  placeholder="短信验证码"
+                  v-model="authCodeLogin.authCode"
+                  :placeholder="$t('route.verificationCode')"
                   maxlength="6"
                 >
                   <el-button
@@ -89,7 +96,7 @@
               </el-form-item>
               <el-form-item>
                 <el-button class="login-button" @click="handleLoginRegister">
-                  立即登录/注册
+                  {{ $t("route.signInSignUp") }}
                 </el-button>
               </el-form-item>
             </el-form>
@@ -97,10 +104,10 @@
               class="login-type-link"
               @click="changeLoginOrRegStatus('login')"
             >
-              用户号密码登录
+              {{ $t("route.loginModePwd") }}
             </span>
             <div class="reverse">
-              <span>收取不到验证码?</span>
+              <span>{{ $t("route.notReceiveVerificationCode") }}</span>
             </div>
           </div>
           <div class="other_login_type">
@@ -122,68 +129,96 @@
 
 <script>
 import { LoginApi } from "@/api";
-import { phoneValidation } from "@/common/utils";
+import { commonValidation, validation } from "@/common/utils";
 import Message from "@/common/tool";
 export default {
   name: "LoginMain",
   data() {
-    const phoneRequired = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error(this.$t("route.phoneRequired")));
-      } else {
-        callback();
-      }
-    };
     return {
       activeName: "first",
       isCurrent: true,
       isLogin: true,
       loading: false,
       btnDisabled: false,
-      authCodeText: "获取验证码",
       time: 60,
-      loginForm: {
+      pwdLogin: {
         phone: "",
         password: ""
       },
-      registerForm: {
+      authCodeLogin: {
         phone: "",
         authCode: ""
       },
-      rules: {
+      loginRules: {
         phone: [
           {
             required: true,
-            validator: phoneRequired,
+            validator: (rule, value, callback) => {
+              validation.phoneRequired(rule, value, callback, this);
+            },
             trigger: "blur"
           },
           {
-            validator: phoneValidation,
+            validator: (rule, value, callback) => {
+              commonValidation.phoneValidation(rule, value, callback, this);
+            },
             trigger: "blur"
           }
         ],
         password: [
           {
             required: true,
-            message: this.$t("route.pwdRequired"),
+            validator: (rule, value, callback) => {
+              validation.pwdRequired(rule, value, callback, this);
+            },
+            trigger: "blur"
+          }
+        ]
+      },
+      authCoderules: {
+        phone: [
+          {
+            required: true,
+            validator: (rule, value, callback) => {
+              validation.phoneRequired(rule, value, callback, this);
+            },
+            trigger: "blur"
+          },
+          {
+            validator: (rule, value, callback) => {
+              commonValidation.phoneValidation(rule, value, callback, this);
+            },
             trigger: "blur"
           }
         ],
         authCode: [
           {
             required: true,
-            message: "请输入验证码",
+            validator: (rule, value, callback) => {
+              validation.verCodeRequired(rule, value, callback, this);
+            },
             trigger: "blur"
           }
         ]
       }
     };
   },
+  computed: {
+    authCodeText() {
+      return this.$t("route.getVerificationCode");
+    }
+  },
   watch: {
     "$i18n.locale": function() {
-      this.$refs["loginForm"].fields.forEach(item => {
+      console.log(this.$refs);
+      this.$refs["pwdLogin"].fields.forEach(item => {
         if (item.validateState === "error") {
-          this.$refs["loginForm"].validateField(item.labelFor);
+          this.$refs["pwdLogin"].validateField(item.labelFor);
+        }
+      });
+      this.$refs["authCodeLogin"].fields.forEach(item => {
+        if (item.validateState === "error") {
+          this.$refs["authCodeLogin"].validateField(item.labelFor);
         }
       });
     }
@@ -211,16 +246,16 @@ export default {
      * @param 无
      */
     handleLogin() {
-      this.$refs["loginForm"].validate(valid => {
+      this.$refs["pwdLogin"].validate(valid => {
         if (valid) {
           const data = {
-            username: this.loginForm.phone,
-            password: this.loginForm.password
+            username: this.pwdLogin.phone,
+            password: this.pwdLogin.password
           };
           LoginApi.login(data).then(res => {
             if (res.data.code === 200) {
               Message(res.data.message, "success");
-              this.$refs["loginForm"].resetFields();
+              this.$refs["pwdLogin"].resetFields();
               this.$router.push("/");
             } else {
               Message(res.data.message, "error");
@@ -237,14 +272,14 @@ export default {
      * @param 无
      */
     getAuthCode() {
-      if (!this.registerForm.phone) {
+      if (!this.authCodeLogin.phone) {
         Message("请先输入手机号", "error");
         return false;
       }
       this.loading = true;
       let onOff = true;
       const param = {
-        mobile: this.registerForm.phone
+        mobile: this.authCodeLogin.phone
       };
       const timer = setInterval(_ => {
         if (this.time === 60 && onOff) {
@@ -272,16 +307,16 @@ export default {
      * @param 无
      */
     handleLoginRegister() {
-      this.$refs["registerForm"].validate(valid => {
+      this.$refs["authCodeLogin"].validate(valid => {
         if (valid) {
           const data = {
-            mobilePhone: this.registerForm.phone,
-            smsCode: this.registerForm.authCode
+            mobilePhone: this.authCodeLogin.phone,
+            smsCode: this.authCodeLogin.authCode
           };
           LoginApi.authCodeLogin(data).then(res => {
             if (res.data.code === 200) {
               Message(res.data.message, "success");
-              this.$refs["registerForm"].resetFields();
+              this.$refs["authCodeLogin"].resetFields();
               this.$router.push("/");
             } else {
               Message(res.data.message, "error");

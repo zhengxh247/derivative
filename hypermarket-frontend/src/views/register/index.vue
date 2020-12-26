@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { phoneValidation, pwdValidationIntensity } from "@/common/utils";
+import { commonValidation } from "@/common/utils";
 import { RegisterApi } from "@/api";
 import Message from "@/common/tool";
 export default {
@@ -72,7 +72,7 @@ export default {
             trigger: "blur"
           },
           {
-            validator: phoneValidation,
+            validator: commonValidation.phoneValidation,
             trigger: "blur"
           }
         ],
@@ -83,7 +83,7 @@ export default {
             trigger: "blur"
           },
           {
-            validator: pwdValidationIntensity,
+            validator: commonValidation.pwdValidationIntensity,
             trigger: "blur"
           }
         ],
