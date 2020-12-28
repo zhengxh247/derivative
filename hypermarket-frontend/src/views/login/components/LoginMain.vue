@@ -136,6 +136,7 @@ export default {
   data() {
     return {
       activeName: "first",
+      authCodeText: this.$t("route.getVerificationCode"),
       isCurrent: true,
       isLogin: true,
       loading: false,
@@ -203,14 +204,8 @@ export default {
       }
     };
   },
-  computed: {
-    authCodeText() {
-      return this.$t("route.getVerificationCode");
-    }
-  },
   watch: {
     "$i18n.locale": function() {
-      console.log(this.$refs);
       this.$refs["pwdLogin"].fields.forEach(item => {
         if (item.validateState === "error") {
           this.$refs["pwdLogin"].validateField(item.labelFor);
@@ -221,6 +216,7 @@ export default {
           this.$refs["authCodeLogin"].validateField(item.labelFor);
         }
       });
+      this.authCodeText = this.$t("route.getVerificationCode");
     }
   },
   methods: {
@@ -273,7 +269,7 @@ export default {
      */
     getAuthCode() {
       if (!this.authCodeLogin.phone) {
-        Message("请先输入手机号", "error");
+        Message(this.$t("route.phoneRequired"), "error");
         return false;
       }
       this.loading = true;
@@ -285,19 +281,19 @@ export default {
         if (this.time === 60 && onOff) {
           LoginApi.getAuthCode(param).then(res => {
             if (!res.status === 200) {
-              Message("验证码发送失败", "error");
+              Message(this.$t("route.verCodeSendFailure"), "error");
             }
           });
           onOff = false;
-        } else if (!this.time) {
-          this.authCodeText = "获取验证码";
+        } else if (!(this.time != 1)) {
+          this.authCodeText = this.$t("route.getVerificationCode");
           this.time = 60;
           this.btnDisabled = false;
           clearInterval(timer);
         } else {
           this.loading = false;
           this.btnDisabled = true;
-          this.authCodeText = `${--this.time}s重新发送`;
+          this.authCodeText = `${this.$t("route.resend")}(${--this.time}s)`;
         }
       }, 1000);
     },

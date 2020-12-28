@@ -15,6 +15,8 @@ export default {
     verificationCode: "短信验证码",
     getVerificationCode: "获取验证码",
     verCodeRequired: "请输入验证码",
+    resend: "重新发送",
+    verCodeSendFailure: "验证码发送失败",
     signInSignUp: "立即登录/注册",
     loginModePwd: "用户名密码登录",
     notReceiveVerificationCode: "收不到验证码?"

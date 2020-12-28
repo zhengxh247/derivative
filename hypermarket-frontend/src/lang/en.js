@@ -15,6 +15,8 @@ export default {
     verificationCode: "Verification code",
     getVerificationCode: "Get verification code",
     verCodeRequired: "Enter your verification code",
+    resend: "Resend code",
+    verCodeSendFailure: "Verification code send failure",
     signInSignUp: "Sign in/Sign up",
     loginModePwd: "Sign in with password",
     notReceiveVerificationCode: "Can't receive verification code?"

@@ -15,6 +15,8 @@ export default {
     verificationCode: "短信驗證碼",
     getVerificationCode: "獲取驗證碼",
     verCodeRequired: "請輸入驗證碼",
+    resend: "重新發送",
+    verCodeSendFailure: "驗證碼發送失敗",
     signInSignUp: "立即登錄/註冊",
     loginModePwd: "用戶名密碼登錄",
     notReceiveVerificationCode: "收不到驗證碼?"
