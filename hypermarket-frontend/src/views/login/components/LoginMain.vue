@@ -129,7 +129,7 @@
 
 <script>
 import { LoginApi } from "@/api";
-import { commonValidation, validation } from "@/common/utils";
+import { commonValidation, loginValidation } from "@/common/utils";
 import Message from "@/common/tool";
 export default {
   name: "LoginMain",
@@ -155,7 +155,7 @@ export default {
           {
             required: true,
             validator: (rule, value, callback) => {
-              validation.phoneRequired(rule, value, callback, this);
+              loginValidation.phoneRequired(rule, value, callback, this);
             },
             trigger: "blur"
           },
@@ -170,7 +170,7 @@ export default {
           {
             required: true,
             validator: (rule, value, callback) => {
-              validation.pwdRequired(rule, value, callback, this);
+              loginValidation.pwdRequired(rule, value, callback, this);
             },
             trigger: "blur"
           }
@@ -181,7 +181,7 @@ export default {
           {
             required: true,
             validator: (rule, value, callback) => {
-              validation.phoneRequired(rule, value, callback, this);
+              loginValidation.phoneRequired(rule, value, callback, this);
             },
             trigger: "blur"
           },
@@ -196,7 +196,7 @@ export default {
           {
             required: true,
             validator: (rule, value, callback) => {
-              validation.verCodeRequired(rule, value, callback, this);
+              loginValidation.verCodeRequired(rule, value, callback, this);
             },
             trigger: "blur"
           }

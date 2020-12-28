@@ -9,10 +9,10 @@ export default {
     }
   },
   // 验证密码强度
-  pwdValidationIntensity(rule, value, callback) {
+  pwdValidationIntensity(rule, value, callback, that) {
     const reg = /^\S*(?=\S{8,})(?=\S*[a-zA-Z])(?=\S*[!@#$%^&*?. ])\S*$/;
     if (!reg.test(value)) {
-      callback(new Error("密码至少8位且包含字母和特殊字符"));
+      callback(new Error(that.$t("route.pwdTrengthRequired")));
     } else {
       callback();
     }

@@ -1,3 +1,4 @@
 import commonValidation from "./common.js";
-import validation from "./validation/login.js";
-export { commonValidation, validation };
+import loginValidation from "./validation/login.js";
+import registerValidation from "./validation/register.js";
+export { commonValidation, loginValidation, registerValidation };
