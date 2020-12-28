@@ -1,5 +1,6 @@
 package com.team.derivative.admin.service;
 
+import com.google.common.collect.Lists;
 import com.team.derivative.admin.dao.GoodsCategoryMapper;
 import com.team.derivative.admin.dao.GoodsDetailsMapper;
 import com.team.derivative.admin.dao.ViewImgMapper;
@@ -69,8 +70,9 @@ public class GoodManagerService {
         array.forEach(r -> {
             List<GoodsDetailsEntity> goodsList = detailsMapper.findGoodsByCroupId(r.getId());
             Map map = new HashMap<>();
+            List<List<GoodsDetailsEntity>> subSets = Lists.partition(goodsList, 4);
             map.put("title", r.getKeyword());
-            map.put("data", goodsList);
+            map.put("data", subSets);
             result.add(map);
         });
         return result;
