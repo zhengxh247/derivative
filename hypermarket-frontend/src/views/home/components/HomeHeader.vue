@@ -61,7 +61,7 @@
         <div class="header-nav">
           <div class="nav-item">
             <template v-for="(menu, i) in menus">
-              <span class="title" :key="'title' + i">手机</span>
+              <span class="title" :key="'title' + i">{{ menu.title }}</span>
               <div class="item-children" :key="'item' + i">
                 <ul class="item-container">
                   <li v-for="(item, index) in menu.data" :key="item.id">
@@ -79,131 +79,6 @@
                 </ul>
               </div>
             </template>
-            <!-- <span class="title">小米手机</span>
-            <div class="item-children">
-              <ul class="item-container">
-                <li v-for="(item, index) in headerMenus.mobile" :key="item.id">
-                  <div>
-                    <div class="figure" :class="{ clear: index === 0 }">
-                      <img
-                        :src="`http://49.232.11.36${item.imgSrc}`"
-                        :alt="item.goodsName"
-                      />
-                    </div>
-                    <div class="title">{{ item.goodsName }}</div>
-                    <div class="price">{{ item.price }}元</div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <span class="title">Redmi 红米</span>
-            <div class="item-children">
-              <ul class="item-container">
-                <li v-for="(item, index) in headerMenus.mobile" :key="item.id">
-                  <div>
-                    <div class="figure" :class="{ clear: index === 0 }">
-                      <img
-                        :src="`http://49.232.11.36${item.imgSrc}`"
-                        :alt="item.goodsName"
-                      />
-                    </div>
-                    <div class="title">{{ item.goodsName }}</div>
-                    <div class="price">{{ item.price }}元</div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <span class="title">电视</span>
-            <div class="item-children">
-              <ul class="item-container">
-                <li v-for="(item, index) in headerMenus.tv" :key="item.id">
-                  <div>
-                    <div class="figure" :class="{ clear: index === 0 }">
-                      <img
-                        :src="`http://49.232.11.36${item.imgSrc}`"
-                        :alt="item.goodsName"
-                      />
-                    </div>
-                    <div class="title">{{ item.goodsName }}</div>
-                    <div class="price">{{ item.price }}元</div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <span class="title">笔记本</span>
-            <div class="item-children">
-              <ul class="item-container">
-                <li v-for="(item, index) in headerMenus.laptop" :key="item.id">
-                  <div>
-                    <div class="figure" :class="{ clear: index === 0 }">
-                      <img
-                        :src="`http://49.232.11.36${item.imgSrc}`"
-                        :alt="item.goodsName"
-                      />
-                    </div>
-                    <div class="title">{{ item.goodsName }}</div>
-                    <div class="price">{{ item.price }}元</div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <span class="title">家电</span>
-            <div class="item-children">
-              <ul class="item-container">
-                <li
-                  v-for="(item, index) in headerMenus.electrical_equipment"
-                  :key="item.id"
-                >
-                  <div>
-                    <div class="figure" :class="{ clear: index === 0 }">
-                      <img
-                        :src="`http://49.232.11.36${item.imgSrc}`"
-                        :alt="item.goodsName"
-                      />
-                    </div>
-                    <div class="title">{{ item.goodsName }}</div>
-                    <div class="price">{{ item.price }}元</div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <span class="title">路由器</span>
-            <div class="item-children">
-              <ul class="item-container">
-                <li v-for="(item, index) in headerMenus.router" :key="item.id">
-                  <div>
-                    <div class="figure" :class="{ clear: index === 0 }">
-                      <img
-                        :src="`http://49.232.11.36${item.imgSrc}`"
-                        :alt="item.goodsName"
-                      />
-                    </div>
-                    <div class="title">{{ item.goodsName }}</div>
-                    <div class="price">{{ item.price }}元</div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <span class="title">智能硬件</span>
-            <div class="item-children">
-              <ul class="item-container">
-                <li
-                  v-for="(item, index) in headerMenus.Intelligent_hardware"
-                  :key="item.id"
-                >
-                  <div>
-                    <div class="figure" :class="{ clear: index === 0 }">
-                      <img
-                        :src="`http://49.232.11.36${item.imgSrc}`"
-                        :alt="item.goodsName"
-                      />
-                    </div>
-                    <div class="title">{{ item.goodsName }}</div>
-                    <div class="price">{{ item.price }}元</div>
-                  </div>
-                </li>
-              </ul>
-            </div> -->
             <span>服务</span>
             <span>社区</span>
           </div>

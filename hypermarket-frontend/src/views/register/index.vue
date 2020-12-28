@@ -7,7 +7,7 @@
             <a href="javascript:;" class="hand-logo"></a>
           </div>
           <div class="title-item">
-            注册剁手账号
+            {{ $t("route.registerTitle") }}
           </div>
           <div class="regbox">
             <el-form
@@ -16,22 +16,22 @@
               ref="registerForm"
               hide-required-asterisk
             >
-              <el-form-item label="手机号码" prop="mobilePhone">
+              <el-form-item :label="$t('route.phoneNumber')" prop="mobilePhone">
                 <el-input v-model="registerForm.mobilePhone">
                   <template slot="prepend">+86</template>
                 </el-input>
               </el-form-item>
-              <el-form-item label="密码" prop="password">
+              <el-form-item :label="$t('route.loginPwd')" prop="password">
                 <el-input v-model="registerForm.password" show-password>
                 </el-input>
               </el-form-item>
-              <el-form-item label="确认密码" prop="repassword">
+              <el-form-item :label="$t('route.rePwd')" prop="repassword">
                 <el-input v-model="registerForm.repassword" show-password>
                 </el-input>
               </el-form-item>
               <el-form-item>
                 <el-button class="res-button" @click="handleRegister">
-                  立即注册
+                  {{ $t("route.registering") }}
                 </el-button>
               </el-form-item>
             </el-form>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { phoneValidation, pwdValidationIntensity } from "@/common/utils";
+import { commonValidation, registerValidation } from "@/common/utils";
 import { RegisterApi } from "@/api";
 import Message from "@/common/tool";
 export default {
@@ -68,33 +68,55 @@ export default {
         mobilePhone: [
           {
             required: true,
-            message: "请输入手机号码",
+            validator: (rule, value, callback) => {
+              registerValidation.phoneRequired(rule, value, callback, this);
+            },
             trigger: "blur"
           },
           {
-            validator: phoneValidation,
+            validator: (rule, value, callback) => {
+              commonValidation.phoneValidation(rule, value, callback, this);
+            },
             trigger: "blur"
           }
         ],
         password: [
           {
             required: true,
-            message: "请输入密码",
+            validator: (rule, value, callback) => {
+              registerValidation.pwdRequired(rule, value, callback, this);
+            },
             trigger: "blur"
           },
           {
-            validator: pwdValidationIntensity,
+            validator: (rule, value, callback) => {
+              commonValidation.pwdValidationIntensity(
+                rule,
+                value,
+                callback,
+                this
+              );
+            },
             trigger: "blur"
           }
         ],
         repassword: [
           {
             required: true,
-            message: "请输入确认密码",
+            validator: (rule, value, callback) => {
+              registerValidation.repwdRequired(rule, value, callback, this);
+            },
             trigger: "blur"
           },
           {
-            validator: validatePass,
+            validator: (rule, value, callback) => {
+              registerValidation.pwdValidationRepwd(
+                rule,
+                value,
+                callback,
+                this
+              );
+            },
             trigger: "blur"
           }
         ]
@@ -111,7 +133,7 @@ export default {
         if (valid) {
           RegisterApi.register(data).then(res => {
             if (res.status === 200) {
-              Message("注册成功", "success");
+              Message(this.$t("route.registerSuccess"), "success");
               this.$refs["registerForm"].resetFields();
               this.$router.push("/login");
             }
