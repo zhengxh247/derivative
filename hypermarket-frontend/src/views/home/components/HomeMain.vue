@@ -4,164 +4,36 @@
       <div class="swiper-container">
         <div class="site-category">
           <div class="site-category-list">
-            <div class="category-item">
-              <span>电子 电器</span>
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <div class="category-item-children" :class="[calcColumnClass]">
-              <div class="container">
-                <ul class="children-list">
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                </ul>
-                <ul class="children-list">
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                </ul>
-                <ul class="children-list">
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                </ul>
-                <ul class="children-list">
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                  <li class="link">手机</li>
-                </ul>
+            <template v-for="(groupMenu, i) in groupMenus">
+              <div class="category-item" :key="'title' + i">
+                <span>{{ groupMenu.title }}</span>
+                <i class="el-icon-arrow-right"></i>
               </div>
-            </div>
-            <div class="category-item">
-              <span>旅游 出行</span>
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <div class="category-item-children">
-              <div class="container">
-                <ul class="children-list">
-                  <li class="link">电视</li>
-                  <li class="link">电视</li>
-                  <li class="link">电视</li>
-                  <li class="link">电视</li>
-                </ul>
+              <div
+                class="category-item-children"
+                :class="{ 'children-col-4': groupMenu.data.length == 4 }"
+                :key="'item' + i"
+              >
+                <div class="container">
+                  <ul
+                    class="children-list"
+                    v-for="(menu, index) in groupMenu.data"
+                    :key="index"
+                  >
+                    <li class="link" v-for="item in menu" :key="item.id">
+                      <a href="javascript:;" class="link-item">
+                        <img
+                          :src="`http://49.232.11.36${item.imgSrc}`"
+                          width="40"
+                          height="40"
+                        />
+                        <span class="text">{{ item.goodsName }}</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-            <div class="category-item">
-              <span>外设 硬件</span>
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <div class="category-item-children">
-              <div class="container">
-                <ul class="children-list">
-                  <li class="link">笔记本</li>
-                  <li class="link">笔记本</li>
-                  <li class="link">笔记本</li>
-                  <li class="link">笔记本</li>
-                </ul>
-              </div>
-            </div>
-            <div class="category-item">
-              <span>日常 生活</span>
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <div class="category-item-children">
-              <div class="container">
-                <ul class="children-list">
-                  <li class="link">家电</li>
-                  <li class="link">家电</li>
-                  <li class="link">家电</li>
-                  <li class="link">家电</li>
-                </ul>
-              </div>
-            </div>
-            <div class="category-item">
-              <span>儿童 玩具</span>
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <div class="category-item-children">
-              <div class="container">
-                <ul class="children-list">
-                  <li class="link">出行</li>
-                  <li class="link">出行</li>
-                  <li class="link">出行</li>
-                  <li class="link">出行</li>
-                </ul>
-              </div>
-            </div>
-            <div class="category-item">
-              <span>智能 路由器</span>
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <div class="category-item-children">
-              <div class="container">
-                <ul class="children-list">
-                  <li class="link">智能</li>
-                  <li class="link">智能</li>
-                  <li class="link">智能</li>
-                  <li class="link">智能</li>
-                </ul>
-              </div>
-            </div>
-            <div class="category-item">
-              <span>电源 配件</span>
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <div class="category-item-children">
-              <div class="container">
-                <ul class="children-list">
-                  <li class="link">电源</li>
-                  <li class="link">电源</li>
-                  <li class="link">电源</li>
-                  <li class="link">电源</li>
-                </ul>
-              </div>
-            </div>
-            <div class="category-item">
-              <span>健康 儿童</span>
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <div class="category-item-children">
-              <div class="container">
-                <ul class="children-list">
-                  <li class="link">健康</li>
-                  <li class="link">健康</li>
-                  <li class="link">健康</li>
-                  <li class="link">健康</li>
-                </ul>
-              </div>
-            </div>
-            <div class="category-item">
-              <span>耳机 音箱</span>
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <div class="category-item-children">
-              <div class="container">
-                <ul class="children-list">
-                  <li class="link">耳机</li>
-                  <li class="link">耳机</li>
-                  <li class="link">耳机</li>
-                  <li class="link">耳机</li>
-                </ul>
-              </div>
-            </div>
-            <div class="category-item">
-              <span>生活 箱包</span>
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <div class="category-item-children">
-              <div class="container">
-                <ul class="children-list">
-                  <li class="link">生活</li>
-                  <li class="link">生活</li>
-                  <li class="link">生活</li>
-                  <li class="link">生活</li>
-                </ul>
-              </div>
-            </div>
+            </template>
           </div>
         </div>
         <el-carousel
@@ -241,7 +113,7 @@ export default {
     },
     getGroupMenuList() {
       GoodsApi.getGroupMenuList().then(res => {
-        this.groupMenus = res.data;
+        this.groupMenus = res.data.result;
       });
     }
   }
@@ -298,6 +170,21 @@ export default {
             .link {
               width: 265px;
               height: 76px;
+              .link-item {
+                display: block;
+                padding: 18px 20px;
+                line-height: 40px;
+                img {
+                  vertical-align: middle;
+                  margin-right: 12px;
+                }
+                // .text {
+                //   width: 172px;
+                //   // white-space: nowrap;
+                //   text-overflow: ellipsis;
+                //   overflow: hidden;
+                // }
+              }
             }
           }
         }
