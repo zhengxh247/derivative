@@ -173,17 +173,23 @@ export default {
               .link-item {
                 display: block;
                 padding: 18px 20px;
+                height: 40px;
                 line-height: 40px;
                 img {
+                  float: left;
                   vertical-align: middle;
                   margin-right: 12px;
                 }
-                // .text {
-                //   width: 172px;
-                //   // white-space: nowrap;
-                //   text-overflow: ellipsis;
-                //   overflow: hidden;
-                // }
+                .text {
+                  float: left;
+                  width: 172px;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                }
+                .text:hover {
+                  overflow: visible;
+                }
               }
             }
           }
