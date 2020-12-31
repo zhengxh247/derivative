@@ -38,6 +38,7 @@ export default {
   position: fixed;
   bottom: 70px;
   right: 0;
+  z-index: 102;
   .item {
     position: relative;
     display: block;

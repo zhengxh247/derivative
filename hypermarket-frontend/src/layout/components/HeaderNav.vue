@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="topbar-banner-Wrapper">
+    <div class="topbar-banner-Wrapper" v-show="$route.path == '/'">
       <a href="javascript:;"></a>
     </div>
     <div class="site-topbar">
@@ -96,7 +96,7 @@
 <script>
 import { GoodsApi } from "@/api";
 export default {
-  name: "HomeHeader",
+  name: "HeaderNav",
   data() {
     return {
       search: "",
@@ -262,6 +262,7 @@ export default {
         }
         .item-children {
           display: none;
+          margin-top: 7px;
           position: absolute;
           background: #fff;
           left: 0;

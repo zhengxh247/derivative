@@ -7,7 +7,18 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import(/* webpackChunkName: "home" */ "../views/home")
+    component: () => import(/* webpackChunkName: "home" */ "../layout"),
+    children: [
+      {
+        path: "/",
+        component: () => import(/* webpackChunkName: "home" */ "../views/home")
+      },
+      {
+        path: "/buy/detail",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "../views/goodsDetail")
+      }
+    ]
   },
   {
     path: "/login",
