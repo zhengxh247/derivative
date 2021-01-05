@@ -21,14 +21,14 @@
                     :key="index"
                   >
                     <li class="link" v-for="item in menu" :key="item.id">
-                      <a href="javascript:;" class="link-item">
+                      <router-link :to="'/detail/' + item.id" class="link-item">
                         <img
                           :src="`http://49.232.11.36${item.imgSrc}`"
                           width="40"
                           height="40"
                         />
                         <span class="text">{{ item.goodsName }}</span>
-                      </a>
+                      </router-link>
                     </li>
                   </ul>
                 </div>

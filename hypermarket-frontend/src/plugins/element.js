@@ -5,7 +5,9 @@ import {
   FormItem,
   Input,
   Carousel,
-  CarouselItem
+  CarouselItem,
+  Breadcrumb,
+  BreadcrumbItem
 } from "element-ui";
 
 Vue.use(Button);
@@ -14,3 +16,5 @@ Vue.use(FormItem);
 Vue.use(Input);
 Vue.use(Carousel);
 Vue.use(CarouselItem);
+Vue.use(Breadcrumb);
+Vue.use(BreadcrumbItem);

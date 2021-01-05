@@ -92,12 +92,39 @@
             <div class="total-price">5900元</div>
           </div>
           <div class="btn-box">
-            <div class="sale-btn">
-              <a href="javascript:;">到货通知</a>
+            <div class="sale-btn" :class="{ isStock: true }">
+              <!-- <a href="javascript:;" class="btn-line-primary">到货通知</a> -->
+              <a href="javascript:;" class="btn-primary">加入购物车</a>
             </div>
             <div class="favorite-btn">
               <a href="javascript:;">喜欢</a>
             </div>
+          </div>
+          <div class="after-sale-info">
+            <span class="support">
+              <i class="el-icon-circle-check"></i>
+              <em>小米自营</em>
+            </span>
+            <span class="support">
+              <i class="el-icon-circle-check"></i>
+              <em>小米发货</em>
+            </span>
+            <span class="support">
+              <i class="el-icon-circle-check"></i>
+              <em>7天无理由退货</em>
+            </span>
+            <span class="support">
+              <i class="el-icon-circle-check"></i>
+              <em>运费说明</em>
+            </span>
+            <span class="support">
+              <i class="el-icon-circle-check"></i>
+              <em>企业信息</em>
+            </span>
+            <span class="support">
+              <i class="el-icon-circle-check"></i>
+              <em>30天价格保护</em>
+            </span>
           </div>
         </div>
       </div>
@@ -123,7 +150,7 @@ export default {
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.07);
   height: 63px;
   width: 100%;
-  z-index: 10;
+  z-index: 12;
   margin-top: 0;
   color: #616161;
   .container {
@@ -323,9 +350,15 @@ export default {
         text-align: center;
         margin-right: 10px;
         border: 1px solid $colorPrimary;
-        a {
+        .btn-line-primary {
           color: $colorPrimary;
         }
+        .btn-primary {
+          color: #fff;
+        }
+      }
+      .isStock {
+        background: $colorPrimary;
       }
       .favorite-btn {
         width: 140px;
@@ -338,6 +371,28 @@ export default {
         font-size: 16px;
         a {
           color: #fff;
+        }
+      }
+    }
+    .after-sale-info {
+      .support {
+        display: inline-block;
+        margin-right: 15px;
+        line-height: 30px;
+        margin-bottom: 10px;
+        white-space: nowrap;
+        color: #b0b0b0;
+        i {
+          font-size: 20px;
+          display: inline-block;
+          font-style: normal;
+          vertical-align: middle;
+        }
+        em {
+          font-style: normal;
+          display: inline-block;
+          margin-left: 2px;
+          vertical-align: middle;
         }
       }
     }

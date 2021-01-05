@@ -53,7 +53,7 @@
     <div class="site-header">
       <div class="container">
         <div class="header-logo">
-          <a href="javascript:;" class="logo"></a>
+          <router-link to="/" class="logo"></router-link>
         </div>
         <div class="doodle">
           <a href="javascript:;" class="link-block"></a>
@@ -65,7 +65,7 @@
               <div class="item-children" :key="'item' + i">
                 <ul class="item-container">
                   <li v-for="(item, index) in menu.data" :key="item.id">
-                    <div>
+                    <router-link :to="'/detail/' + item.id">
                       <div class="figure" :class="{ clear: index === 0 }">
                         <img
                           :src="`http://49.232.11.36${item.imgSrc}`"
@@ -74,7 +74,7 @@
                       </div>
                       <div class="title">{{ item.goodsName }}</div>
                       <div class="price">{{ item.price }}元</div>
-                    </div>
+                    </router-link>
                   </li>
                 </ul>
               </div>
@@ -246,7 +246,7 @@ export default {
       width: 678px;
       margin-left: 172px;
       .nav-item {
-        padding-top: 5px;
+        padding-top: 8px;
         span {
           height: 88px;
           line-height: 88px;
@@ -262,7 +262,7 @@ export default {
         }
         .item-children {
           display: none;
-          margin-top: 7px;
+          margin-top: 4px;
           position: absolute;
           background: #fff;
           left: 0;
