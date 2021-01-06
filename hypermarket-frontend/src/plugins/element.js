@@ -4,6 +4,7 @@ import {
   Form,
   FormItem,
   Input,
+  Checkbox,
   Card,
   Carousel,
   CarouselItem,
@@ -15,6 +16,7 @@ Vue.use(Button);
 Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Input);
+Vue.use(Checkbox);
 Vue.use(Card);
 Vue.use(Carousel);
 Vue.use(CarouselItem);

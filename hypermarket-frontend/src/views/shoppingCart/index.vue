@@ -16,13 +16,38 @@
         </div>
       </div>
     </div>
-    <div class="mi-cart"></div>
+    <div class="mi-cart">
+      <div class="container">
+        <div class="cart-container">
+          <div class="cart-wrap">
+            <div class="list-head">
+              <div class="col-check">
+                <el-checkbox v-model="isAllCheck">全选</el-checkbox>
+              </div>
+              <div class="col-img"></div>
+              <div class="col-name">商品名称</div>
+              <div class="col-price">单价</div>
+              <div class="col-num">数量</div>
+              <div class="col-total">小计</div>
+              <div class="col-action">操作</div>
+            </div>
+            <div class="list-body"></div>
+          </div>
+          <div class="cart-recommend"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ShoppingCart"
+  name: "ShoppingCart",
+  data() {
+    return {
+      isAllCheck: false
+    };
+  }
 };
 </script>
 
@@ -43,7 +68,7 @@ export default {
       margin-top: 20px;
     }
     .header-title {
-      margin-top: 20px;
+      margin-top: 25px;
       display: flex;
       h2 {
         line-height: 48px;
@@ -70,6 +95,68 @@ export default {
         color: #757575;
       }
     }
+  }
+}
+.mi-cart {
+  padding: 38px 0;
+  background: #f5f5f5;
+  .container {
+    width: 1226px;
+    margin: 0 auto;
+    .cart-wrap {
+      background-color: #fff;
+      .list-head {
+        height: 70px;
+        line-height: 70px;
+        font-size: 14px;
+        padding-right: 26px;
+        color: #424242;
+        display: flex;
+        .col-check {
+          width: 110px;
+          margin-left: 24px;
+        }
+        .col-img {
+          width: 120px;
+        }
+        .col-name {
+          width: 380px;
+        }
+        .col-price {
+          width: 140px;
+          padding-right: 18px;
+        }
+        .col-num {
+          width: 150px;
+        }
+        .col-total {
+          width: 120px;
+          padding-right: 81px;
+        }
+        .col-action {
+          width: 80px;
+        }
+      }
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.col-check {
+  .el-checkbox__input.is-checked .el-checkbox__inner,
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    background-color: $colorPrimary;
+    border-color: $colorPrimary !important;
+  }
+  .el-checkbox__inner:hover {
+    border-color: #dedfe6;
+  }
+  .el-checkbox__input.is-focus .el-checkbox__inner {
+    border-color: #dedfe6;
+  }
+  .el-checkbox__input.is-checked + .el-checkbox__label {
+    color: #606266;
   }
 }
 </style>
