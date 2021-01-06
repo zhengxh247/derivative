@@ -38,13 +38,25 @@
               <li>价格</li>
             </ul>
             <ul class="type-list">
-              <li>收获地</li>
+              <li>收货地</li>
               <li>促销</li>
               <li>分期</li>
               <li>仅看有货</li>
             </ul>
           </div>
-          <div class="goods-list-box"></div>
+          <div class="goods-list-box">
+            <div class="goods-list">
+              <el-card
+                class="goods-item"
+                shadow="hover"
+                v-for="item in 9"
+                :key="item"
+              >
+                <img src="" />
+                <h2>123</h2>
+              </el-card>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -112,6 +124,21 @@ export default {
         li {
           float: left;
           margin-left: 30px;
+        }
+      }
+    }
+    .goods-list-box {
+      width: 1226px;
+      margin: 0;
+      .goods-list {
+        display: flex;
+        flex-wrap: wrap;
+        width: 1240px;
+        .goods-item {
+          width: 294px;
+          height: 383px;
+          margin-right: 14px;
+          margin-bottom: 14px;
         }
       }
     }

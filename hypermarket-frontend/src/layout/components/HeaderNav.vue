@@ -85,7 +85,12 @@
         </div>
         <div class="header-search">
           <el-input v-model="search" placeholder="Redmi K30 Pro 变焦版">
-            <el-button slot="append" icon="el-icon-search"></el-button>
+            <el-button
+              slot="append"
+              icon="el-icon-search"
+              @click="$router.push('/search')"
+            >
+            </el-button>
           </el-input>
         </div>
       </div>
