@@ -14,7 +14,7 @@
     </a>
     <a href="javascript:;" class="item">
       <div>icon</div>
-      <span>人工服务</span>
+      <span>人工客服</span>
     </a>
     <a href="javascript:;" class="item">
       <div>icon</div>

@@ -33,10 +33,10 @@
           <a href="javasctipt:;">Select Location</a>
         </div>
         <div class="topbar-cart">
-          <div class="cart-mini">
+          <router-link to="/cart" class="cart-mini">
             <i class="iconfont icon-gouwuche"></i>
             <span>购物车（0）</span>
-          </div>
+          </router-link>
           <div class="cart-menu">
             购物车中还没有商品，赶紧选购吧！
           </div>
@@ -184,6 +184,7 @@ export default {
       .cart-mini {
         background: #424242;
         text-align: center;
+        display: block;
         i {
           font-size: 15px;
         }
