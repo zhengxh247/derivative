@@ -72,7 +72,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         SecurityConstants.DEFAULT_GOODS_DISPLAY,
                         SecurityConstants.SWAGGER_INDEX_HTML,
                         SecurityConstants.SWAGGER_V2,
-                        SecurityConstants.SWAGGER_RESOURCE
+                        SecurityConstants.SWAGGER_RESOURCE,
+                        SecurityConstants.WEBSOCKET_URL,
+                        SecurityConstants.TEST_URL
                         )
                 .permitAll()
                 .anyRequest()
