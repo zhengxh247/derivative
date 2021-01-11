@@ -74,7 +74,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         SecurityConstants.SWAGGER_V2,
                         SecurityConstants.SWAGGER_RESOURCE,
                         SecurityConstants.WEBSOCKET_URL,
-                        SecurityConstants.TEST_URL
+                        SecurityConstants.DIALOGUE_URL
                         )
                 .permitAll()
                 .anyRequest()

@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author zhengxh
  */
-@ServerEndpoint(value = "/dialogue")
+@ServerEndpoint(value = "/ws/asset")
 @Component
 public class DialogueService {
 
