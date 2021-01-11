@@ -7,6 +7,8 @@ import "../public/styles/index.scss";
 import "@/assets/iconfont/iconfont.css";
 import i18n from "@/lang";
 
+require("./mock");
+
 Vue.config.productionTip = false;
 
 new Vue({

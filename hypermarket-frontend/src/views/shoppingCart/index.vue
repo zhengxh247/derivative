@@ -32,33 +32,39 @@
               <div class="col-action">操作</div>
             </div>
             <div class="list-body">
-              <div class="list-item">
+              <div class="list-item" v-for="cart in cartList" :key="cart.id">
                 <div class="item-box">
                   <div class="col col-check">
-                    <el-checkbox v-model="check"></el-checkbox>
+                    <el-checkbox v-model="cart.check"></el-checkbox>
                   </div>
                   <div class="col-img">
-                    <img
-                      src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1568104854.08717848.jpg"
-                      width="80"
-                      height="80"
-                    />
+                    <img :src="cart.imgUrl" />
                   </div>
                   <div class="col col-name">
-                    <h3>米家金属签字笔 金色</h3>
+                    <h3>{{ cart.goodName }}</h3>
                   </div>
-                  <div class="col col-price">24.9元</div>
+                  <div class="col col-price">{{ cart.salePrice }}元</div>
                   <div class="col col-num">
-                    <el-input-number v-model="num" size="small">
+                    <el-input-number
+                      v-model="cart.num"
+                      size="small"
+                      :min="1"
+                      :max="5"
+                    >
                     </el-input-number>
                   </div>
-                  <div class="col col-total">24.9元</div>
+                  <div class="col col-total">{{ cart.subtotal }}元</div>
                   <div class="col col-action">
                     <i class="el-icon-close"></i>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="cart-bar">
+            <div class="section-left"></div>
+            <span class="total-price">合计</span>
+            <div class="no-select-tip"></div>
           </div>
           <div class="cart-recommend"></div>
         </div>
@@ -68,14 +74,24 @@
 </template>
 
 <script>
+import { CartApi } from "@/api";
 export default {
   name: "ShoppingCart",
   data() {
     return {
       isAllCheck: false,
-      check: false,
-      num: 1
+      cartList: []
     };
+  },
+  created() {
+    this.getCartList();
+  },
+  methods: {
+    getCartList() {
+      CartApi.getCartList().then(res => {
+        this.cartList = res.data;
+      });
+    }
   }
 };
 </script>
@@ -143,6 +159,7 @@ export default {
         display: flex;
       }
       .list-body {
+        color: #424242;
         .item-box {
           padding: 15px 26px 15px 0;
           border-top: 1px solid #e0e0e0;
@@ -188,6 +205,13 @@ export default {
         width: 80px;
         text-align: center;
       }
+    }
+    .cart-bar {
+      height: 50px;
+      background: #fff;
+      margin-top: 20px;
+      position: sticky;
+      bottom: 0;
     }
   }
 }
