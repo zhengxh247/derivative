@@ -19,6 +19,7 @@ public interface SecurityConstants {
 	 * @see
 	 */
 	public static final String DEFAULT_UNAUTHENTICATION_URL = "http://49.232.11.36:83/";
+
 	/**
 	 * 默认的用户名密码登录请求处理url
 	 */
@@ -35,6 +36,11 @@ public interface SecurityConstants {
 	 * 商品展示的url
 	 */
 	public static final String DEFAULT_GOODS_DISPLAY= "/goods/*";
+	/**
+	 * 客服url
+	 */
+	public static final String WEBSOCKET_URL= "/ws/*";
+	public static final String DIALOGUE_URL= "/dialogue/*";
 	/**
 	 * swagger的url
 	 */

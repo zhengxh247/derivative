@@ -14,9 +14,9 @@ spring:
     password: ${REDIS_PASSWORD:123456}
 
   datasource:
-    url: jdbc:mysql://${MASTER_MYSQL_HOST:localhost}:${MASTER_MYSQL_PORT:3306}/hypermarket?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    url: jdbc:mysql://${MASTER_MYSQL_HOST:bj-cdb-q25dy9vm.sql.tencentcdb.com}:${MASTER_MYSQL_PORT:61152}/hypermarket?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: ${MASTER_MYSQL_USERNAME:root}
-    password: ${MASTER_MYSQL_PASSWORD:199701}
+    password: ${MASTER_MYSQL_PASSWORD:Zxh18867211314!}
     sql-script-encoding: utf-8
     # 使用druid数据源
     driver-class-name: com.mysql.jdbc.Driver
