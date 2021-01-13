@@ -55,15 +55,29 @@
                   </div>
                   <div class="col col-total">{{ cart.subtotal }}元</div>
                   <div class="col col-action">
-                    <i class="el-icon-close"></i>
+                    <i class="el-icon-close close"></i>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="cart-bar">
-            <div class="section-left"></div>
-            <span class="total-price">合计</span>
+            <div class="section-left">
+              <a href="javascript:;" class="back-shopping">继续购物</a>
+              <span class="cart-total">
+                共
+                <i>2</i>
+                件商品，已选择
+                <i>2</i>
+                件
+              </span>
+            </div>
+            <span class="total-price">
+              合计:
+              <em>45</em>
+              元
+              <a href="javascript:;" class="btn-primary">去结算</a>
+            </span>
             <div class="no-select-tip"></div>
           </div>
           <div class="cart-recommend"></div>
@@ -171,6 +185,14 @@ export default {
           .col-total {
             color: $colorPrimary;
           }
+          .close {
+            cursor: pointer;
+            &:hover {
+              color: #fff;
+              background-color: #e53935;
+              border-radius: 50%;
+            }
+          }
         }
       }
       .col-check {
@@ -212,6 +234,53 @@ export default {
       margin-top: 20px;
       position: sticky;
       bottom: 0;
+      z-index: 100;
+      .section-left {
+        float: left;
+        .back-shopping {
+          line-height: 50px;
+          margin-left: 32px;
+          &:hover {
+            color: $textHover;
+            transition: color 0.3s;
+          }
+        }
+        .cart-total {
+          margin-left: 16px;
+          padding-left: 16px;
+          border-left: 1px solid #eee;
+          color: #757575;
+          i {
+            font-style: normal;
+            color: $colorPrimary;
+          }
+        }
+      }
+      .total-price {
+        color: #ff6700;
+        float: right;
+        em {
+          font-style: normal;
+          font-size: 30px;
+        }
+        .btn-primary {
+          display: inline-block;
+          background: $colorPrimary;
+          border-color: $colorPrimary;
+          color: #fff;
+          text-align: center;
+          width: 200px;
+          height: 48px;
+          line-height: 48px;
+          font-size: 18px;
+          margin-left: 50px;
+          vertical-align: top;
+          &:hover {
+            background: #f25807;
+            border-color: #f25807;
+          }
+        }
+      }
     }
   }
 }
