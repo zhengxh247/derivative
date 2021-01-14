@@ -22,7 +22,12 @@
           <div class="cart-wrap">
             <div class="list-head">
               <div class="col-check">
-                <el-checkbox v-model="isAllCheck">全选</el-checkbox>
+                <el-checkbox
+                  v-model="isAllCheck"
+                  @change="updateAllProductChecked"
+                >
+                  全选
+                </el-checkbox>
               </div>
               <div class="col-img"></div>
               <div class="col-name">商品名称</div>
@@ -35,7 +40,16 @@
               <div class="list-item" v-for="cart in cartList" :key="cart.id">
                 <div class="item-box">
                   <div class="col col-check">
-                    <el-checkbox v-model="cart.check"></el-checkbox>
+                    <el-checkbox
+                      v-model="cart.check"
+                      @change="
+                        updateProductChecked({
+                          productId: cart.id,
+                          checked: $event
+                        })
+                      "
+                    >
+                    </el-checkbox>
                   </div>
                   <div class="col-img">
                     <img :src="cart.imgUrl" />
@@ -50,12 +64,22 @@
                       size="small"
                       :min="1"
                       :max="5"
+                      @change="
+                        updateProductNum({
+                          productId: cart.id,
+                          count: $event
+                        })
+                      "
                     >
                     </el-input-number>
                   </div>
                   <div class="col col-total">{{ cart.subtotal }}元</div>
                   <div class="col col-action">
-                    <i class="el-icon-close close"></i>
+                    <i
+                      class="el-icon-close close"
+                      @click="deleteProduct(cart.id)"
+                    >
+                    </i>
                   </div>
                 </div>
               </div>
@@ -66,15 +90,15 @@
               <a href="javascript:;" class="back-shopping">继续购物</a>
               <span class="cart-total">
                 共
-                <i>2</i>
+                <i>{{ productCount }}</i>
                 件商品，已选择
-                <i>2</i>
+                <i>{{ checkedProductCount }}</i>
                 件
               </span>
             </div>
             <span class="total-price">
               合计:
-              <em>45</em>
+              <em>{{ checkedPriceTotal }}</em>
               元
               <a href="javascript:;" class="btn-primary">去结算</a>
             </span>
@@ -88,24 +112,43 @@
 </template>
 
 <script>
-import { CartApi } from "@/api";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "ShoppingCart",
   data() {
     return {
-      isAllCheck: false,
       cartList: []
     };
+  },
+  computed: {
+    ...mapGetters("cart", [
+      "productCount",
+      "checkedProductCount",
+      "checkedPriceTotal"
+    ]),
+    isAllCheck: {
+      get() {
+        return this.cartList.every(cart => cart.check);
+      },
+      set(value) {
+        this.updateAllProductChecked(value);
+      }
+    }
   },
   created() {
     this.getCartList();
   },
   methods: {
-    getCartList() {
-      CartApi.getCartList().then(res => {
-        this.cartList = res.data;
-      });
-    }
+    async getCartList() {
+      const rs = await this.$store.dispatch("cart/getCartList");
+      this.cartList = rs.data;
+    },
+    ...mapMutations("cart", [
+      "deleteProduct",
+      "updateAllProductChecked",
+      "updateProductChecked",
+      "updateProductNum"
+    ])
   }
 };
 </script>
