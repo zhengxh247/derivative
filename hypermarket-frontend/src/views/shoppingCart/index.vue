@@ -19,7 +19,7 @@
     <div class="mi-cart">
       <div class="container">
         <div class="cart-container">
-          <div class="cart-wrap">
+          <div class="cart-wrap" v-if="cartList.length > 0">
             <div class="list-head">
               <div class="col-check">
                 <el-checkbox
@@ -85,24 +85,47 @@
               </div>
             </div>
           </div>
-          <div class="cart-bar">
-            <div class="section-left">
-              <a href="javascript:;" class="back-shopping">继续购物</a>
-              <span class="cart-total">
-                共
-                <i>{{ productCount }}</i>
-                件商品，已选择
-                <i>{{ checkedProductCount }}</i>
-                件
+          <div class="cart-bar" v-if="cartList.length > 0">
+            <div class="bar-box">
+              <div class="section-left">
+                <a href="javascript:;" class="back-shopping">继续购物</a>
+                <span class="cart-total">
+                  共
+                  <i>{{ productCount }}</i>
+                  件商品，已选择
+                  <i>{{ checkedProductCount }}</i>
+                  件
+                </span>
+              </div>
+              <span class="total-price">
+                合计:
+                <em>{{ checkedPriceTotal }}</em>
+                元
+                <a
+                  href="javascript:;"
+                  class="btn-primary"
+                  :class="{ disabled: isCheck }"
+                >
+                  去结算
+                </a>
               </span>
+              <div
+                class="no-select-tip"
+                v-show="isCheck && cartList.length > 0"
+              >
+                请勾选需要结算的商品
+                <i class="arrow arrow-a"></i>
+                <i class="arrow arrow-b"></i>
+              </div>
             </div>
-            <span class="total-price">
-              合计:
-              <em>{{ checkedPriceTotal }}</em>
-              元
-              <a href="javascript:;" class="btn-primary">去结算</a>
-            </span>
-            <div class="no-select-tip"></div>
+          </div>
+          <div class="empty-cart-wrap" v-else>
+            <div class="empty-cart-top">
+              <h2 class="login-tip is-login">您的购物车还是空的！</h2>
+              <p class="login-desc">登录后将显示您之前加入的商品</p>
+              <a href="javascript:;" class="btn btn-login">立即登录</a>
+              <a href="javascript:;" class="btn btn-shoping">马上去购物</a>
+            </div>
           </div>
           <div class="cart-recommend"></div>
         </div>
@@ -132,6 +155,11 @@ export default {
       },
       set(value) {
         this.updateAllProductChecked(value);
+      }
+    },
+    isCheck: {
+      get() {
+        return this.cartList.every(cart => !cart.check);
       }
     }
   },
@@ -278,51 +306,129 @@ export default {
       position: sticky;
       bottom: 0;
       z-index: 100;
-      .section-left {
-        float: left;
-        .back-shopping {
-          line-height: 50px;
-          margin-left: 32px;
-          &:hover {
-            color: $textHover;
-            transition: color 0.3s;
+      .bar-box {
+        position: relative;
+        .section-left {
+          float: left;
+          .back-shopping {
+            line-height: 50px;
+            margin-left: 32px;
+            &:hover {
+              color: $textHover;
+              transition: color 0.3s;
+            }
+          }
+          .cart-total {
+            margin-left: 16px;
+            padding-left: 16px;
+            border-left: 1px solid #eee;
+            color: #757575;
+            i {
+              font-style: normal;
+              color: $colorPrimary;
+            }
           }
         }
-        .cart-total {
-          margin-left: 16px;
-          padding-left: 16px;
-          border-left: 1px solid #eee;
-          color: #757575;
-          i {
+        .total-price {
+          color: #ff6700;
+          float: right;
+          em {
             font-style: normal;
-            color: $colorPrimary;
+            font-size: 30px;
+          }
+          .btn-primary {
+            display: inline-block;
+            background: $colorPrimary;
+            border-color: $colorPrimary;
+            color: #fff;
+            text-align: center;
+            width: 200px;
+            height: 48px;
+            line-height: 48px;
+            font-size: 18px;
+            margin-left: 50px;
+            vertical-align: top;
+            &:hover {
+              background: #f25807;
+              border-color: #f25807;
+            }
+          }
+          .disabled {
+            background: #e0e0e0 !important;
+            border-color: #e0e0e0 !important;
+            color: #b0b0b0 !important;
+            cursor: default !important;
           }
         }
-      }
-      .total-price {
-        color: #ff6700;
-        float: right;
-        em {
-          font-style: normal;
-          font-size: 30px;
-        }
-        .btn-primary {
-          display: inline-block;
-          background: $colorPrimary;
-          border-color: $colorPrimary;
-          color: #fff;
-          text-align: center;
+        .no-select-tip {
           width: 200px;
           height: 48px;
           line-height: 48px;
-          font-size: 18px;
-          margin-left: 50px;
-          vertical-align: top;
-          &:hover {
-            background: #f25807;
-            border-color: #f25807;
+          position: absolute;
+          top: -58px;
+          right: 0;
+          background-color: #fff;
+          border: 1px solid #ff6700;
+          color: #ff6700;
+          text-align: center;
+          .arrow {
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            overflow: hidden;
+            position: absolute;
+            left: 50%;
+          }
+          .arrow-a {
+            bottom: -8px;
+            margin-left: -10px;
+            border-width: 8px 10px 0;
+            border-color: #ff6700 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+          }
+          .arrow-b {
+            bottom: -7px;
+            margin-left: -8px;
+            border-width: 7px 8px 0;
+            border-color: #fff rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
           }
         }
+      }
+    }
+    .empty-cart-top {
+      height: 273px;
+      margin: 65px 0 130px;
+      padding-left: 558px;
+      background: url(../../assets/images/cart-empty.png) no-repeat 124px 0;
+      color: #b0b0b0;
+      .login-tip {
+        padding: 70px 0 0 0;
+        font-size: 36px;
+      }
+      .login-desc {
+        margin: 7px 0 0 0;
+        font-size: 20px;
+        color: #b0b0b0;
+      }
+      .btn {
+        display: inline-block;
+        text-align: center;
+        width: 170px;
+        height: 48px;
+        border: 1px solid #b0b0b0;
+        line-height: 48px;
+        margin-top: 20px;
+      }
+      .btn-login {
+        background: $colorPrimary;
+        border-color: $colorPrimary;
+        color: #fff;
+        margin-right: 10px;
+      }
+      .btn-shoping {
+        background-color: #f5f5f5;
+        border-color: $colorPrimary;
+        color: $colorPrimary;
       }
     }
   }
