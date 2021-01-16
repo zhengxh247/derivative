@@ -139,9 +139,7 @@ import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "ShoppingCart",
   data() {
-    return {
-      cartList: []
-    };
+    return {};
   },
   computed: {
     ...mapGetters("cart", [
@@ -151,7 +149,11 @@ export default {
     ]),
     isAllCheck: {
       get() {
-        return this.cartList.every(cart => cart.check);
+        if (this.cartList.length == 0) {
+          return false;
+        } else {
+          return this.cartList.every(cart => cart.check);
+        }
       },
       set(value) {
         this.updateAllProductChecked(value);
@@ -161,16 +163,12 @@ export default {
       get() {
         return this.cartList.every(cart => !cart.check);
       }
+    },
+    cartList() {
+      return this.$store.getters["cart/getCartList"];
     }
   },
-  created() {
-    this.getCartList();
-  },
   methods: {
-    async getCartList() {
-      const rs = await this.$store.dispatch("cart/getCartList");
-      this.cartList = rs.data;
-    },
     ...mapMutations("cart", [
       "deleteProduct",
       "updateAllProductChecked",

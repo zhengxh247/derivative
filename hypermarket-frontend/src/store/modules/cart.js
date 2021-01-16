@@ -6,6 +6,7 @@ export default {
     cartList: []
   },
   getters: {
+    getCartList: ({ cartList }) => cartList,
     productCount: ({ cartList }) => {
       return cartList.reduce((sum, cart) => {
         return sum + cart.num;
