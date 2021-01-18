@@ -47,6 +47,7 @@
                 class="cart-list"
                 :style="{ height: cartList.length > 5 ? '445.5px' : 'auto' }"
                 :class="{ isScroll: cartList.length > 5 }"
+                v-if="cartList.length > 0"
               >
                 <li v-for="cart in cartList" :key="cart.id">
                   <div class="cart-item">
@@ -63,23 +64,29 @@
                     <span class="price">
                       {{ cart.salePrice }}元 × {{ cart.num }}
                     </span>
-                    <i class="el-icon-close btn-del"></i>
+                    <i
+                      class="el-icon-close btn-del"
+                      @click="deleteProduct(cart.id)"
+                    >
+                    </i>
                   </div>
                 </li>
               </ul>
-              <div class="cart-total clearfix">
+              <div class="cart-total clearfix" v-if="cartList.length > 0">
                 <span class="total">
                   共
-                  <em>1</em>
+                  <em>{{ productCount }}</em>
                   件商品
                   <span class="price">
-                    <em>6799</em>
+                    <em>{{ checkedPriceTotal }}</em>
                     元
                   </span>
                 </span>
-                <a href="javascript:;" class="btn-cart">去购物车结算</a>
+                <router-link to="/cart" class="btn-cart">
+                  去购物车结算
+                </router-link>
               </div>
-              <div class="msg-empty" v-if="cartList.length == 0">
+              <div class="msg-empty" v-else>
                 购物车中还没有商品，赶紧选购吧！
               </div>
             </div>
@@ -144,6 +151,7 @@
 
 <script>
 import { GoodsApi } from "@/api";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "HeaderNav",
   data() {
@@ -153,6 +161,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("cart", ["checkedPriceTotal", "productCount"]),
     cartList() {
       return this.$store.getters["cart/getCartList"];
     }
@@ -162,6 +171,7 @@ export default {
     this.getHeaderMenuList();
   },
   methods: {
+    ...mapMutations("cart", ["deleteProduct"]),
     async getCartList() {
       await this.$store.dispatch("cart/getCartList");
     },
@@ -260,8 +270,6 @@ export default {
         .menu-content {
           padding: 20px 0 0;
           .cart-list {
-            // overflow: hidden scroll;
-            // height: 445.5px;
             li {
               position: relative;
               height: 80px;
