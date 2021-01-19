@@ -11,7 +11,7 @@ VueRouter.prototype.push = function push(location) {
 const routes = [
   {
     path: "/",
-    component: () => import(/* webpackChunkName: "home" */ "../layout"),
+    component: () => import(/* webpackChunkName: "layout" */ "../layout"),
     children: [
       {
         path: "/",
@@ -21,12 +21,12 @@ const routes = [
       {
         path: "/detail/:id",
         component: () =>
-          import(/* webpackChunkName: "home" */ "../views/goodsDetail")
+          import(/* webpackChunkName: "detail" */ "../views/goodsDetail")
       },
       {
         path: "/search",
         component: () =>
-          import(/* webpackChunkName: "home" */ "../views/search")
+          import(/* webpackChunkName: "search" */ "../views/search")
       }
     ]
   },
@@ -45,7 +45,13 @@ const routes = [
     path: "/cart",
     name: "Cart",
     component: () =>
-      import(/* webpackChunkName: "register" */ "../views/shoppingCart")
+      import(/* webpackChunkName: "cart" */ "../views/shoppingCart")
+  },
+  {
+    path: "*",
+    name: "NotFound",
+    component: () =>
+      import(/* webpackChunkName: "notFound" */ "../views/notFound")
   }
 ];
 

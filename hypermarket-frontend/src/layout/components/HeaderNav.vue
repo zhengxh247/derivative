@@ -33,12 +33,63 @@
           <a href="javasctipt:;">Select Location</a>
         </div>
         <div class="topbar-cart">
-          <router-link to="/cart" class="cart-mini">
+          <router-link
+            to="/cart"
+            class="cart-mini"
+            :class="{ 'cart-filled': cartList.length > 0 }"
+          >
             <i class="iconfont icon-gouwuche"></i>
-            <span>购物车（0）</span>
+            <span>购物车（{{ cartList.length }}）</span>
           </router-link>
           <div class="cart-menu">
-            购物车中还没有商品，赶紧选购吧！
+            <div class="menu-content">
+              <ul
+                class="cart-list"
+                :style="{ height: cartList.length > 5 ? '445.5px' : 'auto' }"
+                :class="{ isScroll: cartList.length > 5 }"
+                v-if="cartList.length > 0"
+              >
+                <li v-for="cart in cartList" :key="cart.id">
+                  <div class="cart-item">
+                    <a href="javscript:;" class="thumb">
+                      <img
+                        src="//cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1591872099.9894566.jpg"
+                        width="60"
+                        height="60"
+                      />
+                    </a>
+                    <a href="javscript:;" class="name">
+                      {{ cart.goodName }}
+                    </a>
+                    <span class="price">
+                      {{ cart.salePrice }}元 × {{ cart.num }}
+                    </span>
+                    <i
+                      class="el-icon-close btn-del"
+                      @click="deleteProduct(cart.id)"
+                    >
+                    </i>
+                  </div>
+                </li>
+              </ul>
+              <div class="cart-total clearfix" v-if="cartList.length > 0">
+                <span class="total">
+                  共
+                  <em>{{ productCount }}</em>
+                  件商品
+                  <span class="price">
+                    <em>{{ checkedPriceTotal }}</em>
+                    元
+                  </span>
+                </span>
+                <router-link to="/cart" class="btn-cart">
+                  去购物车结算
+                </router-link>
+              </div>
+              <div class="msg-empty" v-else>
+                购物车中还没有商品，赶紧选购吧！
+              </div>
+            </div>
           </div>
         </div>
         <div class="topbar-info">
@@ -100,6 +151,7 @@
 
 <script>
 import { GoodsApi } from "@/api";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "HeaderNav",
   data() {
@@ -108,10 +160,21 @@ export default {
       menus: []
     };
   },
+  computed: {
+    ...mapGetters("cart", ["checkedPriceTotal", "productCount"]),
+    cartList() {
+      return this.$store.getters["cart/getCartList"];
+    }
+  },
   created() {
+    !this.cartList.length && this.getCartList();
     this.getHeaderMenuList();
   },
   methods: {
+    ...mapMutations("cart", ["deleteProduct"]),
+    async getCartList() {
+      await this.$store.dispatch("cart/getCartList");
+    },
     getHeaderMenuList() {
       GoodsApi.getHeaderMenuList().then(res => {
         this.menus = res.data.result;
@@ -189,18 +252,123 @@ export default {
           font-size: 15px;
         }
       }
+      .cart-filled {
+        background: $colorPrimary;
+        color: #fff;
+      }
       .cart-menu {
         display: none;
         position: absolute;
         width: 316px;
-        height: 100px;
-        text-align: center;
+        height: auto;
         right: 0;
         top: 40px;
-        z-index: 1;
+        z-index: 30;
         background: #fff;
         box-shadow: -5px 5px 10px -4px rgba(0, 0, 0, 0.15),
           5px 5px 10px -4px rgba(0, 0, 0, 0.15);
+        .menu-content {
+          padding: 20px 0 0;
+          .cart-list {
+            li {
+              position: relative;
+              height: 80px;
+              padding: 0 20px;
+              .cart-item {
+                position: relative;
+                height: 60px;
+                padding: 10px 0;
+                border-top: 1px solid #e0e0e0;
+                line-height: 20px;
+                .thumb {
+                  float: left;
+                }
+                .name {
+                  float: left;
+                  width: 95px;
+                  height: 40px;
+                  line-height: 20px;
+                  margin: 10px 0;
+                  color: #424242;
+                  overflow: hidden;
+                  &:hover {
+                    color: $textHover;
+                    cursor: pointer;
+                  }
+                }
+                .price {
+                  float: right;
+                  margin: 20px 20px 0 5px;
+                }
+                .btn-del {
+                  position: absolute;
+                  top: 35px;
+                  right: 0;
+                  font-size: 12px;
+                  opacity: 0;
+                  &:hover {
+                    color: #000;
+                    cursor: pointer;
+                  }
+                }
+              }
+              &:first-child .cart-item {
+                border-top: 0;
+              }
+              &:hover .cart-item .btn-del {
+                opacity: 1;
+              }
+            }
+          }
+          .isScroll {
+            overflow: hidden scroll;
+          }
+          .cart-total {
+            padding: 15px 20px;
+            background: #fafafa;
+            .total {
+              float: left;
+              width: 135px;
+              color: #757575;
+              line-height: normal;
+              em {
+                font-style: normal;
+              }
+              .price {
+                display: block;
+                font-weight: 400;
+                color: #ff6700;
+                em {
+                  font-size: 24px;
+                  line-height: 1;
+                }
+              }
+            }
+            .btn-cart {
+              float: right;
+              width: 130px;
+              padding: 0;
+              font-size: 14px;
+              line-height: 40px;
+              text-align: center;
+              color: #f5f5f5;
+              background: #ff6700;
+            }
+          }
+          .clearfix:after,
+          .clearfix:before {
+            content: "";
+            display: table;
+          }
+          .clearfix:after {
+            clear: both;
+          }
+          .msg-empty {
+            padding: 10px 0 20px;
+            margin: 0 20px 20px;
+            text-align: center;
+          }
+        }
       }
       .cart-mini:hover {
         color: $colorHover;
