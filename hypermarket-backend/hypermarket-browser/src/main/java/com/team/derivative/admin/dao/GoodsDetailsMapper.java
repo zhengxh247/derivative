@@ -26,4 +26,12 @@ public interface GoodsDetailsMapper extends BaseMapper<GoodsDetailsEntity> {
      */
     @Select("select * from goods_details where goods_category_id in (select id from goods_category where correlation = #{id})")
     List<GoodsDetailsEntity> findGoodsByCroupId(Integer id);
+
+    /**
+     * 根据id获取商品详情
+     * @param id
+     * @return
+     */
+    @Select("select * from goods_details where id = #{id}")
+    GoodsDetailsEntity getGoodDetailsById(Integer id);
 }

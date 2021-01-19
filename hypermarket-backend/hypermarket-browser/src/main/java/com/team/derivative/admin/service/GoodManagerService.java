@@ -94,4 +94,12 @@ public class GoodManagerService {
     public List<ViewImgEntity> getView() {
         return viewImgMapper.selectList(null);
     }
+
+    /**
+     * 单件商品详情
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public GoodsDetailsEntity getGoodDetails(Integer id) {
+        return detailsMapper.getGoodDetailsById(id);
+    }
 }

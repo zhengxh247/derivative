@@ -39,10 +39,15 @@ public class GoodsManagerController {
         return ResultBody.success(service.selectByKey(keyWord));
     }
 
-
     @ApiOperation(value = "查询首页轮播图详情")
     @GetMapping("/getView")
     public ResultBody getView() {
         return ResultBody.success(service.getView());
+    }
+
+    @ApiOperation(value = "单价商品详情")
+    @GetMapping("/getGoodDetails")
+    public ResultBody getGoodDetails(@RequestParam Integer id) {
+        return ResultBody.success(service.getGoodDetails(id));
     }
 }
