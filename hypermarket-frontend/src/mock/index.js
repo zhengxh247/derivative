@@ -1,5 +1,5 @@
 const Mock = require("mockjs");
-Mock.mock("/api/list", "get", () => {
+Mock.mock("/api/cart", "get", () => {
   const arr = [];
   for (let i = 0; i < 10; i++) {
     const money = Mock.mock("@float(1, 1000, 2, 2)");
@@ -12,6 +12,21 @@ Mock.mock("/api/list", "get", () => {
       salePrice: money,
       num,
       subtotal: (money * num).toFixed(2)
+    };
+    arr.push(obj);
+  }
+  return arr;
+});
+
+Mock.mock("/api/cart/other", "get", () => {
+  const arr = [];
+  for (let i = 0; i < 10; i++) {
+    const obj = {
+      id: Mock.mock("@id"),
+      goodName: Mock.mock("@ctitle(5, 12)"),
+      imgUrl: Mock.Random.image("140x140"),
+      price: Mock.mock("@float(1, 1000, 2, 2)"),
+      comment: Mock.mock("@float(1, 100, 2, 1)")
     };
     arr.push(obj);
   }

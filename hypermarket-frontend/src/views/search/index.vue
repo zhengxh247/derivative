@@ -62,8 +62,17 @@
                 v-for="search in searchList"
                 :key="search.id"
               >
-                <img :src="search.imgUrl" />
-                <h2 class="title">{{ search.goodName }}</h2>
+                <router-link :to="'/detail/' + search.id">
+                  <img :src="search.imgUrl" />
+                </router-link>
+                <h2 class="title">
+                  <router-link
+                    :to="'/detail/' + search.id"
+                    style="color: #424242;"
+                  >
+                    {{ search.goodName }}
+                  </router-link>
+                </h2>
                 <p class="price">
                   {{ search.price }}元
                   <!-- <del>{{ search.price }}元 起</del> -->
@@ -101,10 +110,25 @@
             <el-carousel-item v-for="(other, index) in otherList" :key="index">
               <ul class="recommend-list">
                 <li v-for="item in other" :key="item.id" class="recommend-item">
-                  <img :src="item.imgUrl" />
-                  <div class="recommend-name">{{ item.goodName }}</div>
-                  <div class="recommend-price">{{ item.price }}元</div>
-                  <div class="recommend-tips">{{ item.comment }}万人好评</div>
+                  <router-link :to="'/detail/' + item.id">
+                    <img :src="item.imgUrl" />
+                    <div class="recommend-name">{{ item.goodName }}</div>
+                    <div class="recommend-price">{{ item.price }}元</div>
+                    <div class="recommend-tips">{{ item.comment }}万人好评</div>
+                  </router-link>
+                  <div class="recommend-action">
+                    <span class="add-cart" @click="addCartHandle(item.id)">
+                      加入购物车
+                    </span>
+                  </div>
+                  <div class="recommend-notice">
+                    <span
+                      class="add-success"
+                      :class="{ 'success-active': isActive == item.id }"
+                    >
+                      成功加入购物车
+                    </span>
+                  </div>
                 </li>
               </ul>
             </el-carousel-item>
@@ -126,7 +150,8 @@ export default {
       promotion: false,
       installment: false,
       onlyLookGood: false,
-      isAsc: true
+      isAsc: true,
+      isActive: null
     };
   },
   created() {
@@ -143,6 +168,13 @@ export default {
       SearchApi.getOtherList().then(res => {
         this.otherList = res.data;
       });
+    },
+    addCartHandle(id) {
+      this.isActive = id;
+      const timer = setTimeout(_ => {
+        this.isActive = null;
+        clearTimeout(timer);
+      }, 1000);
     }
   }
 };
@@ -333,6 +365,52 @@ export default {
         .recommend-tips {
           color: #757575;
         }
+        .recommend-action {
+          position: absolute;
+          left: 0;
+          bottom: 16px;
+          width: 100%;
+          .add-cart {
+            opacity: 0;
+            background: #fff;
+            color: $colorPrimary;
+            width: 120px;
+            height: 28px;
+            font-size: 12px;
+            line-height: 28px;
+            display: inline-block;
+            border: 1px solid $colorPrimary;
+            cursor: pointer;
+            &:hover {
+              background: $textHover;
+              color: #fff;
+            }
+          }
+        }
+        &:hover .recommend-action .add-cart {
+          opacity: 1;
+        }
+        .recommend-notice {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 5;
+          width: 100%;
+          .add-success {
+            opacity: 0;
+            background: #83c44e;
+            border-color: #83c44e;
+            color: #fff;
+            display: block;
+            width: 100%;
+            height: 38px;
+            line-height: 38px;
+            font-size: 14px;
+          }
+          .success-active {
+            opacity: 1 !important;
+          }
+        }
       }
     }
   }
@@ -367,10 +445,14 @@ export default {
     background-color: rgba(0, 0, 0, 0);
   }
   .el-carousel__button {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 10px;
     opacity: 0.8;
+  }
+  .el-carousel__item:nth-child(2n),
+  .el-carousel__item:nth-child(2n + 1) {
+    background-color: unset;
   }
 }
 </style>

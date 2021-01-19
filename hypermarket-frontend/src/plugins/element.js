@@ -10,7 +10,8 @@ import {
   Carousel,
   CarouselItem,
   Breadcrumb,
-  BreadcrumbItem
+  BreadcrumbItem,
+  MessageBox
 } from "element-ui";
 
 Vue.use(Button);
@@ -24,3 +25,6 @@ Vue.use(Carousel);
 Vue.use(CarouselItem);
 Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
+
+Vue.prototype.$msgbox = MessageBox;
+Vue.prototype.$confirm = MessageBox.confirm;

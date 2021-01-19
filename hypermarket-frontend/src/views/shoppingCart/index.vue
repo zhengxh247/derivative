@@ -3,7 +3,9 @@
     <div class="site-header">
       <div class="container">
         <div class="header-logo">
-          <img src="../../assets/images/handlogo.png" />
+          <router-link to="/">
+            <img src="../../assets/images/handlogo.png" />
+          </router-link>
         </div>
         <div class="header-title">
           <h2>我的购物车</h2>
@@ -77,7 +79,7 @@
                   <div class="col col-action">
                     <i
                       class="el-icon-close close"
-                      @click="deleteProduct(cart.id)"
+                      @click="deleteHandle(cart.id)"
                     >
                     </i>
                   </div>
@@ -127,19 +129,61 @@
               <a href="javascript:;" class="btn btn-shoping">马上去购物</a>
             </div>
           </div>
-          <div class="cart-recommend"></div>
+          <div class="cart-recommend">
+            <h2 class="recommend-title">
+              <span>买购物车中商品的人还买了</span>
+            </h2>
+            <div class="recommend-bd">
+              <ul class="recommend-list">
+                <li
+                  v-for="item in otherList"
+                  :key="item.id"
+                  class="recommend-item"
+                >
+                  <router-link :to="'/detail/' + item.id">
+                    <img :src="item.imgUrl" />
+                    <div class="recommend-name">{{ item.goodName }}</div>
+                    <div class="recommend-price">{{ item.price }}元</div>
+                    <div class="recommend-tips">{{ item.comment }}万人好评</div>
+                  </router-link>
+                  <div class="recommend-action">
+                    <span class="add-cart" @click="addCartHandle(item.id)">
+                      加入购物车
+                    </span>
+                  </div>
+                  <div class="recommend-notice">
+                    <span
+                      class="add-success"
+                      :class="{ 'success-active': isActive == item.id }"
+                    >
+                      成功加入购物车
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <footer-nav></footer-nav>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
+import { CartApi } from "@/api";
+import FooterNav from "@/layout/components/FooterNav.vue";
 export default {
   name: "ShoppingCart",
   data() {
-    return {};
+    return {
+      otherList: [],
+      isActive: null
+    };
+  },
+  components: {
+    FooterNav
   },
   computed: {
     ...mapGetters("cart", [
@@ -168,13 +212,40 @@ export default {
       return this.$store.getters["cart/getCartList"];
     }
   },
+  created() {
+    this.getOtherList();
+  },
   methods: {
     ...mapMutations("cart", [
       "deleteProduct",
       "updateAllProductChecked",
       "updateProductChecked",
       "updateProductNum"
-    ])
+    ]),
+    deleteHandle(id) {
+      this.$confirm("确定删除吗", {
+        cancelButtonText: "取消",
+        confirmButtonText: "确定",
+        center: true,
+        customClass: "cart-confirm"
+      })
+        .then(() => {
+          this.deleteProduct(id);
+        })
+        .catch(() => {});
+    },
+    getOtherList() {
+      CartApi.getOtherList().then(res => {
+        this.otherList = res.data;
+      });
+    },
+    addCartHandle(id) {
+      this.isActive = id;
+      const timer = setTimeout(_ => {
+        this.isActive = null;
+        clearTimeout(timer);
+      }, 1000);
+    }
   }
 };
 </script>
@@ -221,6 +292,9 @@ export default {
       .link {
         padding: 0 5px;
         color: #757575;
+      }
+      .link:hover {
+        color: $textHover;
       }
     }
   }
@@ -429,6 +503,123 @@ export default {
         color: $colorPrimary;
       }
     }
+    .cart-recommend {
+      margin: 60px 0 0;
+      .recommend-title {
+        position: relative;
+        margin: 0;
+        height: 50px;
+        font-size: 30px;
+        font-weight: 400;
+        color: #757575;
+        border-top: 1px solid #e0e0e0;
+        span {
+          position: absolute;
+          top: -20px;
+          left: 372px;
+          height: 40px;
+          width: 482px;
+          line-height: 40px;
+          text-align: center;
+          display: block;
+          background-color: #f5f5f5;
+        }
+      }
+      .recommend-bd {
+        .recommend-list {
+          display: flex;
+          flex-wrap: wrap;
+          .recommend-item {
+            width: 234px;
+            margin-right: 14px;
+            margin-bottom: 14px;
+            height: 300px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            background-color: #fff;
+            font-size: 14px;
+            text-align: center;
+            &:nth-child(5n) {
+              margin-right: 0;
+            }
+            img {
+              display: block;
+              margin: 40px auto 20px;
+            }
+            .recommend-name {
+              margin: 0 10px 10px;
+              height: 18px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+              color: #333;
+            }
+            .recommend-price {
+              margin-bottom: 10px;
+              color: $colorPrimary;
+            }
+            .recommend-tips {
+              color: #757575;
+            }
+            .recommend-action {
+              position: absolute;
+              left: 0;
+              bottom: 16px;
+              width: 100%;
+              .add-cart {
+                opacity: 0;
+                background: #fff;
+                color: $colorPrimary;
+                width: 120px;
+                height: 28px;
+                font-size: 12px;
+                line-height: 28px;
+                display: inline-block;
+                border: 1px solid $colorPrimary;
+                cursor: pointer;
+                &:hover {
+                  background: $textHover;
+                  color: #fff;
+                }
+              }
+            }
+            &:hover .recommend-action .add-cart {
+              opacity: 1;
+            }
+            .recommend-notice {
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 5;
+              width: 100%;
+              .add-success {
+                opacity: 0;
+                background: #83c44e;
+                border-color: #83c44e;
+                color: #fff;
+                display: block;
+                width: 100%;
+                height: 38px;
+                line-height: 38px;
+                font-size: 14px;
+              }
+              .success-active {
+                opacity: 1 !important;
+              }
+            }
+          }
+        }
+      }
+    }
+    .clearfix {
+      clear: both;
+    }
+    .clearfix:after,
+    .clearfix:before {
+      content: " ";
+      display: table;
+    }
   }
 }
 </style>
@@ -483,6 +674,58 @@ export default {
   }
   .el-input-number__increase {
     border-left: 0;
+  }
+}
+.cart-confirm {
+  width: 500px;
+  padding-bottom: 0;
+  .el-message-box__headerbtn:focus .el-message-box__close,
+  .el-message-box__headerbtn:hover .el-message-box__close {
+    color: #fff;
+    background-color: #e53935;
+    border-radius: 50%;
+  }
+  .el-message-box__content {
+    padding: 20px 27px 30px 27px;
+  }
+  .el-message-box__message p {
+    font-size: 18px;
+    line-height: 36px;
+    color: #424242;
+  }
+  .el-message-box__btns {
+    height: 40px;
+    padding: 20px 0;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    background-color: #f5f5f5;
+    .el-button {
+      width: 160px;
+      height: 40px;
+      background: #b0b0b0;
+      border-color: #b0b0b0;
+      color: #fff;
+      font-size: 14px;
+      border-radius: 0;
+      &:hover {
+        background-color: #757575;
+        border-color: #757575;
+        color: #fff;
+      }
+    }
+    .el-button--primary {
+      background: #ff6700;
+      border-color: #ff6700;
+      color: #fff;
+      &:hover {
+        background-color: #f25807;
+        border-color: #f25807;
+        color: #fff;
+      }
+    }
+    .el-button + .el-button {
+      margin-left: 14px;
+    }
   }
 }
 </style>
