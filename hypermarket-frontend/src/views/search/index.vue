@@ -20,11 +20,15 @@
       <div class="search-filter">
         <div class="container">
           <ul>
-            <li>分类:</li>
-            <li>全部</li>
-            <li>手机</li>
-            <li>手机保护壳</li>
-            <li>服务</li>
+            <span class="label">分类:</span>
+            <li
+              v-for="filter in filterList"
+              :key="filter.id"
+              :class="{ active: filterActiveId == filter.id }"
+              @click="filterClick(filter.id)"
+            >
+              {{ filter.name }}
+            </li>
           </ul>
         </div>
       </div>
@@ -32,13 +36,13 @@
         <div class="container">
           <div class="order-list-box">
             <ul class="order-list">
-              <li>综合</li>
-              <li>新品</li>
-              <li>销量</li>
-              <li @click="isAsc = !isAsc">
-                价格
-                <i class="el-icon-top" v-if="isAsc"></i>
-                <i class="el-icon-bottom" v-else></i>
+              <li
+                v-for="order in orderList"
+                :key="order.id"
+                :class="{ active: orderActiveId == order.id }"
+                @click="orderClick(order.id)"
+              >
+                {{ order.name }}
               </li>
             </ul>
             <ul class="type-list">
@@ -124,7 +128,7 @@
                   <div class="recommend-notice">
                     <span
                       class="add-success"
-                      :class="{ 'success-active': isActive == item.id }"
+                      :class="{ 'success-active': isActiveId == item.id }"
                     >
                       成功加入购物车
                     </span>
@@ -145,13 +149,27 @@ export default {
   name: "search",
   data() {
     return {
+      filterList: [
+        { id: 1, name: "全部" },
+        { id: 2, name: "手机" },
+        { id: 3, name: "手机保护壳" },
+        { id: 4, name: "服务" }
+      ],
+      orderList: [
+        { id: 1, name: "综合" },
+        { id: 2, name: "新品" },
+        { id: 3, name: "销量" },
+        { id: 4, name: "价格" }
+      ],
       searchList: [],
       otherList: [],
       promotion: false,
       installment: false,
       onlyLookGood: false,
       isAsc: true,
-      isActive: null
+      orderActiveId: 1,
+      filterActiveId: 1,
+      isActiveId: null
     };
   },
   created() {
@@ -170,11 +188,17 @@ export default {
       });
     },
     addCartHandle(id) {
-      this.isActive = id;
+      this.isActiveId = id;
       const timer = setTimeout(_ => {
-        this.isActive = null;
+        this.isActiveId = null;
         clearTimeout(timer);
       }, 1000);
+    },
+    orderClick(id) {
+      this.orderActiveId = id;
+    },
+    filterClick(id) {
+      this.filterActiveId = id;
     }
   }
 };
@@ -201,9 +225,25 @@ export default {
     position: relative;
     ul {
       height: 48px;
+      position: relative;
+      overflow: hidden;
+      padding: 0 60px 0 124px;
+      margin: 0;
+      list-style: none;
+      font-size: 0;
+      .label {
+        position: absolute;
+        height: 20px;
+        line-height: 20px;
+        padding: 14px 0;
+        font-size: 14px;
+        top: 0;
+        left: 0;
+        color: #b0b0b0;
+      }
     }
     ul > li {
-      float: left;
+      display: inline-block;
       cursor: pointer;
       color: #424242;
       font-size: 14px;
@@ -215,9 +255,8 @@ export default {
     ul > li:hover {
       color: $textHover;
     }
-    ul > li:first-child {
-      color: #424242;
-      cursor: default;
+    ul > .active {
+      color: $colorPrimary;
     }
   }
 }
@@ -235,6 +274,8 @@ export default {
         float: left;
         li {
           float: left;
+          font-size: 14px;
+          color: #424242;
           cursor: pointer;
           padding: 0 30px;
           border-right: 1px solid #e0e0e0;
@@ -245,11 +286,16 @@ export default {
         li:last-child {
           border-right: none;
         }
+        .active {
+          color: $colorPrimary;
+        }
       }
       .type-list {
         float: right;
         li {
           float: left;
+          font-size: 14px;
+          color: #424242;
           margin-left: 30px;
         }
       }

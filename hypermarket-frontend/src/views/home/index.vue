@@ -53,12 +53,54 @@
     <div class="home-hero-sub">
       <div class="span4">
         <ul class="home-channel-list">
-          <li>小米秒杀</li>
-          <li>企业团购</li>
-          <li>F码通道</li>
-          <li>米粉卡</li>
-          <li>以旧换新</li>
-          <li>话费充值</li>
+          <li>
+            <a href="javascript:;">
+              <img
+                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82abdba456e8caaea5848a0cddce03db.png"
+              />
+              小米秒杀
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img
+                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/806f2dfb2d27978e33fe3815d3851fa3.png"
+              />
+              企业团购
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img
+                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/eded6fa3b897a058163e2485532c4f10.png"
+              />
+              F码通道
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img
+                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/43a3195efa6a3cc7662efed8e7abe8bf.png"
+              />
+              米粉卡
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img
+                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f4846bca6010a0deb9f85464409862af.png"
+              />
+              以旧换新
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img
+                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9a76d7636b08e0988efb4fc384ae497b.png"
+              />
+              话费充值
+            </a>
+          </li>
         </ul>
       </div>
       <div class="span16">
@@ -231,8 +273,20 @@ export default {
           width: 70px;
           height: 82px;
           color: #fff;
-          opacity: 0.7;
           padding: 0 3px;
+          a {
+            display: block;
+            padding-top: 18px;
+            text-overflow: ellipsis;
+            color: #fff;
+            opacity: 0.7;
+            img {
+              display: block;
+              width: 24px;
+              height: 24px;
+              margin: 0 auto 4px;
+            }
+          }
         }
       }
     }
