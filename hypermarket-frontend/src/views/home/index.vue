@@ -155,11 +155,50 @@
                 </div>
               </div>
               <div class="flashsale-list swiper-container">
-                <ul class="swiper-wrapper">
-                  <li>
-                    123
-                  </li>
-                </ul>
+                <el-carousel
+                  trigger="click"
+                  :autoplay="false"
+                  :loop="false"
+                  arrow="always"
+                  ref="carousel"
+                  indicator-position="none"
+                >
+                  <el-carousel-item
+                    v-for="(Flashsale, i) in FlashsaleList"
+                    :key="i"
+                    name="i"
+                  >
+                    <ul class="swiper-wrapper">
+                      <li
+                        :class="'rainbow-item-' + item.index"
+                        v-for="item in Flashsale"
+                        :key="item.id"
+                      >
+                        <a href="javascript:;" class="item">
+                          <div class="content">
+                            <div class="thumb">
+                              <img :src="item.imgUrl" />
+                            </div>
+                            <h3 class="title">{{ item.goodName }}</h3>
+                            <p class="desc">{{ item.desc }}</p>
+                            <p class="price">
+                              <span>{{ item.price }}元 </span>
+                              <del>{{ item.originalPrice }}元</del>
+                            </p>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </el-carousel-item>
+                </el-carousel>
+              </div>
+              <div class="swiper-carousel">
+                <span class="swiper-flashsale-prev" @click="carouselPrev">
+                  <i class="el-icon-arrow-left"></i>
+                </span>
+                <span class="swiper-flashsale-next" @click="carouselNext">
+                  <i class="el-icon-arrow-right"></i>
+                </span>
               </div>
             </div>
           </div>
@@ -176,13 +215,16 @@ export default {
   data() {
     return {
       swipers: [],
+      FlashsaleList: [],
       groupMenus: {},
+      carouselIndex: 0,
       calcColumnClass: "children-col-4"
     };
   },
   created() {
     this.getSwiperList();
     this.getGroupMenuList();
+    this.getFlashsaleList();
   },
   methods: {
     getSwiperList() {
@@ -194,6 +236,25 @@ export default {
       GoodsApi.getGroupMenuList().then(res => {
         this.groupMenus = res.data.result;
       });
+    },
+    getFlashsaleList() {
+      GoodsApi.getFlashsaleList().then(res => {
+        this.FlashsaleList = res.data;
+      });
+    },
+    carouselPrev() {
+      this.carouselIndex--;
+      if (this.carouselIndex < 0) {
+        this.carouselIndex = 0;
+      }
+      this.$refs.carousel.setActiveItem(this.carouselIndex);
+    },
+    carouselNext() {
+      this.carouselIndex++;
+      if (this.carouselIndex > 6) {
+        this.carouselIndex = 6;
+      }
+      this.$refs.carousel.setActiveItem(this.carouselIndex);
     }
   }
 };
@@ -438,17 +499,61 @@ export default {
               padding: 0;
               width: 100%;
               height: 340px;
-              display: flex;
+              display: block;
               li {
                 width: 234px;
                 margin-right: 14px;
                 border-top-width: 1px;
                 border-top-style: solid;
                 text-align: center;
+                float: left;
                 background: #fff;
                 transition: all 0.6s;
                 position: relative;
                 list-style: none;
+                .item {
+                  display: block;
+                  height: 300px;
+                  padding-top: 39px;
+                  position: relative;
+                  .thumb {
+                    width: 160px;
+                    margin: 0 auto 22px;
+                    img {
+                      width: 160px;
+                      height: 160px;
+                    }
+                  }
+                  .title {
+                    margin: 0 20px 3px;
+                    font-size: 14px;
+                    font-weight: 400;
+                    text-overflow: ellipsis;
+                    color: #212121;
+                    overflow: hidden;
+                    white-space: nowrap;
+                  }
+                  .desc {
+                    height: 18px;
+                    margin: 0 20px 12px;
+                    font-size: 12px;
+                    text-overflow: ellipsis;
+                    color: #b0b0b0;
+                    overflow: hidden;
+                    white-space: nowrap;
+                  }
+                  .price {
+                    margin: 0;
+                    font-size: 14px;
+                    color: #ff6709;
+                    del {
+                      color: #b0b0b0;
+                    }
+                  }
+                }
+              }
+              li:last-child {
+                margin-right: 0;
               }
               .rainbow-item-1 {
                 border-top-color: #ffac13;
@@ -536,6 +641,40 @@ export default {
               }
             }
           }
+          .swiper-carousel {
+            position: absolute;
+            right: 0;
+            top: 24px;
+            .swiper-flashsale-prev,
+            .swiper-flashsale-next {
+              display: inline-block;
+              width: 24px;
+              height: 16px;
+              padding: 3px 5px;
+              margin-left: -1px;
+              border: 1px solid #e0e0e0;
+              font-size: 16px;
+              line-height: 16px;
+              transition: color 0.5s;
+              color: #b0b0b0;
+              text-align: center;
+              cursor: pointer;
+              i {
+                font-weight: 600;
+              }
+              &:hover {
+                color: $colorPrimary;
+              }
+            }
+          }
+        }
+        .row:after,
+        .row:before {
+          content: " ";
+          display: table;
+        }
+        .row:after {
+          clear: both;
         }
       }
       .clearfix:after {
@@ -555,6 +694,14 @@ export default {
 .swiper-view {
   .el-carousel__container {
     height: 460px;
+  }
+}
+.flashsale-list {
+  .el-carousel__container {
+    height: 340px;
+    .el-carousel__arrow {
+      display: none;
+    }
   }
 }
 </style>

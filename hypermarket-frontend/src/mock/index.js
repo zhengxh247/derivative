@@ -59,12 +59,13 @@ Mock.mock("/api/search/other", "get", () => {
     };
     arr.push(obj);
   }
-  const newArr = cuttingData(arr);
+  const newArr = cuttingData(arr, 5);
   return newArr;
 });
 
-const cuttingData = data => {
-  const proportion = 5; // 按照比例切割
+// 按照比例切割
+const cuttingData = (data, proportion) => {
+  // const proportion = 5;
   let num = 0;
   const _data = [];
   for (let i = 0; i < data.length; i++) {
@@ -78,3 +79,21 @@ const cuttingData = data => {
   }
   return _data;
 };
+
+Mock.mock("/api/home/flashsale", "get", () => {
+  const arr = [];
+  for (let i = 0; i < 28; i++) {
+    const obj = {
+      id: Mock.mock("@id"),
+      index: i + 1,
+      goodName: Mock.mock("@ctitle(5, 12)"),
+      imgUrl: Mock.Random.image("160x160"),
+      price: Mock.mock("@float(1, 100, 2, 2)"),
+      originalPrice: Mock.mock("@float(1, 1000, 2, 2)"),
+      desc: Mock.mock("@ctitle(5, 12)")
+    };
+    arr.push(obj);
+  }
+  const newArr = cuttingData(arr, 4);
+  return newArr;
+});

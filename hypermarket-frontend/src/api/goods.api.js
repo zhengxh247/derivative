@@ -10,5 +10,8 @@ export const GoodsApi = {
   },
   getGroupMenuList() {
     return $http.request("get", {}, `${config.api}/${base}/getGroupAll`);
+  },
+  getFlashsaleList() {
+    return $http.mock("get", "/api/home/flashsale");
   }
 };
