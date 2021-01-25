@@ -412,6 +412,7 @@ export default {
   .home-hero-sub {
     display: flex;
     margin-top: 14px;
+    margin-bottom: 26px;
     .span4 {
       width: 234px;
       .home-channel-list {
