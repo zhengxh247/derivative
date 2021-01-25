@@ -193,12 +193,68 @@
                 </el-carousel>
               </div>
               <div class="swiper-carousel">
-                <span class="swiper-flashsale-prev" @click="carouselPrev">
+                <span
+                  class="swiper-flashsale-prev"
+                  :class="{ 'swiper-button-disabled': carouselIndex == 0 }"
+                  @click="carouselPrev"
+                >
                   <i class="el-icon-arrow-left"></i>
                 </span>
-                <span class="swiper-flashsale-next" @click="carouselNext">
+                <span
+                  class="swiper-flashsale-next"
+                  :class="{ 'swiper-button-disabled': carouselIndex == 6 }"
+                  @click="carouselNext"
+                >
                   <i class="el-icon-arrow-right"></i>
                 </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="home-banner-box">
+          <a href="javascript:;">
+            <img
+              src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/a59db7dac2804ee2b5c7be1b02b3770e.jpg"
+              width="1226"
+              height="120"
+            />
+          </a>
+        </div>
+        <div class="home-brick-box">
+          <div class="box-hd">
+            <h2 class="title">手机</h2>
+            <div class="more">
+              <a href="javascript:;" class="more-link">
+                查看全部
+                <i class="el-icon-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="box-bd">
+            <div class="row">
+              <div class="span4">
+                <ul class="brick-promo-list">
+                  <li>
+                    <a href="javascript:;">
+                      <el-card shadow="hover">
+                        <img
+                          src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/cb1bd61ad71c45a4f67f09b075463944.jpeg"
+                          width="234"
+                          height="614"
+                        />
+                      </el-card>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="span16">
+                <ul class="brick-list">
+                  <li v-for="item in 8" :key="item" class="brick-item">
+                    <el-card shadow="hover">
+                      123
+                    </el-card>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -666,6 +722,11 @@ export default {
                 color: $colorPrimary;
               }
             }
+            .swiper-button-disabled {
+              color: #e0e0e0;
+              cursor: default;
+              pointer-events: none;
+            }
           }
         }
         .row:after,
@@ -686,6 +747,75 @@ export default {
         display: table;
       }
     }
+    .home-banner-box {
+      height: 120px;
+      margin: 22px 0;
+      overflow: hidden;
+    }
+    .home-brick-box {
+      margin-bottom: 8px;
+      .box-hd {
+        position: relative;
+        height: 58px;
+        .title {
+          margin: 0;
+          font-size: 22px;
+          font-weight: 200;
+          line-height: 58px;
+          color: #333;
+        }
+        .more {
+          position: absolute;
+          top: 0;
+          right: 0;
+          .more-link {
+            font-size: 16px;
+            line-height: 58px;
+            color: #424242;
+          }
+          .more-link:hover {
+            color: $colorPrimary;
+          }
+        }
+      }
+      .box-bd {
+        .row {
+          .span4 {
+            width: 234px;
+            float: left;
+            .brick-promo-list {
+              height: 614px;
+            }
+          }
+          .span16 {
+            width: 978px;
+            float: left;
+            .brick-list {
+              width: 992px;
+              height: 614px;
+              .brick-item {
+                position: relative;
+                float: left;
+                width: 234px;
+                height: 260px;
+                padding: 20px 0;
+                margin-left: 14px;
+                margin-bottom: 14px;
+                background: #fff;
+              }
+            }
+          }
+        }
+        .row:after,
+        .row:before {
+          content: " ";
+          display: table;
+        }
+        .row:after {
+          clear: both;
+        }
+      }
+    }
   }
 }
 </style>
@@ -701,6 +831,19 @@ export default {
     height: 340px;
     .el-carousel__arrow {
       display: none;
+    }
+  }
+}
+.home-brick-box {
+  .brick-promo-list {
+    .el-card__body {
+      height: 614px;
+    }
+  }
+  .el-card {
+    border: 0;
+    .el-card__body {
+      padding: 0;
     }
   }
 }
