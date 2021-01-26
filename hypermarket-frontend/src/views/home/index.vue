@@ -249,15 +249,38 @@
               </div>
               <div class="span16">
                 <ul class="brick-list">
-                  <li v-for="item in 8" :key="item" class="brick-item">
+                  <li
+                    v-for="phone in phoneList"
+                    :key="phone.id"
+                    class="brick-item"
+                  >
                     <el-card shadow="hover">
-                      123
+                      <a href="javascript:;">
+                        <div class="figure-img">
+                          <img :src="phone.imgUrl" />
+                        </div>
+                        <h3 class="title">{{ phone.goodName }}</h3>
+                        <p class="desc">{{ phone.desc }}</p>
+                        <p class="price">
+                          <span class="num">{{ phone.price }}元</span>
+                          <span>起</span>
+                        </p>
+                      </a>
                     </el-card>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
+        </div>
+        <div class="home-banner-box">
+          <a href="javascript:;">
+            <img
+              src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/41d16e66381cfeda7b6b39ab67678d5e.jpg"
+              width="1226"
+              height="120"
+            />
+          </a>
         </div>
       </div>
     </div>
@@ -272,6 +295,7 @@ export default {
     return {
       swipers: [],
       FlashsaleList: [],
+      phoneList: [],
       groupMenus: {},
       carouselIndex: 0,
       calcColumnClass: "children-col-4"
@@ -281,6 +305,7 @@ export default {
     this.getSwiperList();
     this.getGroupMenuList();
     this.getFlashsaleList();
+    this.getPhoneList();
   },
   methods: {
     getSwiperList() {
@@ -296,6 +321,11 @@ export default {
     getFlashsaleList() {
       GoodsApi.getFlashsaleList().then(res => {
         this.FlashsaleList = res.data;
+      });
+    },
+    getPhoneList() {
+      GoodsApi.getPhoneList().then(res => {
+        this.phoneList = res.data;
       });
     },
     carouselPrev() {
@@ -798,11 +828,41 @@ export default {
                 position: relative;
                 float: left;
                 width: 234px;
-                height: 260px;
-                padding: 20px 0;
+                height: 300px;
                 margin-left: 14px;
                 margin-bottom: 14px;
                 background: #fff;
+                .figure-img {
+                  width: 160px;
+                  height: 160px;
+                  padding-top: 20px;
+                  margin: 0 auto 18px;
+                }
+                .title {
+                  margin: 0 10px 2px;
+                  font-size: 14px;
+                  font-weight: 400;
+                  color: #333;
+                  text-align: center;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  overflow: hidden;
+                }
+                .desc {
+                  margin: 0 10px 10px;
+                  height: 18px;
+                  font-size: 12px;
+                  color: #b0b0b0;
+                  text-align: center;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  overflow: hidden;
+                }
+                .price {
+                  text-align: center;
+                  color: #ff6700;
+                  margin: 0 10px 14px;
+                }
               }
             }
           }
@@ -839,6 +899,11 @@ export default {
   .brick-promo-list {
     .el-card__body {
       height: 614px;
+    }
+  }
+  .brick-list {
+    .el-card__body {
+      height: 300px;
     }
   }
   .el-card {

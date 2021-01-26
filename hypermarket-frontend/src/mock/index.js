@@ -97,3 +97,18 @@ Mock.mock("/api/home/flashsale", "get", () => {
   const newArr = cuttingData(arr, 4);
   return newArr;
 });
+
+Mock.mock("/api/home/phone", "get", () => {
+  const arr = [];
+  for (let i = 0; i < 8; i++) {
+    const obj = {
+      id: Mock.mock("@id"),
+      goodName: Mock.mock("@ctitle(5, 12)"),
+      imgUrl: Mock.Random.image("160x160"),
+      price: Mock.mock("@float(1, 100, 2, 2)"),
+      desc: Mock.mock("@ctitle(5, 12)")
+    };
+    arr.push(obj);
+  }
+  return arr;
+});

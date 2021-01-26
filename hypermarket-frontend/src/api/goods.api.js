@@ -13,5 +13,8 @@ export const GoodsApi = {
   },
   getFlashsaleList() {
     return $http.mock("get", "/api/home/flashsale");
+  },
+  getPhoneList() {
+    return $http.mock("get", "/api/home/phone");
   }
 };
