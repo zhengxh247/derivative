@@ -287,8 +287,15 @@
             <h2 class="title">家电</h2>
             <div class="more">
               <ul class="tab-list">
-                <li>热门</li>
-                <li>电视影音</li>
+                <li :class="{ 'tab-active': isHot }" @mouseenter="isHot = true">
+                  热门
+                </li>
+                <li
+                  :class="{ 'tab-active': !isHot }"
+                  @mouseenter="isHot = false"
+                >
+                  电视影音
+                </li>
               </ul>
             </div>
           </div>
@@ -377,7 +384,8 @@ export default {
       phoneList: [],
       groupMenus: {},
       carouselIndex: 0,
-      calcColumnClass: "children-col-4"
+      calcColumnClass: "children-col-4",
+      isHot: true
     };
   },
   created() {
@@ -896,7 +904,8 @@ export default {
               margin: 0 0 0 30px;
               cursor: pointer;
             }
-            li:hover {
+            li:hover,
+            .tab-active {
               color: #ff6700;
               border-bottom: 2px solid #ff6700;
             }
