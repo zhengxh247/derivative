@@ -282,6 +282,85 @@
             />
           </a>
         </div>
+        <div class="home-brick-box">
+          <div class="box-hd">
+            <h2 class="title">家电</h2>
+            <div class="more">
+              <ul class="tab-list">
+                <li>热门</li>
+                <li>电视影音</li>
+              </ul>
+            </div>
+          </div>
+          <div class="box-bd">
+            <div class="row">
+              <div class="span4">
+                <ul class="brick-promo-list">
+                  <li class="brick-item-m">
+                    <a href="javascript:;">
+                      <el-card shadow="hover">
+                        <img
+                          src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/116fc43816b87192be4e67cf762e8da5.jpeg"
+                          width="234"
+                          height="300"
+                        />
+                      </el-card>
+                    </a>
+                  </li>
+                  <li class="brick-item-m">
+                    <a href="javascript:;">
+                      <el-card shadow="hover">
+                        <img
+                          src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/7e03c0fe4af4d613603f22aaa8e0ea00.jpg"
+                          width="234"
+                          height="300"
+                        />
+                      </el-card>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="span16">
+                <ul class="brick-list">
+                  <li
+                    v-for="(phone, index) in phoneList"
+                    :key="phone.id"
+                    class="brick-item brick-item-s"
+                  >
+                    <el-card shadow="hover">
+                      <a href="javascript:;">
+                        <div class="figure-img">
+                          <img :src="phone.imgUrl" />
+                        </div>
+                        <h3 class="title">{{ phone.goodName }}</h3>
+                        <p class="desc" v-if="index != 7">
+                          {{ phone.desc }}
+                        </p>
+                        <p class="price">
+                          <span class="num">{{ phone.price }}元</span>
+                          <span>起</span>
+                        </p>
+                      </a>
+                    </el-card>
+                  </li>
+                  <li class="more">
+                    <el-card shadow="hover">
+                      <a href="javascript:;" class="more-link">
+                        <div class="figure-more">
+                          <i class="el-icon-right"></i>
+                        </div>
+                        <div class="title">
+                          浏览更多
+                          <small>电视影音</small>
+                        </div>
+                      </a>
+                    </el-card>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -807,6 +886,21 @@ export default {
           .more-link:hover {
             color: $colorPrimary;
           }
+          .tab-list {
+            margin: 0;
+            padding: 16px 0 0;
+            list-style-type: none;
+            font-size: 16px;
+            li {
+              display: inline-block;
+              margin: 0 0 0 30px;
+              cursor: pointer;
+            }
+            li:hover {
+              color: #ff6700;
+              border-bottom: 2px solid #ff6700;
+            }
+          }
         }
       }
       .box-bd {
@@ -816,6 +910,9 @@ export default {
             float: left;
             .brick-promo-list {
               height: 614px;
+              .brick-item-m {
+                margin-bottom: 14px;
+              }
             }
           }
           .span16 {
@@ -864,6 +961,75 @@ export default {
                   margin: 0 10px 14px;
                 }
               }
+              .brick-item-s:nth-child(8) {
+                height: 93px;
+                .figure-img {
+                  position: absolute;
+                  right: 20px;
+                  top: 32px;
+                  width: 80px;
+                  height: 80px;
+                  margin: 0;
+                  padding: 0;
+                  img {
+                    width: 80px;
+                    height: 80px;
+                  }
+                }
+                .title {
+                  margin: -10px 110px 5px 30px;
+                  font-size: 14px;
+                  font-weight: 400;
+                  text-align: left;
+                  text-overflow: unset;
+                  white-space: unset;
+                  overflow: unset;
+                }
+                .price {
+                  margin: 0 110px 0 30px;
+                  font-size: 12px;
+                  color: #ff6700;
+                  text-align: left;
+                }
+              }
+              .more {
+                position: relative;
+                z-index: 1;
+                float: left;
+                width: 234px;
+                height: 93px;
+                margin-top: 50px;
+                margin-left: 14px;
+                margin-bottom: 14px;
+                background: #fff;
+                .more-link {
+                  .figure-more {
+                    position: absolute;
+                    right: 35px;
+                    top: 48px;
+                    width: 40px;
+                    height: 40px;
+                    color: #ff6700;
+                    border: 2px solid #ff6700;
+                    border-radius: 50%;
+                    i {
+                      font-size: 40px;
+                      line-height: 40px;
+                    }
+                  }
+                  .title {
+                    display: block;
+                    margin: 0 110px 0 30px;
+                    font-size: 18px;
+                    color: #333;
+                    small {
+                      display: block;
+                      font-size: 12px;
+                      color: #757575;
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -900,10 +1066,22 @@ export default {
     .el-card__body {
       height: 614px;
     }
+    .brick-item-m {
+      .el-card__body {
+        height: 300px;
+      }
+    }
   }
   .brick-list {
     .el-card__body {
       height: 300px;
+    }
+    .brick-item-s:nth-child(8),
+    .more {
+      .el-card__body {
+        height: 93px;
+        padding-top: 50px;
+      }
     }
   }
   .el-card {
