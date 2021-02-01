@@ -210,33 +210,6 @@ export default {
             margin-left: 14px;
             margin-bottom: 14px;
             background: #fff;
-            .more-link {
-              .figure-more {
-                position: absolute;
-                right: 35px;
-                top: 48px;
-                width: 40px;
-                height: 40px;
-                color: #ff6700;
-                border: 2px solid #ff6700;
-                border-radius: 50%;
-                i {
-                  font-size: 40px;
-                  line-height: 40px;
-                }
-              }
-              .title {
-                display: block;
-                margin: 0 110px 0 30px;
-                font-size: 18px;
-                color: #333;
-                small {
-                  display: block;
-                  font-size: 12px;
-                  color: #757575;
-                }
-              }
-            }
           }
         }
       }
@@ -274,6 +247,33 @@ export default {
       .el-card__body {
         height: 93px;
         padding-top: 50px;
+      }
+      .more-link {
+        .figure-more {
+          position: absolute;
+          right: 35px;
+          top: 48px;
+          width: 40px;
+          height: 40px;
+          color: #ff6700;
+          border: 2px solid #ff6700;
+          border-radius: 50%;
+          i {
+            font-size: 40px;
+            line-height: 40px;
+          }
+        }
+        .title {
+          display: block;
+          margin: 0 110px 0 30px;
+          font-size: 18px;
+          color: #333;
+          small {
+            display: block;
+            font-size: 12px;
+            color: #757575;
+          }
+        }
       }
     }
   }

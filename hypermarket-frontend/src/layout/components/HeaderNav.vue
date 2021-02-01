@@ -139,7 +139,9 @@
             <el-button
               slot="append"
               icon="el-icon-search"
-              @click="$router.push('/search')"
+              @click="
+                $router.push({ path: '/search', query: { keyword: search } })
+              "
             >
             </el-button>
           </el-input>

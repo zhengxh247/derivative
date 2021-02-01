@@ -17,7 +17,7 @@
           </el-breadcrumb>
         </div>
       </div>
-      <div class="search-filter">
+      <div class="search-filter" v-if="searchList.length != 0">
         <div class="container">
           <ul>
             <span class="label">分类:</span>
@@ -32,7 +32,7 @@
           </ul>
         </div>
       </div>
-      <div class="search-result">
+      <div class="search-result" v-if="searchList.length != 0">
         <div class="container">
           <div class="order-list-box">
             <ul class="order-list">
@@ -98,6 +98,16 @@
               </el-card>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="no-result-content" v-if="searchList.length == 0">
+        <div class="content-main">
+          <img
+            src="http://m.mi.com/static/img/icon-search-empty.3d766c8b3f.png"
+            width="200"
+          />
+          <p class="empty">抱歉，没有找到商品“dfafafaf”，换个词搜搜吧</p>
+          <div class="btn">查看全部商品</div>
         </div>
       </div>
       <div class="search-favourite">
@@ -178,8 +188,12 @@ export default {
   },
   methods: {
     getSearchList() {
-      SearchApi.getSearchList().then(res => {
-        this.searchList = res.data;
+      const {
+        query: { keyword }
+      } = this.$route;
+      SearchApi.getSearchList({ keyword }).then(res => {
+        console.log(res);
+        // this.searchList = res.data;
       });
     },
     getOtherList() {
@@ -348,6 +362,37 @@ export default {
           }
         }
       }
+    }
+  }
+}
+.no-result-content {
+  width: 1226px;
+  width: 1226px;
+  margin: 0 auto;
+  padding: 60px 0 100px;
+  text-align: center;
+  .content-main {
+    .empty {
+      color: #333;
+      font-size: 14px;
+      display: block;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+    }
+    .btn {
+      display: inline-block;
+      width: 158px;
+      height: 38px;
+      padding: 0;
+      margin: 0;
+      border: 1px solid #b0b0b0;
+      font-size: 14px;
+      line-height: 38px;
+      text-align: center;
+      color: #b0b0b0;
+      cursor: pointer;
     }
   }
 }
