@@ -67,14 +67,14 @@
                 :key="search.id"
               >
                 <router-link :to="'/detail/' + search.id">
-                  <img :src="search.imgUrl" />
+                  <img :src="`http://49.232.11.36${search.imgSrc}`" />
                 </router-link>
                 <h2 class="title">
                   <router-link
                     :to="'/detail/' + search.id"
                     style="color: #424242;"
                   >
-                    {{ search.goodName }}
+                    {{ search.goodsName }}
                   </router-link>
                 </h2>
                 <p class="price">
@@ -85,12 +85,20 @@
                   <ul class="thumb-list">
                     <li class="active">
                       <a href="javascript:;">
-                        <img :src="search.imgUrl" width="34" height="34" />
+                        <img
+                          :src="`http://49.232.11.36${search.imgSrc}`"
+                          width="34"
+                          height="34"
+                        />
                       </a>
                     </li>
                     <li class="active">
                       <a href="javascript:;">
-                        <img :src="search.imgUrl" width="34" height="34" />
+                        <img
+                          :src="`http://49.232.11.36${search.imgSrc}`"
+                          width="34"
+                          height="34"
+                        />
                       </a>
                     </li>
                   </ul>
@@ -106,7 +114,9 @@
             src="http://m.mi.com/static/img/icon-search-empty.3d766c8b3f.png"
             width="200"
           />
-          <p class="empty">抱歉，没有找到商品“dfafafaf”，换个词搜搜吧</p>
+          <p class="empty">
+            抱歉，没有找到商品“{{ $route.query.keyWord }}”，换个词搜搜吧
+          </p>
           <div class="btn">查看全部商品</div>
         </div>
       </div>
@@ -189,11 +199,10 @@ export default {
   methods: {
     getSearchList() {
       const {
-        query: { keyword }
+        query: { keyWord }
       } = this.$route;
-      SearchApi.getSearchList({ keyword }).then(res => {
-        console.log(res);
-        // this.searchList = res.data;
+      SearchApi.getSearchList({ keyWord }).then(res => {
+        this.searchList = res.data.result;
       });
     },
     getOtherList() {
