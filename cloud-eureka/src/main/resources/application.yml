@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: eureka
+server:
+  port: 8761
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${IP_ADDRESS:localhost}:8761/eureka/

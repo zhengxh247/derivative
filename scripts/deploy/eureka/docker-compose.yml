@@ -1,0 +1,25 @@
+version: '3'
+services:
+
+  cloud-eureka:
+    container_name: cloud-eureka
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: cloud-eureka:theversion
+    privileged: true
+    restart: always
+    ports:
+      - 8761:8761
+    volumes:
+      - /opt/logs/cloud-eureka:/opt/logs/cloud-eureka
+    environment:
+      - SQL_ENV_NAME=dev
+      - IP_ADDRESS=theip
+      - LOG_PATH=/opt/logs/cloud-eureka
+      - LOG_FILE=cloud-eureka
+      - LOG_MAX_FILE_SIZE=100MB
+      - LOG_MAX_HISTORY_DAYS=30
+      - LOG_ROOT_LEVEL=info
+      - TZ=Asia/Shanghai
+
