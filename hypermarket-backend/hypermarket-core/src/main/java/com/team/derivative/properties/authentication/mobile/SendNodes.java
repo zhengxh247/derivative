@@ -8,14 +8,16 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.team.derivative.properties.validate.code.sms.SmsCodeSender;
 
 /**
  * 阿里短信接口
  */
 
-public class SendNodes {
+public class SendNodes implements SmsCodeSender {
 
-    public Boolean sendNodes(String mobile, String code) {
+    @Override
+    public void send(String mobile, String code) {
 
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI5tNJH2myQiwSNoTE6gqn", "HIInYzZIY8GcrhoEFe37RZhVS6TOMc");
         IAcsClient client = new DefaultAcsClient(profile);
@@ -40,7 +42,6 @@ public class SendNodes {
         } catch (ClientException e) {
             e.printStackTrace();
         }
-        return true;
     }
 
 }

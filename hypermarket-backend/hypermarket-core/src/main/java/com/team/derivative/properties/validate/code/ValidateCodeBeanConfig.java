@@ -3,6 +3,7 @@
  */
 package com.team.derivative.properties.validate.code;
 
+import com.team.derivative.properties.authentication.mobile.SendNodes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -30,10 +31,15 @@ public class ValidateCodeBeanConfig {
 		return codeGenerator;
 	}
 	
+//	@Bean
+//	@ConditionalOnMissingBean(SmsCodeSender.class)
+//	public SmsCodeSender smsCodeSender() {
+//		return new DefaultSmsCodeSender();
+//	}
+
 	@Bean
 	@ConditionalOnMissingBean(SmsCodeSender.class)
 	public SmsCodeSender smsCodeSender() {
-		return new DefaultSmsCodeSender();
+		return new SendNodes();
 	}
-
 }
